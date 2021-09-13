@@ -1,0 +1,12 @@
+body{
+	font-family: $main-font-regular;
+	font-size: $fs-16;
+	line-height: 1.5;
+	color: $light;
+}
+
+.container {
+    max-width: $baseWidth;
+    margin: 0 auto;
+    padding: 0 $d-4;
+}

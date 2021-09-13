@@ -3,10 +3,11 @@ import { render } from 'react-dom'
 import App from './App'
 /** Setup Redux */
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
 import { store } from './redux/configStore'
+/** Css ReactSlick */
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
-const store = createStore(rooReducer)
 
 render(
   <Provider store={store}>

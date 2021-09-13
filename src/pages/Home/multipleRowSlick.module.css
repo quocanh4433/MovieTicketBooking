@@ -1,0 +1,16 @@
+.slick-prev:before, .slick-next:before {
+    color: gray !important;
+    font-size: 3rem !important;
+}
+
+.width-item {
+    width: 100%  !important;
+}
+
+.active_Film {
+    @apply bg-indigo-500;
+}
+
+.none_active_Film {
+    @apply bg-indigo-300 ;
+}

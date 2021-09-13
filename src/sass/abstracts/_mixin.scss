@@ -1,0 +1,20 @@
+@mixin breakpoint($point) {
+	@if $point == 1400 {
+		@media only screen and (min-width: 1400px) { @content ; }
+	}
+	@else if $point == 1200  {
+		@media only screen and (min-width: 1200px) { @content ; }
+	}
+    @else if $point == 992  {
+		@media only screen and (min-width: 992) { @content ; }
+	}
+    @else if $point == 768  {
+		@media only screen and (min-width: 768) { @content ; }
+	}
+    @else if $point == 576  {
+		@media only screen and (min-width: 576) { @content ; }
+	}
+    @else if $point == 376  {
+		@media only screen and (min-width: 376) { @content ; }
+	}
+}

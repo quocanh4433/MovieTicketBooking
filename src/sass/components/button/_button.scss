@@ -1,0 +1,19 @@
+.c-main-btn {
+    padding: 1rem 1.5rem;
+    border-radius: 1rem;
+
+    font-family: $main-font-bold;
+    font-size: $fs-14;
+    text-transform: uppercase;
+
+    color: $light;
+    background-image: linear-gradient(to right, $orange-1 0% , $orange-3 60%, $orange-1 100%);
+    box-shadow: 2px 4px 6px rgba(255, 107, 0, 0.34);
+    background-size: 200% auto;
+
+    transition: 0.3s;
+
+    &:hover {
+        background-position: right;
+    }
+}

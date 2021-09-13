@@ -1,2 +1,24 @@
-// Import base
-@import "./base/base"
+/* Import adstracts */
+@import "./abstracts/mixin";
+@import "./abstracts/variables";
+
+/* Import base */ 
+@import "./base/reset";
+@import "./base/font";
+
+/* Import layout */ 
+@import "./layout/layout";
+
+/* Import components */ 
+@import "./components/button/button";
+
+/* Import from Template React */
+@import "../templates/HomeTemplate/Header/header";
+
+/* Import from Page React */
+@import "../pages/Home/home"
+
+
+
+
+
