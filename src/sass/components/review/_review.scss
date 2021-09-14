@@ -1,0 +1,42 @@
+.c-review {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    &__raiting {
+        display: flex;
+        align-items: center;
+
+        padding: 1px 4px 0px 4px;
+        border-radius: 2px;
+        
+        font-family: $fourth-font;
+        font-size: $fs-12;
+        
+        background-color: $red;
+        color: $light;
+    }
+
+    &__score {
+        display: flex;
+        align-items: center;
+
+        padding-left: 1rem;
+        margin-left: 1.3rem;
+        
+        font-family: $main-font-bold;
+        font-size: $fs-12;
+
+        border-left: 1px solid $light;
+        color: $light;
+
+        span:last-child {
+            margin-left: 5px;
+            padding: 1px 4px 0px 4px;
+            background-color: $yellow;
+            color: $dark;
+            font-family: $third-font;
+            border-radius: 2px;
+        }
+    }
+}

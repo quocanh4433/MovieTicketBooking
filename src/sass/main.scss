@@ -1,3 +1,7 @@
+// -------------------------------------
+// SASS
+// -------------------------------------
+
 /* Import adstracts */
 @import "./abstracts/mixin";
 @import "./abstracts/variables";
@@ -11,12 +15,22 @@
 
 /* Import components */ 
 @import "./components/button/button";
+@import "./components/review/review";
+
+
+// -------------------------------------
+// REACT JS
+// -------------------------------------
 
 /* Import from Template React */
-@import "../templates/HomeTemplate/Header/header";
+@import "../templates/HomeTemplate/Layout/Header/header";
 
 /* Import from Page React */
-@import "../pages/Home/home"
+@import "../pages/Home/home";
+
+/* Import from Component React*/
+@import "../components/carousel/carousel"
+
 
 
 

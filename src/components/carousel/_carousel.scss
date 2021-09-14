@@ -1,0 +1,143 @@
+.slider {
+    position: relative;
+
+    .slider__wrapper {
+        position: relative;
+        padding: 32rem 0;
+        width: 100%;
+        
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    
+        &::after {
+            content: "";
+            display: block;
+            
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+    
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(to top right, rgba(0, 0, 0, 0.7), rgba(255, 255, 255, 0));
+        }
+        .slider__inner {
+            position: absolute;
+            top: 50%;
+            left: 0;
+    
+            z-index: 2;
+            transform: translateY(-50%);
+            
+            .heading {
+                margin-bottom: 1rem;
+                font-size: $fs-40;
+                font-family: $second-font-bold;
+                text-transform: uppercase;
+                color: $light;
+            }
+        
+            .desc {
+                width: 50%;
+                margin-bottom: 2rem;
+                color: $light;
+    
+                font-size:  $fs-14;
+                line-height: 1.6;
+                letter-spacing: 0.5px;
+                
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 3;
+            }
+    
+            .icon-play {
+                span {
+                    font-size: $fs-22;
+                    margin-right: 0.8rem;
+                }
+            }
+        }
+    }
+
+    /* Custom slick-dots */
+    .slick-dots {
+        display: flex !important;
+        flex-direction: column;
+        justify-content: center;
+
+        top: 50%;
+        right: 3rem;
+        width: auto;
+        transform: translateY(-50%);
+        li {
+            margin: 1rem 0;
+            button::before {
+                font-size: $fs-16;
+                opacity: 0.5;
+                color: $light;
+            }         
+        }
+
+        li.slick-active {
+            button::before {
+                color: $orange-2;
+                opacity: 1;
+            }         
+        }
+    }
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    width: 1000%;
+    height: 100vh;
+    margin: 0 auto;
+
+    display: inline-flex;
+    align-items: flex-end;
+    flex-direction: column;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: 0.2s;
+    z-index: 100;
+
+    &__btnClose {
+        position: absolute;
+        right: -1.5rem;
+        top: -2rem;
+
+        text-align: right;
+        color: $light;
+        font-size: $fs-36;
+        cursor: pointer;
+    }
+
+    &__video {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+
+        width: 700px;
+        max-height: 500px;
+        margin: 0 auto;
+        height: 100%;
+    }
+}
+
+.modal-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+}

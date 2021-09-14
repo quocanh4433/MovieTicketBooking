@@ -5,8 +5,8 @@
     right: 0;
 
     padding: 10px 0;
-    background-color: $dark-30;
-    z-index: 999;
+    background-color: $dark-60;
+    z-index: 20;
     transition: 0.3s;
 
     &__wrapper {
@@ -18,12 +18,16 @@
             display: flex;
             a {
                 display: block;
-                padding: 1rem;
+                padding: 10px;
                 color: $light;
 
                 text-transform: uppercase;
                 font-family: $main-font-bold;
                 font-size: $fs-14;
+
+                @include responsive("992") {
+                    display: none;
+                }
             }
 
             .nav-active {
@@ -47,10 +51,18 @@
                 &:hover {
                     color: $orange-2;
                 }
+
+                @include responsive("992") {
+                    display: none;
+                }
             }
 
             .signin {
                 font-size: $fs-12;
+            }
+
+            @include responsive("992") {
+                display: none;
             }
         }
 
@@ -140,11 +152,14 @@
                 pointer-events: all;
                 visibility: visible;
             }
+
+            @include responsive("992") {
+                display: none;
+            }
         }
     }
 }
 
 .header-onScroll {
     padding: 7px 0;
-    background-color: $dark-30;
 }

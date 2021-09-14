@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { CaretDownOutlined, UserOutlined, SecurityScanOutlined, LogoutOutlined } from '@ant-design/icons';
-
+import { NavLink } from 'react-router-dom'
 
 export default function Header() {
-    const userLogin = true;
+    const userLogin = false;
     const maLoaiNguoiDung = "quantri";
     const [headerOnScroll, setHeaderOnScroll] = useState(false)
 
@@ -76,8 +76,8 @@ export default function Header() {
             </div>
         }
         return <div className="header__wrapper--signin">
-            <a href="#" className="signup">Đăng Ký</a>
-            <a href="#" className="c-main-btn signin">Đăng Nhập</a>
+            <NavLink to="/register" className="signup">Đăng Ký</NavLink>
+            <NavLink to="/login" className="c-main-btn signin">Đăng Nhập</NavLink>
         </div>
     };
 
@@ -87,13 +87,13 @@ export default function Header() {
         <header className={headerOnScroll ? "header header-onScroll" : "header"}>
             <div className="header__wrapper container">
                 <h1>
-                    <a href="#"><img src="./images/header/logo.svg" alt="Logo" /></a>
+                    <NavLink to="/home"><img src="./images/header/logo.svg" alt="Logo" /></NavLink>
                 </h1>
                 <nav className="header__wrapper--nav">
-                    <a className="nav-active" href="#">Trang Chủ</a>
-                    <a href="#">Cụm Rạp</a>
-                    <a href="#">Tin Tức</a>
-                    <a href="#">Ứng Dụng</a>
+                    <NavLink to="/home" activeClassName="nav-active">Trang Chủ</NavLink>
+                    <NavLink to="/theater" activeClassName="nav-active">Cụm Rạp</NavLink>
+                    <NavLink to="/news" activeClassName="nav-active">Tin Tức</NavLink>
+                    <NavLink to="/apps" activeClassName="nav-active">Ứng Dụng</NavLink>
                 </nav>
                 {checkUserLogin()}
             </div>
