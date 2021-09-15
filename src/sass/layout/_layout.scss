@@ -9,4 +9,8 @@ body{
     max-width: $baseWidth;
     margin: 0 auto;
     padding: 0 $d-4;
+
+	@include responsive(992) {
+		padding: 0 2.5rem;
+	}
 }

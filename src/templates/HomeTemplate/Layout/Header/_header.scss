@@ -16,22 +16,107 @@
 
         &--nav {
             display: flex;
-            a {
+            color: $light;
+            transition: 0.3s;
+            
+            font-size: $fs-14;
+            text-transform: uppercase;
+            font-family: $main-font-bold;
+
+            & > a {
                 display: block;
                 padding: 10px;
-                color: $light;
 
-                text-transform: uppercase;
-                font-family: $main-font-bold;
-                font-size: $fs-14;
+                @include responsive(992) {
+                    padding: 1.5rem 0;
+                    margin-bottom: 1rem;
+                }
+            }
 
-                @include responsive("992") {
-                    display: none;
+            /* custom button close menu on mobile */
+            span {
+                display: none;
+
+                @include responsive(992) {
+                    position: fixed;
+                    top: 3rem;
+                    right: 3rem;
+                    z-index: 3; 
+
+                    display: block;
+                    font-size: $fs-30;
+                    cursor: pointer;
+                }
+            }
+            
+            /* custom button signin & signup on mobile*/
+            div {
+                display: none;
+
+                a {
+                    padding: 1rem;
+                    border: 2px solid $light;
+                    border-radius: 5px;
+                    min-width: 150px;
+
+                    @include responsive(768){
+                        max-width: 150px;
+                        margin-bottom: 2.5rem;
+                    }
+                }
+
+                @include responsive(992){
+                    display: flex;
+                    justify-content: space-evenly;
+                    padding-top: 2rem;
+                    margin-top: 2rem;
+                }
+
+                @include responsive(768){
+                    flex-direction: column;
+                    align-items: center;
                 }
             }
 
             .nav-active {
                 color: $orange-2;
+            }
+
+            @include responsive(992) {
+                position: fixed;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 2;
+
+                width: 60%;
+                transform: translateX(20%);
+                padding: 15rem 0;
+
+                opacity: 0;
+                pointer-events: none;
+                visibility: hidden;
+
+                flex-direction: column;
+                font-size: $fs-18;
+                text-align: center;
+
+                box-shadow: -2px 0 15px $dark-30;
+                color: $light;
+                background: linear-gradient(to top, $orange-1 , $orange-3);
+            }
+
+            @include responsive(576) {
+                width: 100%;
+            }
+        }
+
+        .nav-activeOnMobile {
+            @include responsive(992) {
+                transform: translateX(0%);
+                opacity: 1;
+                pointer-events: all;
+                visibility: visible;
             }
         }
 
@@ -52,7 +137,7 @@
                     color: $orange-2;
                 }
 
-                @include responsive("992") {
+                @include responsive(992) {
                     display: none;
                 }
             }
@@ -61,7 +146,7 @@
                 font-size: $fs-12;
             }
 
-            @include responsive("992") {
+            @include responsive(992) {
                 display: none;
             }
         }
@@ -107,7 +192,7 @@
             }
 
             /* arrowDown of antDesign  */
-            span {  
+            span {
                 font-size: $fs-18;
                 cursor: pointer;
                 padding: 1rem;
@@ -125,7 +210,7 @@
                 opacity: 0;
                 pointer-events: none;
                 visibility: hidden;
-            
+
                 width: 80%;
                 padding: 1rem;
                 border-radius: 1rem;
@@ -153,8 +238,18 @@
                 visibility: visible;
             }
 
-            @include responsive("992") {
+            @include responsive(992) {
                 display: none;
+            }
+        }
+
+        &--toggle {
+            display: none;
+            font-size: $fs-24;
+            color: $light;
+
+            @include responsive(992) {
+                display: block;
             }
         }
     }

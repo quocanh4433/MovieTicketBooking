@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
-import { CaretDownOutlined, UserOutlined, SecurityScanOutlined, LogoutOutlined } from '@ant-design/icons';
-import { NavLink } from 'react-router-dom'
+import { CaretDownOutlined, UserOutlined, SecurityScanOutlined, LogoutOutlined, MenuOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import { NavLink } from 'react-router-dom';
+
 
 export default function Header() {
     const userLogin = false;
     const maLoaiNguoiDung = "quantri";
-    const [headerOnScroll, setHeaderOnScroll] = useState(false)
+    const [headerOnScroll, setHeaderOnScroll] = useState(false);
+    const [menuOnMobile, setMenuOnMobile] = useState(false);
+
 
     const headeronScroll = () => {
         const POSITION_DEFAULT = 80
@@ -34,6 +37,14 @@ export default function Header() {
             }
         });
     };
+
+    const hiddenMenuOnMobile = () => {
+        setMenuOnMobile(false)
+    };
+
+    const showMenuOnMobile = () => {
+        setMenuOnMobile(true)
+    }
 
     const checkUserIsAdmin = () => {
         if (maLoaiNguoiDung == "quantri") {
@@ -89,13 +100,20 @@ export default function Header() {
                 <h1>
                     <NavLink to="/home"><img src="./images/header/logo.svg" alt="Logo" /></NavLink>
                 </h1>
-                <nav className="header__wrapper--nav">
-                    <NavLink to="/home" activeClassName="nav-active">Trang Chủ</NavLink>
-                    <NavLink to="/theater" activeClassName="nav-active">Cụm Rạp</NavLink>
-                    <NavLink to="/news" activeClassName="nav-active">Tin Tức</NavLink>
-                    <NavLink to="/apps" activeClassName="nav-active">Ứng Dụng</NavLink>
+                <nav className={menuOnMobile ? "header__wrapper--nav nav-activeOnMobile" : "header__wrapper--nav"}>
+                    <NavLink to="/home" activeClassName="nav-active" onClick={hiddenMenuOnMobile}>Trang Chủ</NavLink>
+                    <NavLink to="/theater" activeClassName="nav-active" onClick={hiddenMenuOnMobile}>Cụm Rạp</NavLink>
+                    <NavLink to="/news" activeClassName="nav-active" onClick={hiddenMenuOnMobile}>Tin Tức</NavLink>
+                    <NavLink to="/apps" activeClassName="nav-active" onClick={hiddenMenuOnMobile}>Ứng Dụng</NavLink>
+                    {/* Only Show on mobile  */}
+                    <CloseCircleOutlined onClick={hiddenMenuOnMobile} />
+                    <div>
+                        <NavLink to="/login" activeClassName="nav-active" onClick={hiddenMenuOnMobile}>Đăng Ký</NavLink>
+                        <NavLink to="/register" activeClassName="nav-active" onClick={hiddenMenuOnMobile}>Đăng Nhập</NavLink>
+                    </div>
                 </nav>
                 {checkUserLogin()}
+                <MenuOutlined className="header__wrapper--toggle" onClick={showMenuOnMobile} />
             </div>
         </header>
     )
