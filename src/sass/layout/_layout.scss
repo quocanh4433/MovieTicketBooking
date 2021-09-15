@@ -14,3 +14,14 @@ body{
 		padding: 0 2.5rem;
 	}
 }
+
+.container2 {
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 0 3rem;
+
+	@include responsive(992) {
+		padding: 0 2.5rem;
+	}
+}
+

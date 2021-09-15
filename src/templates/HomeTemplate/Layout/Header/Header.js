@@ -9,7 +9,6 @@ export default function Header() {
     const [headerOnScroll, setHeaderOnScroll] = useState(false);
     const [menuOnMobile, setMenuOnMobile] = useState(false);
 
-
     const headeronScroll = () => {
         const POSITION_DEFAULT = 80
         if (window.scrollY >= POSITION_DEFAULT) {
@@ -38,12 +37,12 @@ export default function Header() {
         });
     };
 
-    const hiddenMenuOnMobile = () => {
-        setMenuOnMobile(false)
+    const closeMenuOnMobile = () => {
+        setMenuOnMobile(false);
     };
 
-    const showMenuOnMobile = () => {
-        setMenuOnMobile(true)
+    const openMenuOnMobile = () => {
+        setMenuOnMobile(true);
     }
 
     const checkUserIsAdmin = () => {
@@ -101,19 +100,19 @@ export default function Header() {
                     <NavLink to="/home"><img src="./images/header/logo.svg" alt="Logo" /></NavLink>
                 </h1>
                 <nav className={menuOnMobile ? "header__wrapper--nav nav-activeOnMobile" : "header__wrapper--nav"}>
-                    <NavLink to="/home" activeClassName="nav-active" onClick={hiddenMenuOnMobile}>Trang Chủ</NavLink>
-                    <NavLink to="/theater" activeClassName="nav-active" onClick={hiddenMenuOnMobile}>Cụm Rạp</NavLink>
-                    <NavLink to="/news" activeClassName="nav-active" onClick={hiddenMenuOnMobile}>Tin Tức</NavLink>
-                    <NavLink to="/apps" activeClassName="nav-active" onClick={hiddenMenuOnMobile}>Ứng Dụng</NavLink>
+                    <NavLink to="/home" activeClassName="nav-active" onClick={closeMenuOnMobile}>Trang Chủ</NavLink>
+                    <NavLink to="/theater" activeClassName="nav-active" onClick={closeMenuOnMobile}>Cụm Rạp</NavLink>
+                    <NavLink to="/news" activeClassName="nav-active" onClick={closeMenuOnMobile}>Tin Tức</NavLink>
+                    <NavLink to="/apps" activeClassName="nav-active" onClick={closeMenuOnMobile}>Ứng Dụng</NavLink>
                     {/* Only Show on mobile  */}
-                    <CloseCircleOutlined onClick={hiddenMenuOnMobile} />
+                    <CloseCircleOutlined onClick={closeMenuOnMobile} />
                     <div>
-                        <NavLink to="/login" activeClassName="nav-active" onClick={hiddenMenuOnMobile}>Đăng Ký</NavLink>
-                        <NavLink to="/register" activeClassName="nav-active" onClick={hiddenMenuOnMobile}>Đăng Nhập</NavLink>
+                        <NavLink to="/login" activeClassName="nav-active" onClick={closeMenuOnMobile}>Đăng Ký</NavLink>
+                        <NavLink to="/register" activeClassName="nav-active" onClick={closeMenuOnMobile}>Đăng Nhập</NavLink>
                     </div>
                 </nav>
                 {checkUserLogin()}
-                <MenuOutlined className="header__wrapper--toggle" onClick={showMenuOnMobile} />
+                <MenuOutlined className="header__wrapper--toggle" onClick={openMenuOnMobile} />
             </div>
         </header>
     )

@@ -1,0 +1,80 @@
+.footer {
+    background-color: $dark;
+    padding: 3rem 0;
+
+    &__main {
+        display: flex;
+        justify-content: space-between;
+
+        padding-bottom: 2rem;
+        margin-bottom: 2rem;
+        border-bottom: 1px solid $light;
+
+        @include responsive(576) {
+            flex-wrap: wrap;
+        }
+
+        .footer__item {
+            color: $light;
+            width: 25%;
+
+            @include responsive(576) {
+                width: 50%;
+                margin-bottom: 2rem;
+            }
+            h4 {
+                font-size: $fs-16;
+                font-family: $main-font-bold;
+                margin-bottom: 1rem;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+            }
+            li {
+                font-size: $fs-14;
+                margin-bottom: 5px;
+            }
+            div {
+                a {
+                    display: inline-block;
+                    margin: 0 1rem 0 0;
+                    span {
+                        font-size: $fs-28;
+                    }
+                    img {
+                        width: 3.5rem;
+                        height: 3.5rem;
+                        object-fit: cover;
+                        border-radius: 50%;
+                    }
+                }
+            }
+            
+        }
+    }
+
+    &__sub {
+        display: flex;
+        justify-content: space-between;
+
+        @include responsive(576) {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        a {
+            width: 20%;
+            @include responsive(576) {
+                width: 100%;
+            }
+        }
+
+        p{
+            width: 78%;
+            color: $light;
+            font-size: $fs-10;
+            @include responsive(576) {
+                width: 100%;
+            }
+        }
+    }
+}
