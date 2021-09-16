@@ -1,0 +1,131 @@
+.form {
+    display: flex;
+    align-items: center;
+    &__btnClose {
+        position: fixed;
+        top: 2rem;
+        right: 3rem;
+
+        color: $gray-3;
+        font-size: $fs-28;
+        cursor: pointer;
+    }
+
+    &__bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -1;
+
+        width: 50%;
+        height: 100vh;
+
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+
+        @include responsive(768) {
+            display: none;
+        }
+    }
+
+    &__content {
+        position: fixed;
+        top: 50%;
+        left: 50%; 
+
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        transform:  translate(-50%, -50%);
+        width: 100%;
+
+        @include responsive(768) {
+            flex-direction: column;
+        }
+
+        &-logo {
+            width: 40%;
+            @include responsive(768) {
+                display: none;
+            }
+        }
+
+        form {
+            width: 40%;
+            @include responsive(768) {
+                width: 60%;
+            }
+
+            @include responsive(576) {
+                width: 90%;
+            }
+
+            h3 {
+                font-family: $main-font-bold;
+                text-transform: uppercase;
+                font-size: $fs-40;
+
+                margin-bottom: 2rem;
+                background: linear-gradient(to right, $orange-1 , $orange-3 50% );
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            .form__group {
+                margin-bottom: 1.5rem;
+                label {
+                    display: block;
+                    margin-bottom: 2px;
+                    color: $gray-3;
+                    font-family: $main-font-bold;
+                    
+                    span {
+                        color: $orange-1;
+                    }
+                }
+
+                input {
+                    width: 100%;
+                    padding: 1rem;
+
+                    font-family: $main-font-semibold;
+                    font-size: $fs-16;
+
+                    border-radius: 10px;
+                    outline: none;
+                    border: 2px solid $gray-3;
+                    color: $dark;
+                }
+
+                /* Errors */
+                p {
+                    color: $orange-1;
+                    font-size: $fs-12;
+                    font-family: $main-font-semibold;
+                }
+            }
+
+            .form__btnSubmit {
+                text-align: center;
+                button {
+                    padding: 1.5rem 3.5rem;
+                    margin-bottom: 1.5rem;
+                    font-size: $fs-16;
+                    border-radius: 15px;
+
+                    @include responsive(768) {
+                        margin-bottom: 2.5rem;
+                    }
+                }
+                p{
+                    color: $gray-3;
+                    a{
+                        color: $orange-1;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,8 +1,6 @@
 import { GET_ALL_FILM_INFO, GET_BANNER } from "../types/QuanLyPhimType"
 
 const stateDefault = {
-
-    /** Array for only banner */
     arrBanner: [
         // {
         //     "maBanner": 1,

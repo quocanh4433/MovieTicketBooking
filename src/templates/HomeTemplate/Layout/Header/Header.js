@@ -1,13 +1,25 @@
 import React, { useState } from 'react'
 import { CaretDownOutlined, UserOutlined, SecurityScanOutlined, LogoutOutlined, MenuOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { TOKEN_CYBERSOFT, USER_LOGIN } from '../../../../utils/setting';
+import { history } from '../../../../App';
 
 
 export default function Header() {
-    const userLogin = false;
+    const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer)
+    console.log(userLogin)
+
     const maLoaiNguoiDung = "quantri";
     const [headerOnScroll, setHeaderOnScroll] = useState(false);
     const [menuOnMobile, setMenuOnMobile] = useState(false);
+
+    const logout = () => {
+        localStorage.removeItem(USER_LOGIN);
+        localStorage.removeItem(TOKEN_CYBERSOFT);
+        history.push('/home');
+        window.location.reload() 
+    }
 
     const headeronScroll = () => {
         const POSITION_DEFAULT = 80
@@ -48,36 +60,36 @@ export default function Header() {
     const checkUserIsAdmin = () => {
         if (maLoaiNguoiDung == "quantri") {
             return <div className="submenu" >
-                <a href="#">
+                <NavLink to="/">
                     <UserOutlined />
                     <span>Thông Tin</span>
-                </a>
-                <a href="#">
+                </NavLink>
+                <NavLink to="/">
                     <SecurityScanOutlined />
                     <span>Quản Trị</span>
-                </a>
-                <a href="#">
+                </NavLink>
+                <button onClick={logout}>
                     <LogoutOutlined />
                     <span>Đăng Xuất</span>
-                </a>
+                </button>
             </div>
         }
         return <div className="submenu" >
-            <a href="#">
+            <NavLink to="#">
                 <UserOutlined />
                 <span>Thông Tin</span>
-            </a>
-            <a href="#">
+            </NavLink>
+            <button onClick={logout}>
                 <LogoutOutlined />
                 <span>Đăng Xuất</span>
-            </a>
+            </button>
         </div>
     };
 
     const checkUserLogin = () => {
-        if (userLogin) {
+        if (userLogin !== null) {
             return <div className="header__wrapper--info">
-                <p>David De Gea</p>
+                <p>{userLogin.taiKhoan}</p>
                 <div className="avatar">
                     <img src="/images/header/avatar.jfif" alt="UserName" />
                 </div>
@@ -107,8 +119,8 @@ export default function Header() {
                     {/* Only Show on mobile  */}
                     <CloseCircleOutlined onClick={closeMenuOnMobile} />
                     <div>
-                        <NavLink to="/login" activeClassName="nav-active" onClick={closeMenuOnMobile}>Đăng Ký</NavLink>
-                        <NavLink to="/register" activeClassName="nav-active" onClick={closeMenuOnMobile}>Đăng Nhập</NavLink>
+                        <NavLink to="/register" activeClassName="nav-active" onClick={closeMenuOnMobile}>Đăng Ký</NavLink>
+                        <NavLink to="/login" activeClassName="nav-active" onClick={closeMenuOnMobile}>Đăng Nhập</NavLink>
                     </div>
                 </nav>
                 {checkUserLogin()}

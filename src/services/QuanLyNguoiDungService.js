@@ -5,13 +5,13 @@ export class QuanLyNguoiDungService extends baseService {
         super()
     }
 
-    // dangNhap = (thongTinDangNhap) => { // {taiKhoan: "", matKhau: ""}
-    //     return this.post("/api/QuanLyNguoiDung/DangNhap", thongTinDangNhap)
-    // }
+    login = (userInfo) => { // {taiKhoan: "", matKhau: ""}
+        return this.post("/api/QuanLyNguoiDung/DangNhap", userInfo)
+    }
 
-    // dangKy = (thongTinDangKy) => { // {taiKhoan: "", matKhau: "", soDt: "", email: "", maNhom: "", hoTen: ""}
-    //     return this.post("/api/QuanLyNguoiDung/DangKy", thongTinDangKy)
-    // }
+    signup = (userInfo) => { // {taiKhoan: "", matKhau: "", soDt: "", email: "", maNhom: "", hoTen: ""}
+        return this.post("/api/QuanLyNguoiDung/DangKy", userInfo)
+    }
 
     // layThongtinNguoiDung = () => {
     //     return this.post("/api/QuanLyNguoiDung/ThongTinTaiKhoan")

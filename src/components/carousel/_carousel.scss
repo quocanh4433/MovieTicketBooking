@@ -41,9 +41,6 @@
                 text-transform: uppercase;
                 color: $light;
 
-                @include responsive(768) {
-                    font-size: $fs-34;
-                }
             }
 
             .desc {
@@ -65,9 +62,6 @@
                     width: 70%;
                 }
 
-                @include responsive(576) {
-                    font-size: $fs-12;
-                }
             }
 
             .icon-play span {

@@ -55,7 +55,7 @@ export default function Carousel() {
       return <div className="slider" key={index}>
         <div style={{ backgroundImage: `url(${banner.hinhAnh})` }} className="slider__wrapper">
           <div className="slider__inner container">
-            <h2 className="heading">Lorem ipsum dolor</h2>
+            <h2 className="heading">Lorem ipsum</h2>
             <div className="c-review">
               <span className="c-review__raiting">PG-13</span>
               <p className="c-review__score">
