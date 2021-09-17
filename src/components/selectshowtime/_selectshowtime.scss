@@ -1,0 +1,28 @@
+.selectShowtime {   
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    padding: 1.4rem;
+    border-radius: 10px;
+    margin: 2rem auto 5rem !important;
+    box-shadow: 0 6px 15px $dark-30;
+
+    &__dropdown {
+        width: 20%;
+        
+        /* Custom arrow down select*/
+        .ant-select-selection-placeholder {
+            color: $gray-3;
+            font-family: $main-font-bold;
+        }
+
+        .ant-select-arrow {
+            color: $gray-3 ;
+        }
+    }
+
+    button {
+        padding: 10px 20px;
+    }
+}

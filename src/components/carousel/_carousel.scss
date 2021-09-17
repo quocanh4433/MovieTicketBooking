@@ -78,17 +78,18 @@
 
     /* Custom slick-dots */
     .slick-dots {
-        bottom: 4rem;
+        bottom: 1rem;
         left: 50%;
 
         max-width: 1280px;
         width: 100%;
         transform: translate(-50%, -50%);
+
         li {
             margin: 0 1.3rem;
             button::before {
                 font-size: $fs-16;
-                opacity: 0.5;
+                opacity: 0.8;
                 color: $light;
             }
         }

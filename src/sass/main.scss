@@ -17,7 +17,7 @@
 @import "./components/button/button";
 @import "./components/review/review";
 @import "./components/form/form";
-
+@import "./components/title/title";
 
 
 // -------------------------------------
@@ -28,13 +28,16 @@
 @import "../templates/HomeTemplate/Layout/Header/header";
 @import "../templates/HomeTemplate/Layout/Footer/footet";
 
-
 /* Import from Page React */
 @import "../pages/Home/home";
 
 /* Import from Component React*/
 @import "../components/carousel/carousel";
-@import "../components/modal/modal"
+@import "../components/modal/modal";
+@import "../components/selectshowtime/selectshowtime";
+@import "../components/multiplerow-carousel/multipleerow";
+
+
 
 
 

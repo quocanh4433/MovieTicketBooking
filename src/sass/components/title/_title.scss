@@ -1,0 +1,23 @@
+.c-primary__title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 4rem;
+
+    font-size: $fs-24;
+    text-transform: uppercase;
+
+    h3 {
+        margin: 0 3rem;
+        color: $gray-2;
+    }
+
+
+}
+.title-active {
+    font-size: $fs-24;
+
+    background: linear-gradient(to right, $orange-1 50% , $orange-3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

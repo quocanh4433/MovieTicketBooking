@@ -8,8 +8,6 @@ import { history } from '../../../../App';
 
 export default function Header() {
     const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer)
-    console.log(userLogin)
-
     const maLoaiNguoiDung = "quantri";
     const [headerOnScroll, setHeaderOnScroll] = useState(false);
     const [menuOnMobile, setMenuOnMobile] = useState(false);
@@ -18,8 +16,8 @@ export default function Header() {
         localStorage.removeItem(USER_LOGIN);
         localStorage.removeItem(TOKEN_CYBERSOFT);
         history.push('/home');
-        window.location.reload() 
-    }
+        window.location.reload()
+    };
 
     const headeronScroll = () => {
         const POSITION_DEFAULT = 80
@@ -33,20 +31,21 @@ export default function Header() {
     const openSubmenu = () => {
         let submenu = document.querySelector(".submenu");
         submenu.classList.toggle("submenu-active");
+
         /* Close submenu when press ESC */
         document.addEventListener("keydown", (e) => {
             e = e || window.event;
-            if (e.keyCode == 27) {
+            if (e.keyCode === 27) {
                 submenu.classList.remove("submenu-active");
             }
         })
         /* Close submenu when click another place */
-        document.addEventListener('mouseup', (e) => {
-            let isActive = submenu.classList.contains("submenu-active");
-            if (isActive) {
-                submenu.classList.remove("submenu-active");
-            }
-        });
+        // document.addEventListener('mouseup', () => {
+        //     let isActive = submenu.classList.contains("submenu-active");
+        //     if (isActive) {
+        //         submenu.classList.remove("submenu-active");
+        //     }
+        // });
     };
 
     const closeMenuOnMobile = () => {
@@ -55,7 +54,7 @@ export default function Header() {
 
     const openMenuOnMobile = () => {
         setMenuOnMobile(true);
-    }
+    };
 
     const checkUserIsAdmin = () => {
         if (maLoaiNguoiDung == "quantri") {

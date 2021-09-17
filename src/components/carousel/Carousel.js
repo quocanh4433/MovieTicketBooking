@@ -29,13 +29,13 @@ export default function Carousel() {
     } else {
       let url = "";
       let convertUrl = "";
-      if (filmID == 1282) {
+      if (filmID === 1282) {
         url = "https://www.youtube.com/watch?v=uqJ9u7GSaYM";
         convertUrl = url.replace("watch?v=", "embed/");
-      } else if (filmID == 1283) {
+      } else if (filmID === 1283) {
         url = "https://www.youtube.com/watch?v=kBY2k3G6LsM";
         convertUrl = url.replace("watch?v=", "embed/");
-      } else if (filmID == 1284) {
+      } else if (filmID === 1284) {
         url = "https://www.youtube.com/watch?v=Eu9G8nO5-Ug";
         convertUrl = url.replace("watch?v=", "embed/");
       }
