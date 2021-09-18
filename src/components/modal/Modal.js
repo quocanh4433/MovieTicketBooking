@@ -6,10 +6,10 @@ export default function Modal(props) {
 
     const renderModal = () => {
         if (modal) {
-            return <div className="modal modal-active" className={modal ? "modal modal-active" : "modal"}>  r
+            return <div className="modal modal-active" className={modal ? "modal modal-active" : "modal"}>
                 <div className="modal__video">
-                    <iframe  src={trailer} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    <CloseCircleOutlined className="modal__btnClose"/>
+                    <iframe src={trailer} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <CloseCircleOutlined className="modal__btnClose" />
                 </div>
             </div>
         }

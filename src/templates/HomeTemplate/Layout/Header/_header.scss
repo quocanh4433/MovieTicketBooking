@@ -161,6 +161,7 @@
             p {
                 font-size: $fs-16;
                 margin: 0;
+                text-transform: capitalize;
             }
 
             .avatar {
@@ -254,7 +255,7 @@
         &--toggle {
             display: none !important;
             font-size: $fs-24;
-            color: $light;
+            color: $light !important;
 
             @include responsive(992) {
                 display: block !important;

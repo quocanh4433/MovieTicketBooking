@@ -6,17 +6,33 @@
 
     font-size: $fs-24;
     text-transform: uppercase;
+    transition: 0.3s;
+    cursor: pointer;
 
     h3 {
         margin: 0 3rem;
-        color: $gray-2;
+        color: $gray-3;
+
+        @include responsive(768) {
+            margin: 0;
+        }
     }
 
+    @include responsive(992) {
+        margin: 3rem 0;
+    }
 
+    @include responsive(768) {
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    @include responsive(576) {
+        justify-content: space-between;
+    }
 }
 .title-active {
     font-size: $fs-24;
-
     background: linear-gradient(to right, $orange-1 50% , $orange-3);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

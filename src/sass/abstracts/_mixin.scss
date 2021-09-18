@@ -1,9 +1,12 @@
 @mixin responsive($width) {
 	@if $width == 1400 {
-		@media only screen and (min-width: 1400px) { @content ; }
+		@media only screen and (max-width: 1400px) { @content ; }
 	}
 	@else if $width == 1200  {
-		@media only screen and (min-width: 1200px) { @content ; }
+		@media only screen and (max-width: 1200px) { @content ; }
+	}
+	@else if $width == 1024  {
+		@media only screen and (max-width: 1024px) { @content ; }
 	}
     @else if $width == 992  {
 		@media only screen and (max-width: 992px) { @content ; }

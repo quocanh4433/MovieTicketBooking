@@ -19,10 +19,21 @@
 
         .ant-select-arrow {
             color: $gray-3 ;
+            border-top: 8px solid $gray-3;
+            border-right: 6px solid transparent;
+            border-left: 6px solid transparent;
+
+            svg {
+                display: none;
+            }
         }
     }
 
     button {
         padding: 10px 20px;
+    }
+
+    @include responsive(992) {
+        display: none;
     }
 }
