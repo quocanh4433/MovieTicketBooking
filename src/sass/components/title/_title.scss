@@ -4,7 +4,8 @@
     align-items: center;
     margin-bottom: 4rem;
 
-    font-size: $fs-24;
+    font-size: $fs-26 !important;
+    font-family: $main-font-bold;
     text-transform: uppercase;
     transition: 0.3s;
     cursor: pointer;
@@ -23,6 +24,7 @@
     }
 
     @include responsive(768) {
+        font-size: $fs-22 !important;
         display: flex;
         justify-content: space-evenly;
     }
@@ -32,8 +34,11 @@
     }
 }
 .title-active {
-    font-size: $fs-24;
     background: linear-gradient(to right, $orange-1 50% , $orange-3);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+.c-primary__title--center {
+    justify-content: center !important;
 }

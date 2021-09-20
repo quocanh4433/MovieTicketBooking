@@ -30,6 +30,13 @@ export default function Modal(props) {
         setModal(false);
     });
 
+    /* Overflow: hidden when modal is opened */
+    if (modal) {
+        document.documentElement.style.overflow = 'hidden';
+    } else {
+        document.documentElement.style.overflow = 'auto';
+    }
+
     return (
         <Fragment>
             {renderModal()}

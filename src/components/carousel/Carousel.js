@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Slider from "react-slick";
-import { useDispatch, useSelector, } from 'react-redux'
-import { PlayCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
+import { useDispatch } from 'react-redux'
+import { PlayCircleOutlined } from '@ant-design/icons'
 import { getBannerAction } from '../../redux/actions/QuanLyPhimAction';
 import Modal from '../modal/Modal';
 
-export default function Carousel() {
-  const { arrBanner } = useSelector(state => state.QuanLyPhimReducer)
+export default function Carousel(props) {
+  let {arrBanner} = props
   const [modal, setModal] = useState(false);
   const [trailer, setTrailer] = useState("");
-  const dispatch = useDispatch()
 
   const settings = {
     dots: true,
@@ -43,12 +42,6 @@ export default function Carousel() {
       setTrailer(convertUrl);
     }
   }
-
-  useEffect(() => {
-    dispatch(getBannerAction())
-  }, [])
-
-  
 
   const renderBannerCarousel = () => {
     return arrBanner.map((banner, index) => {

@@ -1,4 +1,4 @@
-import { GROUPID } from "../utils/setting"
+import { GROUPID } from "../utils/setting.js"
 import { baseService } from "./baseService"
 
 export class QuanLyPhimService extends baseService {

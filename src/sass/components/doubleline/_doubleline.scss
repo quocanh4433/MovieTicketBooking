@@ -1,0 +1,21 @@
+.c-doubleline {
+    &::before {
+		content: "";
+		width: 30%;
+		height: 2px;
+		background-color: $orange-3;
+		display: block;
+		margin: 0 auto 3px;
+        border-radius: 50%;
+	}
+
+    &::after {
+        content: "";
+		width: 20%;
+		height: 2px;
+		background-color: $orange-3;
+		display: block;
+		margin: 0 auto;
+        border-radius: 50%;
+	}
+}

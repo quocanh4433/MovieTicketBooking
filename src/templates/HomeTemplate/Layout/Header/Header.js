@@ -8,7 +8,6 @@ import { history } from '../../../../App';
 
 export default function Header() {
     const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer)
-    const maLoaiNguoiDung = "quantri";
     const [headerOnScroll, setHeaderOnScroll] = useState(false);
     const [menuOnMobile, setMenuOnMobile] = useState(false);
 
@@ -57,7 +56,7 @@ export default function Header() {
     };
 
     const checkUserIsAdmin = () => {
-        if (maLoaiNguoiDung == "quantri") {
+        if (userLogin.maLoaiNguoiDung == "quantri") {
             return <div className="submenu" >
                 <NavLink to="/">
                     <UserOutlined />

@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { PlayCircleOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
-import Modal from "../modal/Modal";
+import Modal from "../Modal/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { GET_FILM_COMINGSOON, GET_FILM_NOWSHOWING } from "../../redux/types/QuanLyPhimType";
 
 export default function MultipleRows(props) {
     let { arrAllFilmInfo } = props
     const { nowShowing, comingSoon } = useSelector(state => state.QuanLyPhimReducer)
-    console.log({ arrAllFilmInfo })
     const [modal, setModal] = useState(false);
     const [trailer, setTrailer] = useState("");
     const dispatch = useDispatch()
@@ -49,7 +48,6 @@ export default function MultipleRows(props) {
             }
         ]
     }
-
 
     const renderFilms = () => {
         return arrAllFilmInfo?.map((film, index) => {

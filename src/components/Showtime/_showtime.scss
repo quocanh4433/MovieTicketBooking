@@ -1,0 +1,270 @@
+.showtime {
+    &__wrapper {
+        padding: 2.5rem 0 2.5rem 2.5rem !important;
+        border-radius: 1rem;
+        border: 2px solid $gray-70;
+
+        @include responsive(992){
+            padding: 0 0 0 2rem !important;
+        }
+
+        @include responsive(576) {
+            padding: 0 0 0 1rem !important;
+        }
+
+        /* Custom LINE ant design */
+        .ant-tabs-ink-bar {
+            background: $orange-3;    
+        }
+
+        /* Custom TAB retina cinema-brand ant design */
+        .ant-tabs-tab {
+            padding: 1rem 2.5rem 1rem 0 !important;
+            max-width: 250px;
+            @include responsive(992) {
+                padding: 2.6rem  !important;
+                margin: 0 !important;
+            }
+            @include responsive(768) {
+                padding: 2.6rem 1rem 1rem 1rem !important;
+            }
+
+            @include responsive(576) {
+                padding: 2.6rem 0.5rem 1rem 0.5rem !important;
+            }
+        }
+
+        .ant-tabs-nav-wrap {
+            @include responsive(992) {
+                justify-content: center;
+            }
+
+            @include responsive(768) {
+                justify-content: center;
+            }
+        }
+
+        .ant-tabs-nav-wrap.ant-tabs-nav-wrap-ping-right {
+            @include responsive(992) {
+                justify-content: flex-start !important;
+            }
+
+        }
+        
+        /* Custom SCROLL BAR ant design */
+        .ant-tabs-tabpane .ant-tabs-tabpane-active {
+            height: 600px;
+            max-width: 100%;
+            overflow-x: hidden;
+
+            /* width */
+            &::-webkit-scrollbar {
+                width: 4px;
+            }
+
+            /* Track */
+            &::-webkit-scrollbar-track {
+                background-color: $gray-70;
+            }
+
+            /* Handle */
+            &::-webkit-scrollbar-thumb {
+                background: $orange-3;
+                border-radius: 2px;
+            }
+
+            /* Handle on hover */
+            &::-webkit-scrollbar-thumb:hover {
+            }
+        }
+
+        /* Custom brand of cinema */
+        .cinema-brand {
+            width: 5rem;
+            height: 5rem;
+            object-fit: cover;
+
+            @include responsive(768) {
+                width: 4rem;
+                height: 4rem;
+            }
+
+            @include responsive(576) {
+                width: 3.5rem;
+                height: 3.5rem;
+            }
+        }
+
+        /* Custom location of cinema*/
+        .cinema-location {
+            display: flex;
+            justify-content: space-between;
+            img {
+                width: 5rem;
+                height: 5rem;
+                object-fit: cover;
+            }
+
+            div {
+                text-align: left;
+                margin-left: 1rem;
+                h3 {
+                    width: 170px;
+                    overflow: hidden;
+                    margin-bottom: 0;
+                    
+                    color: $gray-1;
+                    font-family: $main-font-bold;
+
+                    text-overflow: ellipsis;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 1;
+
+                    @include responsive(992) {
+                        margin-right: 2rem;
+                    }
+                }
+                
+                a {
+                    color: $red;
+                    font-size: $fs-12;
+                }
+            }
+        }
+
+        /* Custom showtime of cinema  */
+        .cinema-showtime {
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid $gray-70;
+            .cinema-showtime-info {
+                display: flex;
+                justify-content: space-between;
+                padding: 0 2rem 1rem 0;    
+
+                img {
+                    border-radius: 5px;
+                    width: 15%;
+                    height: 120px;
+                    object-fit: cover;
+
+                    @include responsive(992) {
+                        height: 170px;
+                        width: 130px;
+                    }
+                }
+                div {
+                    width: 83%;
+                   
+                    h3 {
+                        color: $gray-1;
+                        text-transform: capitalize;
+                        font-size: $fs-18;
+                        margin: 0;
+                        font-family: $main-font-bold;
+                    }
+
+                    h4 {
+                        font-size: $fs-12;
+                        font-family: $main-font-semibold;
+                    }
+
+                    .c-review {
+                        margin: 0;
+ 
+                        .c-review__score {
+                            border-left: 1px solid $gray-1;
+    
+                            span:first-child {
+                                color: $gray-1;
+                            }
+                        }
+
+                        @include responsive(376) {
+                            justify-content: center;
+                        }
+                    }
+
+                    @include responsive(992){
+                        margin-left: 1.5rem;
+                        width: 100% !important;
+                    }
+
+                    @include responsive(376) {
+                        text-align: center;
+                    }
+                }
+                
+                @include responsive(992){
+                    justify-content: flex-start;
+                }
+
+                @include responsive(768){
+                    padding: 0 1rem 1rem 0;    
+                }
+
+                @include responsive(376){
+                    flex-direction: column;  
+                    align-items: center;
+                }
+            }
+
+            .cinema-showtime-time {
+                display: flex;
+                flex-wrap: wrap;
+                transform: translateX(-9px);
+
+                div {
+                    width: calc(100%/5);
+                    padding: 9px;
+
+                    a {
+                        width: 100%;
+                        font-family: $main-font-bold;
+                        border-radius: 5px;
+                        padding: 3px 10px;
+                        color: $orange-1;
+                        border: 2px solid $orange-1;
+
+                        @include responsive(768){
+                            padding: 3px 6px;    
+                        }
+                    }
+
+                    @include responsive(768) {
+                        width: calc(100%/4);
+                    }
+
+                    @include responsive(576) {
+                        text-align: center;
+                        width: calc(100%/3);
+                        padding: 9px 5px ;
+                    }
+
+                    @include responsive(376) {
+                        width: calc(100%/2);
+                        padding: 9px 5px ;
+                    }
+                }
+
+                @include responsive(576) {
+                    transform: translateX(-5px);
+                }
+
+                @include responsive(376) {
+                    transform: translateX(0);
+                }
+            }
+            
+            &:last-child {
+                margin-bottom: 0;
+                padding:  0;
+                border: none;
+            }
+
+            @include responsive(992) {
+                padding: 2rem 0;
+            }
+        }
+    }
+}

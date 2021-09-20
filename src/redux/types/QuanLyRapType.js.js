@@ -1,0 +1,1 @@
+export const GET_CINEMA_INFO = "GET_CINEMA_INFO"

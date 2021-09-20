@@ -1,5 +1,5 @@
 body{
-	font-family: $main-font-regular;
+	font-family: $main-font-regular !important;
 	font-size: $fs-16;
 	line-height: 1.5;
 	// color: $light;
@@ -22,6 +22,14 @@ body{
 
 	@include responsive(992) {
 		padding: 0 2.5rem;
+	}
+}
+
+.l-section {
+	padding: 4.5rem 0;
+
+	@include responsive(768) {
+		padding: 3rem 0;
 	}
 }
 

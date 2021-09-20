@@ -8,7 +8,7 @@ const { Option } = Select;
 export default function SelectShowTime() {
 
     return (
-        <section className="selectShowtime container2">
+        <div className="selectShowtime container2">
             <Select placeholder="Phim" className="selectShowtime__dropdown" clearIcon bordered={false}>
                 <Option value="jack">Intertellar</Option>
                 <Option value="lucy">Inception</Option>
@@ -33,6 +33,6 @@ export default function SelectShowTime() {
                 <Option value="lucy">16:00</Option>
             </Select>
             <button className="c-main-btn icon-play">Đặt vé</button>
-        </section>
+        </div>
     )
 }

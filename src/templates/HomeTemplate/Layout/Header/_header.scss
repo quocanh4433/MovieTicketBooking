@@ -59,6 +59,7 @@
                     border: 2px solid $light;
                     border-radius: 5px;
                     min-width: 150px;
+                    color: $light !important;
 
                     @include responsive(768){
                         max-width: 150px;

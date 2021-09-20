@@ -1,5 +1,5 @@
 import Axios from "axios"
-import { ACCESS_TOKEN, DOMAIN } from "../utils/setting"
+import { ACCESS_TOKEN, DOMAIN } from "../utils/setting.js"
 
 export class baseService {
 
