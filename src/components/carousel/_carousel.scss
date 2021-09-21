@@ -1,77 +1,91 @@
-.slider {
+.mainvisual {
     position: relative;
 
-    .slider__wrapper {
-        position: relative;
-        padding: 32rem 0;
-        width: 100%;
-
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-
-        &::after {
-            content: "";
-            display: block;
-
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
-
+    /* Background-gradient for carousel */
+    &__wrapper {
+        .mainvisual__inner {
+            position: relative;
+            padding: 32rem 0;
             width: 100%;
-            height: 100%;
-            background-image: linear-gradient(to top right, rgba(0, 0, 0, 0.7), rgba(255, 255, 255, 0));
-        }
-        .slider__inner {
-            position: absolute;
-            top: 50%;
-            left: 50%;
 
-            width: 100%;
-            margin: 0 4rem;
-            max-width: 1280px;
-            transform: translate(-50%, -50%);
-            z-index: 2;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
 
-            .heading {
-                margin-bottom: 1rem;
-                font-size: $fs-40;
-                font-family: $second-font-bold;
-                text-transform: uppercase;
-                color: $light;
+            .mainvisual__content {
+                position: absolute;
+                top: 50%;
+                left: 50%;
 
-            }
+                width: 100%;
+                margin: 0 4rem;
+                max-width: 1280px;
+                transform: translate(-50%, -50%);
+                z-index: 2;
 
-            .desc {
-                width: 50%;
-                margin-bottom: 2rem;
-                color: $light;
+                .heading {
+                    margin-bottom: 1rem;
+                    font-size: $fs-40;
+                    font-family: $second-font-bold;
+                    text-transform: uppercase;
+                    color: $light;
 
-                font-size: $fs-14;
-                line-height: 1.6;
-                letter-spacing: 0.5px;
-
-                overflow: hidden;
-                text-overflow: ellipsis;
-                display: -webkit-box;
-                -webkit-box-orient: vertical;
-                -webkit-line-clamp: 3;
-
-                @include responsive(992) {
-                    width: 70%;
+                    @include responsive(768) {
+                        font-size: $fs-30;
+                    }
                 }
 
+                .desc {
+                    width: 50%;
+                    margin-bottom: 2rem;
+                    color: $light;
+
+                    font-size: $fs-14;
+                    line-height: 1.6;
+                    letter-spacing: 0.5px;
+
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 3;
+
+                    @include responsive(992) {
+                        width: 70%;
+                    }
+
+                    @include responsive(768) {
+                        font-size: $fs-12;
+                    }
+                }
+
+                .icon-play span {
+                    font-size: $fs-22;
+                    margin-right: 0.8rem;
+                }
+
+                @include responsive(992) {
+                    max-width: 942px;
+                    margin: 0 2.5rem;
+                }
             }
 
-            .icon-play span {
-                font-size: $fs-22;
-                margin-right: 0.8rem;
+            &::after {
+                content: "";
+                display: block;
+
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 1;
+
+                width: 100%;
+                height: 100%;
+                background-image: linear-gradient(to top right, rgba(0, 0, 0, 0.7), rgba(255, 255, 255, 0));
             }
 
-            @include responsive(992) {
-                max-width: 942px;
-                margin: 0 2.5rem;
+            @include responsive(768) {
+                padding: 22rem 0;
             }
         }
     }

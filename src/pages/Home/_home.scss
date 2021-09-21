@@ -1,0 +1,228 @@
+.news {
+    &--main {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 2rem;
+
+        @include responsive(576){
+            flex-direction: column;
+        }
+
+        /* Content on Mobile */
+        .news-content {
+            width: 49%;
+
+            @include responsive(576){
+                width: 100%;
+            }
+        }
+    }
+
+    &--secondary {
+        display: flex;
+        justify-content: space-between;
+
+        /* Content on Mobile */
+        .news-content {
+            width: calc(100%/3 - 10px);
+
+            figure {
+                img {
+                    @include responsive(768) {
+                        height: 150px;
+                    }
+                    @include responsive(576) {
+                        height: 120px;
+                        
+                    }
+                }
+
+                @include responsive(576){
+                    width: 40%;
+                }
+            }
+
+            div {
+                @include responsive(576){
+                    width: 58%;
+                }
+            }
+
+            @include responsive(576){
+                width: 100%;
+                margin-bottom: 1.5rem;
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+
+        @include responsive(576){
+            flex-direction: column;
+        }
+    }
+
+    /* Content all of news on PC */
+    &-content {
+        img {
+            height: 250px;
+            width: 100%;
+            margin-bottom: 5px;
+
+            object-fit: cover;
+            border-radius: 10px;
+
+            @include responsive(576) {
+                height: 200px;
+            }
+        }
+        div  {
+            h3 {
+                margin: 0;
+                height: 56px;
+
+                color: $dark;
+                font-size: $fs-18;
+                font-family: $main-font-bold;
+
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+
+                @include responsive(576) {
+                    font-size: $fs-16;
+                    height: 48px;
+                }
+            }
+
+            p {
+                margin: 0;
+                color: $gray-2;
+                font-size: $fs-16;
+
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 3;
+
+                @include responsive(576) {
+                    font-size: $fs-14;
+                }
+            }
+        }
+
+        @include responsive(576) {
+            margin-bottom: 1rem;
+        }
+    }
+
+    &__btn-readmore {
+        text-align: center;
+        margin-top: 2rem;
+    }
+}
+
+.homeApp {
+    padding: 10rem 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    &__wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &-left {
+            width: 50%;
+            h3 {
+                margin-bottom: 3.5rem;
+                color: $light;
+
+                text-transform: uppercase;
+                font-family:  $second-font-bold;
+                font-size: $fs-30;
+
+                @include responsive(768) {
+                    font-size: $fs-26;
+                    margin-bottom: 2.5rem;
+                }
+            }
+
+            p {
+                margin-bottom: 2.5rem;
+                color: $light;
+
+                font-family: $main-font-semibold;
+                font-size: $fs-16;
+
+                @include responsive(768) {
+                    font-size: $fs-14;
+                }
+            }
+
+            button {
+                margin-bottom: 2rem;
+
+                @include responsive(768) {
+                    margin-bottom: 1rem;
+                }
+            }
+
+            .notice-download {
+                font-size:  $fs-14;
+
+                a {
+                    color: $orange-1;
+                }
+            }
+
+            @include responsive(768) {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        &-right {
+            position: relative;
+            width: 50%;
+            text-align: center;
+
+            & > img {
+                padding: 0 28%;
+                display: block;
+                height: auto;
+            }
+
+            /* Slider on screen mobile */
+            .homeApp-slider {
+                position: absolute;
+                top: 0;
+                left: 0;
+                
+                padding: 1.2% 29.3% 0 29.3%;
+                width: 100%;
+
+                .slick-list {
+                    border-radius: 2.3rem;
+                }
+
+                .slick-slide {
+                    height: auto;
+                }
+            }
+        }
+
+        @include responsive(768) {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+    @include responsive(768) {
+        padding: 6rem 0;
+    }
+
+}

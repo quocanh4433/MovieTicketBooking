@@ -6,7 +6,7 @@ import Modal from "../Modal/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { GET_FILM_COMINGSOON, GET_FILM_NOWSHOWING } from "../../redux/types/QuanLyPhimType";
 
-export default function MultipleRows(props) {
+export default function MultipleRowCarousel(props) {
     let { arrAllFilmInfo } = props
     const { nowShowing, comingSoon } = useSelector(state => state.QuanLyPhimReducer)
     const [modal, setModal] = useState(false);
@@ -51,10 +51,10 @@ export default function MultipleRows(props) {
 
     const renderFilms = () => {
         return arrAllFilmInfo?.map((film, index) => {
-            return <div className="multipleRow__wrapper">
+            return <div className="multipleRow__wrapper" key={index}>
                 <div className="multipleRow__item">
                     <div className="multipleRow__item-bg">
-                        <NavLink to="/" className="booking">ĐẶT VÉ</NavLink>
+                        <NavLink to={`/detail/${film.maPhim}`} className="booking">ĐẶT VÉ</NavLink>
                         <PlayCircleOutlined className="trailer" onClick={() => {
                             setModal(true)
                             setTrailer(film.trailer)

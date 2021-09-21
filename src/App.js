@@ -11,6 +11,8 @@ import Register from "./pages/Register/Register";
 import Theater from "./pages/Theater/Theater";
 import Apps from "./pages/App/Apps";
 import UserTemplate from "./templates/UsesTemplate/UserTemplate";
+import Detail from "./pages/Detail/Detail";
+import Checkout from "./pages/Checkout/Checkout";
 
 export const history = createBrowserHistory()
 
@@ -23,6 +25,8 @@ function App() {
         <HomeTemplate exact path="/theater" Component={Theater} />
         <HomeTemplate exact path="/news" Component={News} />
         <HomeTemplate exact path="/apps" Component={Apps} />
+        <HomeTemplate exact path="/detail/:id" Component={Detail} />
+        <HomeTemplate exact path="/checkout/:id" Component={Checkout} />
         <UserTemplate exact path="/login" Component={Login} />
         <UserTemplate exact path="/register" Component={Register} />
       </Switch>

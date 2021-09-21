@@ -1,5 +1,5 @@
 .footer {
-    background-color: $dark;
+    background-color: $dark-2;
     padding: 3rem 0 1rem;
 
     &__main {
@@ -75,6 +75,7 @@
             width: 20%;
             @include responsive(576) {
                 width: 100%;
+                margin-bottom: 1rem;
             }
         }
 

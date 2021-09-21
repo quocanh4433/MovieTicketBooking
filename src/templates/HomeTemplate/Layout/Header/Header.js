@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Avatar, Image } from 'antd';
 import { CaretDownOutlined, UserOutlined, SecurityScanOutlined, LogoutOutlined, MenuOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -89,7 +90,7 @@ export default function Header() {
             return <div className="header__wrapper--info">
                 <p>{userLogin.taiKhoan}</p>
                 <div className="avatar">
-                    <img src="/images/header/avatar.jfif" alt="UserName" />
+                    <img src="/images/header/avatar.fif" alt="UserName" onError={(e) => { e.target.onError = null; e.target.src = `/images/header/avatar-user.jpg` }} />
                 </div>
                 <CaretDownOutlined onClick={openSubmenu} />
                 {checkUserIsAdmin()}
@@ -107,7 +108,7 @@ export default function Header() {
         <header className={headerOnScroll ? "header header-onScroll" : "header"}>
             <div className="header__wrapper container">
                 <h1>
-                    <NavLink to="/home"><img src="./images/header/logo.svg" alt="Logo" /></NavLink>
+                    <NavLink to="/home"><img src="/images/header/logo.svg" alt="Logo" /></NavLink>
                 </h1>
                 <nav className={menuOnMobile ? "header__wrapper--nav nav-activeOnMobile" : "header__wrapper--nav"}>
                     <NavLink to="/home" activeClassName="nav-active" onClick={closeMenuOnMobile}>Trang Chủ</NavLink>

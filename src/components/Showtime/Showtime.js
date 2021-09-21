@@ -64,6 +64,7 @@ export default function Showtime() {
                                             <img src={cinema.hinhAnh} alt="brandlogo" />
                                             <div>
                                                 <h3>{cinema.tenCumRap}</h3>
+                                                <h4>{cinema.diaChi}</h4>
                                                 <NavLink to="/" >[Chi tết]</NavLink>
                                             </div>
                                         </div>
@@ -77,7 +78,6 @@ export default function Showtime() {
                                                 <img src={film.hinhAnh} alt={film.tenPhim} />
                                                 <div>
                                                     <h3>{film.tenPhim}</h3>
-                                                    <h4>{cinema.diaChi}</h4>
                                                     <div className="c-review">
                                                         <span className="c-review__raiting">PG-13</span>
                                                         <p className="c-review__score">

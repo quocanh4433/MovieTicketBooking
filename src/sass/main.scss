@@ -28,17 +28,21 @@
 
 /* Import from Template React */
 @import "../templates/HomeTemplate/Layout/Header/header";
-@import "../templates/HomeTemplate/Layout/Footer/footet";
+@import "../templates/HomeTemplate/Layout/Footer/footer";
 
 /* Import from Page React */
 @import "../pages/Home/home";
+@import "../pages/Detail/detail";
+@import "../pages/Checkout/checkout";
 
 /* Import from Component React*/
-@import "../components/carousel/carousel";
-@import "../components/modal/modal";
-@import "../components/selectshowtime/selectshowtime";
-@import "../components/multiplerow-carousel/multiplerow";
+@import "../components/Carousel/carousel";
+@import "../components/Modal/modal";
+@import "../components/ShowtimeBar/showtimebar";
+@import "../components/MultiplerowCarousel/multiplerow";
 @import "../components/Showtime/showtime";
+@import "../components/ParallelCarousel/parallelcarousel";
+
 
 
 

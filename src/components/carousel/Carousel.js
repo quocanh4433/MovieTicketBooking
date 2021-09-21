@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { Fragment, useState } from 'react';
 import Slider from "react-slick";
-import { useDispatch } from 'react-redux'
 import { PlayCircleOutlined } from '@ant-design/icons'
-import { getBannerAction } from '../../redux/actions/QuanLyPhimAction';
-import Modal from '../modal/Modal';
+import Modal from '../Modal/Modal';
 
 export default function Carousel(props) {
-  let {arrBanner} = props
+  let { arrBanner } = props
   const [modal, setModal] = useState(false);
   const [trailer, setTrailer] = useState("");
 
@@ -45,35 +43,37 @@ export default function Carousel(props) {
 
   const renderBannerCarousel = () => {
     return arrBanner.map((banner, index) => {
-      return <div className="slider" key={index}>
-        <div style={{ backgroundImage: `url(${banner.hinhAnh})` }} className="slider__wrapper">
-          <div className="slider__inner container">
-            <h2 className="heading">Lorem ipsum</h2>
-            <div className="c-review">
-              <span className="c-review__raiting">PG-13</span>
-              <p className="c-review__score">
-                <span>8.0</span>
-                <span>IMDb</span>
-              </p>
+      return (
+        <div className="mainvisual__wrapper" key={index}>
+          <div style={{ backgroundImage: `url(${banner.hinhAnh})` }} className="mainvisual__inner">
+            <div className="mainvisual__content container">
+              <h2 className="heading">Lorem ipsum</h2>
+              <div className="c-review">
+                <span className="c-review__raiting">PG-13</span>
+                <p className="c-review__score">
+                  <span>8.0</span>
+                  <span>IMDb</span>
+                </p>
+              </div>
+              <p className="desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat quia totam a unde quo corporis magni doloremque ducimus cum eius.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat quia totam a unde quo corporis magni doloremque ducimus cum eius.</p>
+              <button className="c-main-btn icon-play" onClick={() => {
+                let filmID = banner.maPhim
+                showModal(filmID)
+              }}><PlayCircleOutlined />Trailer</button>
             </div>
-            <p className="desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat quia totam a unde quo corporis magni doloremque ducimus cum eius.
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat quia totam a unde quo corporis magni doloremque ducimus cum eius.</p>
-            <button className="c-main-btn icon-play" onClick={() => {
-              let filmID = banner.maPhim
-              showModal(filmID)
-            }}><PlayCircleOutlined />Trailer</button>
           </div>
         </div>
-      </div>
+      )
     })
   }
 
   return (
-    <div className="slider">
-      <Slider {...settings}>
+    <Fragment>
+      <Slider {...settings} className="mainvisual">
         {renderBannerCarousel()}
       </Slider>
-      <Modal modal={modal} trailer={trailer} setTrailer={setTrailer} setModal={setModal}/>
-    </div>
+      <Modal modal={modal} trailer={trailer} setTrailer={setTrailer} setModal={setModal} />
+    </Fragment>
   )
 }
