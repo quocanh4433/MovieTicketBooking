@@ -1,5 +1,7 @@
 import { USER_LOGIN } from "../../utils/setting";
-import { LOG_IN } from "../types/QuanLyNguoiDungType"
+import { ADD_COMMENT, COUNT_LIKE, LOG_IN } from "../types/QuanLyNguoiDungType"
+import _ from 'lodash'
+import ActionButton from "antd/lib/modal/ActionButton";
 
 /** Check user logged  */
 let userLogged = null;
@@ -9,6 +11,102 @@ if (localStorage.getItem(USER_LOGIN)) {
 
 const stateDefault = {
     userLogin: userLogged,
+    lstUserComment: [
+        {
+            id: 1,
+            name: "Nam",
+            like: 5,
+            score: 9,
+            comment: "Bộ phim có chất lượng hành động tốt, cảnh quay đep.",
+            avatar: "https://i.pravatar.cc?u=nam",
+            day: "2021-8-3"
+        },
+
+        {
+            id: 2,
+            name: "Hoàng",
+            like: 7,
+            score: 6,
+            comment: "Bộ phim có chất lượng hành động tốt, cảnh quay đep.",
+            avatar: "https://i.pravatar.cc?u=hoang",
+            day: "2021-8-6"
+        },
+
+        {
+            id: 3,
+            name: "An",
+            like: 12,
+            score: 4,
+            comment: "Bộ phim có chất lượng hành động tốt, cảnh quay đep.",
+            avatar: "https://i.pravatar.cc?u=an",
+            day: "2021-8-9"
+        },
+
+        {
+            id: 4,
+            name: "Định",
+            like: 45,
+            score: 6,
+            comment: "Bộ phim có chất lượng hành động tốt, cảnh quay đep.",
+            avatar: "https://i.pravatar.cc?u=dinh",
+            day: "2021-20-8"
+        },
+        {
+            id: 5,
+            name: "Thoại",
+            like: 23,
+            score: 8,
+            comment: "Bộ phim có chất lượng hành động tốt, cảnh quay đep.",
+            avatar: "https://i.pravatar.cc?u=thoai",
+            day: "2021-8-23"
+        },
+        {
+            id: 6,
+            name: "Nhã",
+            like: 27,
+            score: 5,
+            comment: "Bộ phim có chất lượng hành động tốt, cảnh quay đep.",
+            avatar: "https://i.pravatar.cc?u=nha",
+            day: "2021-26-8"
+        },
+        {
+            id: 6,
+            name: "Bích",
+            like: 23,
+            score: 8,
+            comment: "Bộ phim có chất lượng hành động tốt, cảnh quay đep.",
+            avatar: "https://i.pravatar.cc?u=bich",
+            day: "2021-9-1"
+        },
+        {
+            id: 7,
+            name: "Trung",
+            like: 12,
+            score: 8,
+            comment: "Bộ phim có chất lượng hành động tốt, cảnh quay đep.",
+            avatar: "https://i.pravatar.cc?u=trung",
+            day: "2021-9-2"
+        },
+        {
+            id: 8,
+            name: "Phước",
+            like: 3,
+            score: 9,
+            comment: "Bộ phim có chất lượng hành động tốt, cảnh quay đep.",
+            avatar: "https://i.pravatar.cc?u=phuoc",
+            day: "2021-9-18"
+        },
+        {
+            id: 9,
+            name: "Đức",
+            like: 3,
+            score: 6,
+            comment: "Bộ phim có chất lượng hành động tốt, cảnh quay đep.",
+            avatar: "https://i.pravatar.cc?u=duc",
+            day: "2021-9-19"
+        },
+
+    ]
 }
 
 export const QuanLyNguoiDungReducer = (state = stateDefault, action) => {
@@ -18,6 +116,15 @@ export const QuanLyNguoiDungReducer = (state = stateDefault, action) => {
             return { ...state }
         }
 
+        case COUNT_LIKE: {
+            let index = _.findIndex(state.lstUserComment, user => user.id == action.id)
+            let newLike = [...state.lstUserComment, state.lstUserComment[index].like += 1] 
+        }
+
+        case ADD_COMMENT: {
+            state.lstUserComment = [...state.lstUserComment, action.userComment]
+            return {...state}
+        }
         default: return { ...state }
     }
 }

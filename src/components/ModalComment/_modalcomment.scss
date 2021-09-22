@@ -1,0 +1,109 @@
+.comment__modal-toggle {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+
+    cursor: pointer;
+    background: $white;
+    border-radius: 8px;
+    input {
+        padding: 2rem 2rem 2rem 8rem;
+        width: 100%;
+
+        border: none;
+        outline: none;
+        cursor: pointer;
+
+        &::placeholder {
+            font-family: $main-font-bold;
+            font-size: $fs-16;
+        }
+    }
+
+    img {
+        position: absolute;
+        top: 50%;
+        left: 2rem;
+        transform:  translateY(-50%);
+
+        width: 4.3rem;
+        height: 4.3rem;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    & > .ant-rate {
+        position: absolute;
+        top: 50%;
+        right: 2rem;
+        transform:  translateY(-50%);
+        color: $orange-3;
+        opacity: 0.7;
+
+        @include responsive(576) {
+            display: none;
+        }
+    }
+}
+
+.comment__modal {
+    h3 {
+        font-size: $fs-40;
+        color: $green;
+        text-align: center;
+        font-family: $main-font-bold;
+        margin: 0;
+        line-height: 1;
+    }
+
+    &__start {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        
+        li {
+            font-size: $fs-30;
+            color:  $orange-3;
+        }
+    }
+
+    textarea {
+        min-width: 100%;
+        min-height: 11rem;
+        max-height: 11rem;
+        border: 1px solid $gray-3;
+        border-radius: 8px;
+        box-sizing: border-box;
+        padding: 2rem;
+    }
+}
+
+/* Custom layout modal in ant Design */
+.ant-modal-content {
+    border-radius: 8px !important;
+}
+
+.ant-modal-body {
+    padding: 2.4rem 3rem !important;
+}
+
+.ant-modal-footer {
+    border: none !important;
+
+    .ant-btn {
+        border-radius: 6px;
+    }
+
+    .ant-btn.ant-btn-primary {
+        color: $light;
+        transition: 0.3s;
+        border: none;
+
+        background-image: linear-gradient(to right, $orange-1 0% , $orange-3 60%, $orange-1 100%);
+        box-shadow: 2px 4px 6px rgba(255, 107, 0, 0.34);
+        background-size: 200% auto;
+
+        &:hover {
+            background-position: right;
+        }
+    }
+}

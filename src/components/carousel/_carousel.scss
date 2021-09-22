@@ -59,11 +59,6 @@
                     }
                 }
 
-                .icon-play span {
-                    font-size: $fs-22;
-                    margin-right: 0.8rem;
-                }
-
                 @include responsive(992) {
                     max-width: 942px;
                     margin: 0 2.5rem;

@@ -85,6 +85,9 @@ export default function Showtime() {
                                                             <span>IMDb</span>
                                                         </p>
                                                     </div>
+                                                    <figure>
+                                                        <img src="/images/common/4DX.jpg" alt="4DX" />
+                                                    </figure>
                                                 </div>
                                             </div>
                                             <div className="cinema-showtime-time">

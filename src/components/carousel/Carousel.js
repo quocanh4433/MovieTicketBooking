@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import Slider from "react-slick";
 import { PlayCircleOutlined } from '@ant-design/icons'
-import Modal from '../Modal/Modal';
+import ModalTrailer from '../ModalTrailer/ModalTrailer';
 
 export default function Carousel(props) {
   let { arrBanner } = props
@@ -73,7 +73,7 @@ export default function Carousel(props) {
       <Slider {...settings} className="mainvisual">
         {renderBannerCarousel()}
       </Slider>
-      <Modal modal={modal} trailer={trailer} setTrailer={setTrailer} setModal={setModal} />
+      <ModalTrailer modal={modal} trailer={trailer} setTrailer={setTrailer} setModal={setModal} />
     </Fragment>
   )
 }

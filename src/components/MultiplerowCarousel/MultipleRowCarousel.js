@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { PlayCircleOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
-import Modal from "../Modal/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { GET_FILM_COMINGSOON, GET_FILM_NOWSHOWING } from "../../redux/types/QuanLyPhimType";
+import ModalTrailer from "../ModalTrailer/ModalTrailer";
 
 export default function MultipleRowCarousel(props) {
     let { arrAllFilmInfo } = props
@@ -90,7 +90,7 @@ export default function MultipleRowCarousel(props) {
             <Slider {...settings} className="multipleRow">
                 {renderFilms()}
             </Slider>
-            <Modal modal={modal} trailer={trailer} setTrailer={setTrailer} setModal={setModal} />
+            <ModalTrailer modal={modal} trailer={trailer} setTrailer={setTrailer} setModal={setModal} />
         </section >
     )
 }

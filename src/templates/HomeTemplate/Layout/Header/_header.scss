@@ -27,6 +27,13 @@
                 display: block;
                 padding: 10px;
                 color: $light;
+                transition: 0.2s;
+
+                &:hover {
+                    color: $orange-2;
+                }
+
+
 
                 @include responsive(992) {
                     padding: 1.5rem 0;

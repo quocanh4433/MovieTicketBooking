@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { CloseCircleOutlined } from "@ant-design/icons"
 
-export default function Modal(props) {
+export default function ModalTrailer(props) {
     let { modal, trailer, setModal, setTrailer } = props;
 
     const renderModal = () => {
