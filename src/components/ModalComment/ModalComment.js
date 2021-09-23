@@ -21,7 +21,7 @@ export default function ModalComment() {
         let userComment = {
             id: 10,
             name: `${userLogin.taiKhoan}`,
-            like: 5,
+            like: 0,
             score: start,
             comment: contentComment,
             avatar: "/images/header/avatar.jfif",
@@ -40,11 +40,11 @@ export default function ModalComment() {
         setStart(0)
     };
 
-    const handleChangeStartRate = (value) => {
+    const handleStartRate = (value) => {
         setStart(value)
     };
 
-    const handleChangeComment = (e) => {
+    const handleComment = (e) => {
         let { value } = e.target
         setContentComment(value)
     }
@@ -67,9 +67,9 @@ export default function ModalComment() {
                 <div className="comment__modal">
                     <h3>{(start * 2).toFixed(1)}</h3>
                     <div className="comment__modal-startRate">
-                        <Rate allowHalf defaultValue={start} onChange={handleChangeStartRate} />
+                        <Rate allowHalf defaultValue={start} onChange={handleStartRate} />
                     </div>
-                    <textarea placeholder="Bạn nghĩ gì về phim này..." name="comment" onChange={handleChangeComment}></textarea>
+                    <textarea placeholder="Bạn nghĩ gì về phim này..." name="comment" onChange={handleComment}></textarea>
                 </div>
             </Modal>
         </Fragment>

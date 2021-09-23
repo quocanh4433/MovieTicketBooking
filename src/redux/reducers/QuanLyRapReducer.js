@@ -2,7 +2,6 @@ import { GET_CINEMA_INFO, GET_THEATERS_INFO } from "../types/QuanLyRapType.js";
 
 const stateDefault = {
     cinemaSystem: [],
-
 }
 
 export const QuanLyRapReducer = (state= stateDefault, action) => {

@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import { CustomCard } from '@tsamantanis/react-glassmorphism'
 import '@tsamantanis/react-glassmorphism/dist/index.css'
 import { Tabs } from 'antd';
@@ -9,16 +9,16 @@ import { COUNT_LIKE } from '../../redux/types/QuanLyNguoiDungType';
 import ModalComment from '../../components/ModalComment/ModalComment';
 import _ from "lodash"
 import moment from 'moment'
+import { NavLink } from 'react-router-dom';
 import Showtime from '../../components/Showtime/Showtime';
+import { getCinemaInfoAction, getCinemaShowtimeAction } from '../../redux/actions/QuanLyRapAction';
 
 const { TabPane } = Tabs;
 
 // ======================================================
 // Tabs Component
 // ======================================================
-
 function TabComment() {
-
     const { lstUserComment } = useSelector(state => state.QuanLyNguoiDungReducer);
     const [showComment, setShowComment] = useState(4)
     const dispatch = useDispatch()
@@ -118,14 +118,13 @@ function TabComment() {
                 </TabPane>
                 <TabPane tab={<h4>Đánh Giá</h4>} key="2">
                     <div className="tab__comment">
-                        {/* =========================== */}
+
                         <ModalComment />
                         {renderLstComment()}
-                        {/* =========================== */}
 
                         <div className="tab__comment-btnReadmore">
-                            <button className="c-main-btn icon-play" onClick={handleShowLstComment}> 
-                                {showComment >= lstUserComment.length ? "thu gọn" : "xem thêm"} 
+                            <button className="c-main-btn icon-play" onClick={handleShowLstComment}>
+                                {showComment >= lstUserComment.length ? "thu gọn" : "xem thêm"}
                             </button>
                         </div>
                     </div>
@@ -136,10 +135,143 @@ function TabComment() {
 }
 
 // ======================================================
+// ShowtimeII Component
+// ======================================================
+/* Showtime for detail page */
+function ShowtimeDetail(props) {
+    const { filmDetail } = useSelector(state => state.QuanLyPhimReducer);
+    const dispatch = useDispatch()
+    const [state, setState] = useState({
+        tabPosition: 'left',
+    });
+    const { tabPosition } = state;
+
+    console.log(filmDetail.tenPhim)
+
+    useEffect(() => {
+        let { filmID } = props;
+        dispatch(getCinemaShowtimeAction(filmID))
+    }, [])
+
+    window.onload = () => {
+        let widthScreen = window.innerWidth
+        if (widthScreen <= 992) {
+            setState({
+                tabPosition: 'top'
+            })
+        } else {
+            setState({
+                tabPosition: 'left'
+            })
+        }
+    }
+
+    window.onresize = () => {
+        let widthScreen = window.innerWidth
+        if (widthScreen <= 992) {
+            setState({
+                tabPosition: 'top'
+            })
+        } else {
+            setState({
+                tabPosition: 'left'
+            })
+        }
+    }
+
+    const renderCinemaSystem = () => {
+        return filmDetail.heThongRapChieu?.map((cinemaSystem, index) => {
+            return (
+                <TabPane
+                    tab={<img className="cinema-brand" src={cinemaSystem.logo} alt={cinemaSystem.tenHeThongRap} />}
+                    key={index}
+                >
+                    <Tabs tabPosition={tabPosition}>
+                        {cinemaSystem.cumRapChieu?.map((cinema, index) => {
+                            return (
+                                <TabPane
+                                    tab={
+                                        <div className="cinema-location">
+                                            <img src={cinema.hinhAnh} alt={cinema.tenCumRap} />
+                                            <div>
+                                                <h3>{cinema.tenCumRap}</h3>
+                                                <h4>{cinema.diaChi}</h4>
+                                                <NavLink to="/" >[Chi tết]</NavLink>
+                                            </div>
+                                        </div>
+                                    }
+                                    key={index}
+                                >
+                                    {/* List of detail info film */}
+                                    {cinemaSystem.cumRapChieu.map((showtime, index) => {
+                                        return (
+                                            <div className="cinema-showtime" key={index}>
+                                                <div className="cinema-showtime-info">
+                                                    <img src={filmDetail.hinhAnh} alt={filmDetail.tenPhim} />
+                                                    <div>
+                                                        <h3>{filmDetail.tenPhim}</h3>
+                                                        <div className="c-review">
+                                                            <span className="c-review__raiting">PG-13</span>
+                                                            <p className="c-review__score">
+                                                                <span>8.0</span>
+                                                                <span>IMDb</span>
+                                                            </p>
+                                                        </div>
+                                                        <figure>
+                                                            <img src="/images/common/4DX.jpg" alt="4DX" />
+                                                        </figure>
+                                                    </div>
+                                                </div>
+                                                <div className="cinema-showtime-time">
+                                                    {showtime.lichChieuPhim.slice(0,10).map((time, index) => {
+                                                        return (
+                                                            <div>
+                                                                <NavLink to={`/checkout/${time.maLichChieu}`} key={index}>
+                                                                    {moment(time.ngayChieuGioChieu).format('hh:mm A')}
+                                                                </NavLink>
+                                                            </div>
+                                                        )
+                                                    })}
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
+                                </TabPane>
+                            )
+                        })}
+                    </Tabs>
+                </TabPane>
+            )
+        })
+    }
+
+    return (
+        <div className="c-multipletabs container2" >
+            <div className="c-primary__title c-primary__title--center">
+                <h3 className="title-active" >chọn suất chiếu</h3>
+            </div>
+            <Tabs defaultActiveKey="1" tabPosition={tabPosition} className="c-multipletabs__wrapper" >
+
+                {renderCinemaSystem()}
+
+            </Tabs>
+        </div>
+    )
+}
+
+// ======================================================
 // Main Component 
 // ======================================================
-
 export default function (props) {
+    const { filmDetail } = useSelector(state => state.QuanLyPhimReducer)
+    const dispatch = useDispatch()
+    const { id } = props.match.params
+    useEffect(() => {
+        let { id } = props.match.params;
+        dispatch(getCinemaShowtimeAction(id))
+    }, [])
+
+    console.log(filmDetail)
 
     return (
         <section className="detail">
@@ -196,7 +328,7 @@ export default function (props) {
 
             {/* Detail showtime */}
             <div className="detail__showtime l-section">
-                <Showtime />
+                <ShowtimeDetail filmID={id} />
             </div>
 
             {/* Detail tabs info and comment */}

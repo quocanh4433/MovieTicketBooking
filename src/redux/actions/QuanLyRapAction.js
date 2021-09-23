@@ -1,6 +1,5 @@
 import { quanLyRapService } from "../../services/QuanLyRapService"
-import { GET_CINEMA_INFO } from "../types/QuanLyRapType.js"
-
+import { GET_CINEMA_INFO, GET_CINEMA_SHOWTIME } from "../types/QuanLyRapType.js"
 export const getCinemaInfoAction = () => {
     return async (dispatch) => {
         try {
@@ -8,6 +7,20 @@ export const getCinemaInfoAction = () => {
             dispatch({
                 type: GET_CINEMA_INFO,
                 cinemaSystem: result.data.content
+            })
+        } catch(error) {
+            console.log(error.response?.data)
+        }
+    }
+}
+
+export const getCinemaShowtimeAction = (filmID) => {
+    return async (dispatch) => {
+        try {
+            const result = await quanLyRapService.getCinemaShowtime(filmID)
+            dispatch({
+                type: GET_CINEMA_SHOWTIME,
+                filmDetail: result.data.content
             })
         } catch(error) {
             console.log(error.response?.data)
