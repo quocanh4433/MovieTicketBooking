@@ -37,7 +37,7 @@ export default function MultipleRowCarousel(props) {
                 }
             },
             {
-                breakpoint: 576,
+                breakpoint: 376,
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1,

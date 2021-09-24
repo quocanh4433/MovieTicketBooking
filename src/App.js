@@ -13,6 +13,7 @@ import Apps from "./pages/App/Apps";
 import UserTemplate from "./templates/UsesTemplate/UserTemplate";
 import Detail from "./pages/Detail/Detail";
 import Checkout from "./pages/Checkout/Checkout";
+import CheckoutTemplate from "./templates/CheckoutTemplate/CheckoutTemplate";
 
 export const history = createBrowserHistory()
 
@@ -26,7 +27,7 @@ function App() {
         <HomeTemplate exact path="/news" Component={News} />
         <HomeTemplate exact path="/apps" Component={Apps} />
         <HomeTemplate exact path="/detail/:id" Component={Detail} />
-        <HomeTemplate exact path="/checkout/:id" Component={Checkout} />
+        <CheckoutTemplate exact path="/checkout/:id" Component={Checkout} />
         <UserTemplate exact path="/login" Component={Login} />
         <UserTemplate exact path="/register" Component={Register} />
       </Switch>

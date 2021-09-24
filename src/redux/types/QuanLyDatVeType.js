@@ -1,0 +1,2 @@
+export const GET_SHOWTIME_DETIAL = "GET_SHOWTIME_DETIAL";
+export const SELECT_SEAT = "SELECT_SEAT"

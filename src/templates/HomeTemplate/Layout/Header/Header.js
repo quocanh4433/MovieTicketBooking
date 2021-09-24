@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import { Avatar, Image } from 'antd';
 import { CaretDownOutlined, UserOutlined, SecurityScanOutlined, LogoutOutlined, MenuOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
@@ -59,11 +59,11 @@ export default function Header() {
     const checkUserIsAdmin = () => {
         if (userLogin.maLoaiNguoiDung == "quantri") {
             return <div className="submenu" >
-                <NavLink to="/">
+                <NavLink to="#">
                     <UserOutlined />
                     <span>Thông Tin</span>
                 </NavLink>
-                <NavLink to="/">
+                <NavLink to="#">
                     <SecurityScanOutlined />
                     <span>Quản Trị</span>
                 </NavLink>
@@ -85,16 +85,18 @@ export default function Header() {
         </div>
     };
 
-    const checkUserLogin = () => {
+    const checkUserIsLogin = () => {
         if (userLogin !== null) {
-            return <div className="header__wrapper--info">
-                <p>{userLogin.taiKhoan}</p>
-                <div className="avatar">
-                    <img src="/images/header/avatar.fif" alt="UserName" onError={(e) => { e.target.onError = null; e.target.src = `/images/header/avatar-user.jpg` }} />
+            return (
+                <div className="header__wrapper--info">
+                    <p>{userLogin.taiKhoan}</p>
+                    <div className="avatar">
+                        <img src="/images/header/avatar.fif" alt="UserName" onError={(e) => { e.target.onError = null; e.target.src = `/images/header/avatar-user.jpg` }} />
+                    </div>
+                    <CaretDownOutlined onClick={openSubmenu} />
+                    {checkUserIsAdmin()}
                 </div>
-                <CaretDownOutlined onClick={openSubmenu} />
-                {checkUserIsAdmin()}
-            </div>
+            )
         }
         return <div className="header__wrapper--signin">
             <NavLink to="/register" className="signup">Đăng Ký</NavLink>
@@ -102,29 +104,66 @@ export default function Header() {
         </div>
     };
 
-    window.addEventListener("scroll", headeronScroll)
-
-    return (
-        <header className={headerOnScroll ? "header header-onScroll" : "header"}>
-            <div className="header__wrapper container">
-                <h1>
-                    <NavLink to="/home"><img src="/images/header/logo.svg" alt="Logo" /></NavLink>
-                </h1>
-                <nav className={menuOnMobile ? "header__wrapper--nav nav-activeOnMobile" : "header__wrapper--nav"}>
-                    <NavLink to="/home" activeClassName="nav-active" onClick={closeMenuOnMobile}>Trang Chủ</NavLink>
-                    <NavLink to="/theater" activeClassName="nav-active" onClick={closeMenuOnMobile}>Cụm Rạp</NavLink>
-                    <NavLink to="/news" activeClassName="nav-active" onClick={closeMenuOnMobile}>Tin Tức</NavLink>
-                    <NavLink to="/apps" activeClassName="nav-active" onClick={closeMenuOnMobile}>Ứng Dụng</NavLink>
-                    {/* Only Show on mobile  */}
-                    <CloseCircleOutlined onClick={closeMenuOnMobile} />
-                    <div>
-                        <NavLink to="/register" activeClassName="nav-active" onClick={closeMenuOnMobile}>Đăng Ký</NavLink>
-                        <NavLink to="/login" activeClassName="nav-active" onClick={closeMenuOnMobile}>Đăng Nhập</NavLink>
+    const checkUserInfoMobile = () => {
+        if (userLogin !== null) {
+            return (
+                <Fragment>
+                    <p>{userLogin?.taiKhoan}</p>
+                    <div className="avatar">
+                        <img src="/images/header/avatar.fif" alt="UserName" onError={(e) => { e.target.onError = null; e.target.src = `/images/header/avatar-user.jpg` }} />
                     </div>
-                </nav>
-                {checkUserLogin()}
-                <MenuOutlined className="header__wrapper--toggle" onClick={openMenuOnMobile} />
-            </div>
-        </header>
-    )
-}
+                </Fragment>
+            )
+        }
+        return <img src="/images/header/logo.svg" alt="Logo" />
+    }
+
+    const checkSignInBtnMobile = () => {
+        if (userLogin !== null) {
+            return (
+                <div>
+                    <NavLink to="/login" activeClassName="nav-active" onClick={closeMenuOnMobile}>Đăng Xuất</NavLink>
+                </div>
+            )
+        } else {
+            return (
+                <div>
+                    <NavLink to="/register" activeClassName="nav-active" onClick={closeMenuOnMobile}>Đăng Ký</NavLink>
+                    <NavLink to="/login" activeClassName="nav-active" onClick={closeMenuOnMobile}>Đăng Nhập</NavLink>
+                </div>
+            )
+        }
+    }
+
+        window.addEventListener("scroll", headeronScroll)
+
+        return (
+            <header className={headerOnScroll ? "header header-onScroll" : "header"}>
+                <div className="header__wrapper container">
+                    <h1>
+                        <NavLink to="/home"><img src="/images/header/logo.svg" alt="Logo" /></NavLink>
+                    </h1>
+                    <nav className={menuOnMobile ? "header__wrapper--nav nav-activeOnMobile" : "header__wrapper--nav"}>
+
+                        {/* User info on mobile */}
+                        <div className="navUserInfo">{checkUserInfoMobile()}</div>
+
+                        {/* Main menu on PC and mobile */}
+                        <NavLink to="/home" activeClassName="nav-active" onClick={closeMenuOnMobile}>Trang Chủ</NavLink>
+                        <a href="#news" activeClassName="nav-active" onClick={closeMenuOnMobile}>Tin Tức</a>
+                        <a href="#event" activeClassName="nav-active" onClick={closeMenuOnMobile}>Sự kiện</a>
+                        <a href="#homeapp" activeClassName="nav-active" onClick={closeMenuOnMobile}>Ứng Dụng</a>
+
+                        {/* Only Show on mobile  */}
+                        <CloseCircleOutlined onClick={closeMenuOnMobile} />
+                        {checkSignInBtnMobile()}
+
+                    </nav>
+
+                    {checkUserIsLogin()}
+
+                    <MenuOutlined className="header__wrapper--toggle" onClick={openMenuOnMobile} />
+                </div>
+            </header>
+        )
+    }

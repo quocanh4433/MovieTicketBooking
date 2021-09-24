@@ -68,7 +68,7 @@ function ShowtimeHome(props) {
                                             <div>
                                                 <h3>{cinema.tenCumRap}</h3>
                                                 <h4>{cinema.diaChi}</h4>
-                                                <NavLink to="/" >[Chi tết]</NavLink>
+                                                {/* <NavLink to="/" >[Chi tết]</NavLink> */}
                                             </div>
                                         </div>
                                     }
@@ -141,7 +141,7 @@ function SliderMobileScreen() {
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 3000,
+        autoplaySpeed: 2000,
     };
     return (
         <Slider {...settings} className="homeApp-slider">
@@ -374,7 +374,7 @@ export default function (props) {
             <section className="l-section">
                 <div className="news container2">
                     <div className="c-primary__title c-primary__title--center">
-                        <h3 className="title-active">Tin Tức</h3>
+                        <h3 className="title-active" id="news">Tin Tức</h3>
                     </div>
                     <News />
                 </div>
@@ -385,7 +385,7 @@ export default function (props) {
             <section className="l-section">
                 <div className="container2">
                     <div className="c-primary__title c-primary__title--center">
-                        <h3 className="title-active">KHUYẾN MÃI</h3>
+                        <h3 className="title-active" id="event">KHUYẾN MÃI</h3>
                     </div>
                 </div>
                 <div className="event container2">
@@ -394,7 +394,7 @@ export default function (props) {
             </section>
 
             {/* Home App download  */}
-            <section className="homeApp" style={{ backgroundImage: `url(./images/app/app01.jpg)` }}>
+            <section className="homeApp" style={{ backgroundImage: `url(./images/app/app01.jpg)` }} id="homeapp">
                 <div className="homeApp__wrapper container2">
                     <div className="homeApp__wrapper-left">
                         <h3>Ứng dụng tiện lợi dành cho <br /> người yêu điện ảnh</h3>

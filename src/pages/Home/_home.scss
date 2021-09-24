@@ -214,6 +214,10 @@
                     height: auto;
                 }
             }
+
+            @include responsive(768) {
+                width: 80%;
+            }
         }
 
         @include responsive(768) {
@@ -223,7 +227,7 @@
     }
 
     @include responsive(768) {
-        padding: 6rem 0;
+        padding: 4rem 0;
     }
 
 }

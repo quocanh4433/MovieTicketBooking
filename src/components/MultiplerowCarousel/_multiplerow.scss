@@ -140,6 +140,10 @@
                 @include responsive(768){
                     height: 410px;
                 }
+
+                @include responsive(576){
+                    height: 310px;
+                }
             }
 
             p {
