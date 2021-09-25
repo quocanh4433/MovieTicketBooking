@@ -10,8 +10,7 @@ import ModalComment from '../../components/ModalComment/ModalComment';
 import _ from "lodash"
 import moment from 'moment'
 import { NavLink } from 'react-router-dom';
-import Showtime from '../../components/Showtime/Showtime';
-import { getCinemaInfoAction, getCinemaShowtimeAction } from '../../redux/actions/QuanLyRapAction';
+import { getCinemaShowtimeAction } from '../../redux/actions/QuanLyRapAction';
 import ModalTrailer from '../../components/ModalTrailer/ModalTrailer';
 
 const { TabPane } = Tabs;
@@ -27,9 +26,7 @@ function ShowtimeDetail(props) {
         tabPosition: 'left',
     });
     const { tabPosition } = state;
-
-    console.log(filmDetail.tenPhim)
-
+    
     useEffect(() => {
         let { filmID } = props;
         dispatch(getCinemaShowtimeAction(filmID))
@@ -275,8 +272,6 @@ export default function (props) {
         let { id } = props.match.params;
         dispatch(getCinemaShowtimeAction(id))
     }, [])
-
-    console.log(filmDetail)
 
     return (
         <Fragment>

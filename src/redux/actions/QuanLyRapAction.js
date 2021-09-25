@@ -9,7 +9,7 @@ export const getCinemaInfoAction = () => {
                 cinemaSystem: result.data.content
             })
         } catch(error) {
-            console.log(error.response?.data)
+            console.log("Error: ", error.response?.data)
         }
     }
 }
@@ -23,7 +23,7 @@ export const getCinemaShowtimeAction = (filmID) => {
                 filmDetail: result.data.content
             })
         } catch(error) {
-            console.log(error.response?.data)
+            console.log("Error: ", error.response?.data)
         }
     }
 }

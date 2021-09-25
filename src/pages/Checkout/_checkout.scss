@@ -5,9 +5,9 @@
     margin: 0 auto;
     max-width: 1440px;
     padding: 0 3rem;
+
     &__right {
         width: 69.5%;
-        // background-color: lightblue;
 
         .checkout__cinema {
             display: flex;
@@ -32,24 +32,32 @@
                     font-size: $fs-14;
                     color: $dark;
                     margin: 0 0 0 1.5rem;
-                    // font-family: $main-font-bold;
+                }
+            }
+
+            .countdown {
+                margin-right: 2rem;
+
+                .ant-statistic-content-value {
+                    font-family: $main-font-bold;
+                    font-size: $fs-22;
+                    color: $orange-1;
                 }
             }
         }
 
         .checkout__booking {
+
             .screen {
                 position: relative;
                 width: 100%;
                 height: 50px;
-                /*   border:solid 5px #000; */
+                margin-bottom: 2rem;
+
+                border-bottom: none;
                 border-color: #000 transparent transparent transparent;
                 border-radius: 100%/100px 100px 0 0;
-
                 background: linear-gradient(to bottom, $orange-3, transparent 70%);
-                border-bottom: none;
-
-                margin-bottom: 2rem;
 
                 span {
                     position: absolute;
@@ -63,7 +71,6 @@
             .lstseats {
                 display: flex;
                 align-items: center;
-                // justify-content: center;
                 flex-wrap: wrap;
 
                 width: 65%;
@@ -76,13 +83,15 @@
                     .seat {
                         height: 3.5rem;
                         width: 3.5rem;
-                        background-color: rgb(189, 189, 189);
-                        border: 2px solid rgb(189, 189, 189);
-                        border-radius: 7px;
+
                         display: flex;
                         justify-content: center;
                         align-items: center;
+                        
+                        border-radius: 7px;
+                        border: 2px solid rgb(189, 189, 189);
                         color: $light;
+                        background-color: rgb(189, 189, 189);
                         span {
                             color: $light;
                         }
@@ -107,10 +116,10 @@
                     .seat-userselected{
                         background-color: $white;
                         border: 2px solid $orange-1;
+                        cursor: no-drop;
                         span {
                             color: $orange-1 !important; 
                         }
-
                     }
                 }
             }
@@ -118,27 +127,31 @@
     }
     &__left {
         width: 29.5%;
-        padding: 2rem;
-        background-color: $orange-6;
-        border-radius: 15px;
         height: 100%;
+        padding: 2rem;
+
+        border-radius: 15px;
+        background-color: $orange-6;
+        box-shadow: 0px 6px 36px -13px $dark-30;
+
         .film__info {
             display: flex;
             align-items: center;
+
             padding-bottom: 1.5rem;
             margin-bottom: 1rem;
             border-bottom: 1px dashed $dark-30;
-            // justify-content: center;
 
             figure {
                 margin: 0;
                 margin-right: 1rem;
+
                 img {
-                    min-width: 90px;
-                    height: 110px;
+                    width: 100px;
+                    height: 130px;
                     object-fit: cover;
                     border-radius: 1rem;
-                    box-shadow: 1px 3px 20px rgba(0,0, 0, 0.5);
+                    box-shadow: 0px 6px 11px -3px $dark-30;
                 }
             }
 
@@ -184,7 +197,29 @@
                 line-height: 1.2;         
             }
 
-            .seat__number {
+            .cinemaInfo {
+                display: flex;
+                justify-content: space-between;
+
+                padding-bottom: 1rem;
+                margin-bottom: 1.5rem;
+                border-bottom: 1px dashed $dark-30;   
+
+                span:first-of-type {
+                    color: $orange-1;
+                    font-size: $fs-14;
+                    font-family: $main-font-semibold;
+                    text-transform: uppercase;
+                }
+
+                & > span:last-of-type {
+                    color: $gray-2;
+                    font-size: $fs-14;
+                    font-family: $main-font-bold;
+                } 
+            }
+
+            .seatNumber {
                 display: flex;
                 justify-content: space-between;
 
@@ -194,14 +229,15 @@
 
                 & > span{
                     color: $orange-1;
-                    // font-size: $fs-14;
                     font-family: $main-font-semibold;
+                    text-transform: uppercase;
                 }
 
                 & > div {
                     width: 50%;
                     display: flex;
                     flex-wrap: wrap;
+                    justify-content: flex-end;
 
                     span{
                         color: $gray-2;
@@ -210,10 +246,9 @@
                         margin-right: 1rem;
                     }
                 }
-
             }
-
             .payments {
+
                 h3 {
                     color: $orange-1;
                     font-size: $fs-14;
@@ -249,11 +284,7 @@
                     display: flex;
                     justify-content: center;
                 }
-
-
             }
-
-
         }
     }
 }

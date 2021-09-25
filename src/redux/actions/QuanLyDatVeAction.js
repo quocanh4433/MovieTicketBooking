@@ -1,5 +1,6 @@
 import { quanLyDatVeService } from "../../services/QuanLyDatVeSevice"
-import { GET_SHOWTIME_DETIAL } from "../types/QuanLyDatVeType"
+import { DONE_BOOKING_TICKET, GET_SHOWTIME_DETIAL } from "../types/QuanLyDatVeType"
+import { displayLoadingAction, hideLoadingAction } from "./LoadingAction"
 
 export const getShowtimeDetailAction = (showtimeID) => {
     return async (dispatch) => {
@@ -20,18 +21,18 @@ export const getShowtimeDetailAction = (showtimeID) => {
 export const bookingTicketAction = (ticketInfo) => {
     return async (dispatch, getState) => {
         try {
-            // // Hiển thị loading khi đợi API
-            // dispatch(displayLoadingAction)
+            // Hiển thị loading khi đợi API
+            dispatch(displayLoadingAction)
             const result = await quanLyDatVeService.bookingTicket(ticketInfo)
-            console.log({result})
 
             // Đặt vé thành công load lại trang
-            // await dispatch(layLichChieuAction(thongTinDatVe.maLichChieu))
-            // await dispatch({
-            //     type: DAT_VE_HOAN_TAT
-            // })
-            // // Ẩn loading cho dù gọi API không thành công
-            // dispatch(hideLoadingAction)
+            await dispatch(getShowtimeDetailAction(ticketInfo.maLichChieu))
+
+            await dispatch({
+                type: DONE_BOOKING_TICKET
+            })
+            // Ẩn loading cho dù gọi API không thành công
+            dispatch(hideLoadingAction)
 
             // Gọi lên tín hiệu đặt vé thành công để BE hiểu vé đã đặt thành công. 
             // Sau đó gưi tín hiểu đến các client khác cùng biết là ghế đó đã đặt và khong thể chọn được nửa

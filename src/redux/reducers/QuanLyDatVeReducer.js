@@ -1,4 +1,4 @@
-import { GET_SHOWTIME_DETIAL, SELECT_SEAT } from "../types/QuanLyDatVeType"
+import { DONE_BOOKING_TICKET, GET_SHOWTIME_DETIAL, SELECT_SEAT } from "../types/QuanLyDatVeType"
 
 const stateDefault = {
     showtimeDetail: {},
@@ -21,6 +21,11 @@ export const QuanLyDatVeReducer = (state = stateDefault, action) => {
                 state.lstSeatSelecting.push(action.seatSelect)
             }
             return { ...state }
+        }
+
+        case DONE_BOOKING_TICKET: {
+            state.lstSeatSelecting = []
+            return {...state}
         }
 
         default: return { ...state }
