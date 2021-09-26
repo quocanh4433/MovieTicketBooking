@@ -2,7 +2,6 @@ import React, { Fragment, useEffect, useState } from "react";
 import Carousel from "../../components/Carousel/Carousel";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllFilmInfoAction, getBannerAction } from "../../redux/actions/QuanLyPhimAction";
-
 import Slider from "react-slick";
 import ShowtimeBar from "../../components/ShowtimeBar/ShowtimeBar";
 import MultipleRowCarousel from "../../components/MultiplerowCarousel/MultipleRowCarousel";
@@ -55,6 +54,7 @@ function ShowtimeHome(props) {
         return cinemaSystem?.map((singleSystem, index) => {
             return (
                 <TabPane
+                    defaultActiveKey="1"
                     tab={<img className="cinema-brand" src={singleSystem.logo} alt={singleSystem.tenHeThongRap} />}
                     key={index}
                 >

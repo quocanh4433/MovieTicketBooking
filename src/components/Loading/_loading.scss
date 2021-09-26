@@ -1,0 +1,23 @@
+.loading {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: $light;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+
+    /** Custom spin loading */
+    .ant-spin-lg .ant-spin-dot {
+        font-size: 7rem;
+        i {
+            width: 2.3rem;
+            height: 2.3rem;
+            background-color: $orange-1;
+        }
+    }
+
+}

@@ -4,7 +4,7 @@
 
     margin: 0 auto;
     max-width: 1440px;
-    padding: 0 3rem;
+    padding: 0 3rem 3rem;
 
     &__right {
         width: 69.5%;
@@ -13,7 +13,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
 
             .cinema {
                 display: flex;
@@ -33,6 +33,10 @@
                     color: $dark;
                     margin: 0 0 0 1.5rem;
                 }
+
+                @include responsive(376) {
+                    display: none;
+                }
             }
 
             .countdown {
@@ -43,10 +47,20 @@
                     font-size: $fs-22;
                     color: $orange-1;
                 }
+
+                @include responsive(376) {
+                    margin: 0;
+                }
+            }
+
+            @include responsive(376) {
+                justify-content: center;
+                margin-bottom: 1rem;
             }
         }
 
         .checkout__booking {
+            margin-bottom: 1.5rem;
 
             .screen {
                 position: relative;
@@ -57,6 +71,8 @@
                 border-bottom: none;
                 border-color: #000 transparent transparent transparent;
                 border-radius: 100%/100px 100px 0 0;
+
+                font-family: $main-font-bold;
                 background: linear-gradient(to bottom, $orange-3, transparent 70%);
 
                 span {
@@ -65,70 +81,159 @@
                     left: 50%;
                     transform: translate(-50%, -65%);
                     color: $gray-3;
+
+                    @include responsive(768) {
+                        font-size: $fs-12;
+                    }
+                }
+
+                @include responsive(576) {
+                    margin-bottom: 1rem;
                 }
             }
 
+            /** Custom color for seat in bottom this file */
             .lstseats {
                 display: flex;
                 align-items: center;
                 flex-wrap: wrap;
 
-                width: 65%;
+                width: 90%;
                 margin: 0 auto;
 
                 .seat__wrapper {
-                    width: calc(100%/16);
-                    padding: 2.5px;
+                    width: calc(100% / 16);
+                    padding: 5px;
 
                     .seat {
-                        height: 3.5rem;
-                        width: 3.5rem;
-
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        
                         border-radius: 7px;
+                        outline: none;
                         border: 2px solid rgb(189, 189, 189);
                         color: $light;
                         background-color: rgb(189, 189, 189);
+
                         span {
                             color: $light;
                         }
-                    }
 
-                    .seat-vip {
-                        background-color: rgb(241, 186, 3);
-                        border: 2px solid rgb(241, 186, 3);
-                    }
+                        .seatNumber {
+                            height: 3rem;
+                            width: 100%;
+                            max-width: 3rem;
+                            margin: 0 auto;
 
-                    .seat-selected {
-                        background-color: rgba(220, 50, 27, 0.87);
-                        border: 2px solid rgba(220, 50, 27, 0.87);;
-                        cursor: no-drop;
-                    }
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
 
-                    .seat-selecting{
-                        background-color: rgba(16, 184, 69, 0.904);
-                        border: 2px solid rgba(16, 184, 69, 0.904);
-                    }
+                            @include responsive(1024) {
+                                height: 3rem;
+                                line-height: 1;
+                            }
 
-                    .seat-userselected{
-                        background-color: $white;
-                        border: 2px solid $orange-1;
-                        cursor: no-drop;
-                        span {
-                            color: $orange-1 !important; 
+                            @include responsive(1024) {
+                                height: 3rem;
+                                line-height: 1;
+                            }
+
+                            @include responsive(576) {
+                                display: none;
+                            }
+                        }
+
+                        @include responsive(576) {
+                            height: 3rem;
+                            border-radius: 1.5rem;
+                        }
+
+                        @include responsive(376) {
+                            height: 1.8rem;
                         }
                     }
+
+                    @include responsive(992) {
+                        padding: 3.5px;
+                        font-size: $fs-12;
+                    }
+
+                    @include responsive(768) {
+                        padding: 3px;
+                    }
+
+                    @include responsive(576) {
+                        padding: 2px;
+                    }
+                }
+
+                @include responsive(1024) {
+                    width: 98%;
+                }
+
+                @include responsive(992) {
+                    width: 100%;
                 }
             }
+        }
+
+        .seatNote {
+            display: flex;
+            justify-content: space-between;
+
+            div {
+                width: calc(100% / 4);
+                text-align: center;
+
+                h6 {
+                    font-size: $fs-12;
+                    font-family: $main-font-bold;
+                    color: $gray-3;
+                    margin: 0;
+
+                    @include responsive(576) {
+                        font-size: $fs-10;
+                    }
+                }
+
+                span {
+                    display: block;
+                    width: 2.5rem;
+                    height: 2.5rem;
+                    margin: 0 auto;
+                    border-radius: 7px;
+
+                    @include responsive(576) {
+                        border-radius: 50%;
+                        width: 2rem;
+                        height: 2rem;
+                    }
+
+                    @include responsive(376) {
+                        border-radius: 50%;
+                        width: 1.5rem;
+                        height: 1.5rem;
+                    }
+                }
+
+                @include responsive(576) {
+                    width: calc(100% / 2);
+                    margin-bottom: 1rem;
+                }
+            }
+
+            @include responsive(576) {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        @include responsive(768) {
+            width: 100%;
+            margin-bottom: 3rem;
         }
     }
     &__left {
         width: 29.5%;
-        height: 100%;
-        padding: 2rem;
+        padding: 1.5rem 2rem;
 
         border-radius: 15px;
         background-color: $orange-6;
@@ -153,6 +258,10 @@
                     border-radius: 1rem;
                     box-shadow: 0px 6px 11px -3px $dark-30;
                 }
+
+                @include responsive(992) {
+                    margin-bottom: 1rem;
+                }
             }
 
             div {
@@ -169,7 +278,7 @@
                     .c-review__score {
                         color: $dark;
                         border-left: 1px solid $gray-2;
-                        margin: 0 0 0 1.3rem ;
+                        margin: 0 0 0 1.3rem;
                     }
                 }
 
@@ -180,21 +289,28 @@
                     line-height: 1;
                 }
             }
+
+            @include responsive(992) {
+                flex-direction: column;
+            }
+
+            @include responsive(768) {
+                justify-content: center;
+            }
         }
 
         .payment__info {
-
             & > h3 {
                 color: $green;
                 font-size: $fs-30;
-            
+
                 text-align: center;
                 font-family: $main-font-bold;
 
                 padding-bottom: 1rem;
-                margin-bottom: 1.5rem;
-                border-bottom: 1px dashed $dark-30;     
-                line-height: 1.2;         
+                margin-bottom: 1rem;
+                border-bottom: 1px dashed $dark-30;
+                line-height: 1;
             }
 
             .cinemaInfo {
@@ -202,21 +318,32 @@
                 justify-content: space-between;
 
                 padding-bottom: 1rem;
-                margin-bottom: 1.5rem;
-                border-bottom: 1px dashed $dark-30;   
+                margin-bottom: 1rem;
+                border-bottom: 1px dashed $dark-30;
 
                 span:first-of-type {
+                    width: 36%;
                     color: $orange-1;
                     font-size: $fs-14;
                     font-family: $main-font-semibold;
                     text-transform: uppercase;
+
+                    @include responsive(768) {
+                        font-size: $fs-12;
+                    }
                 }
 
                 & > span:last-of-type {
+                    width: 60%;
                     color: $gray-2;
                     font-size: $fs-14;
                     font-family: $main-font-bold;
-                } 
+                    text-align: right;
+
+                    @include responsive(768) {
+                        font-size: $fs-12;
+                    }
+                }
             }
 
             .seatNumber {
@@ -225,9 +352,10 @@
 
                 padding-bottom: 1rem;
                 margin-bottom: 1rem;
-                border-bottom: 1px dashed $dark-30;    
+                border-bottom: 1px dashed $dark-30;
 
-                & > span{
+                & > span {
+                    width: 40%;
                     color: $orange-1;
                     font-family: $main-font-semibold;
                     text-transform: uppercase;
@@ -239,7 +367,7 @@
                     flex-wrap: wrap;
                     justify-content: flex-end;
 
-                    span{
+                    span {
                         color: $gray-2;
                         font-size: $fs-14;
                         font-family: $main-font-bold;
@@ -247,12 +375,16 @@
                     }
                 }
             }
-            .payments {
 
+            .payments {
                 h3 {
                     color: $orange-1;
                     font-size: $fs-14;
                     font-family: $main-font-semibold;
+
+                    @include responsive(768) {
+                        font-size: $fs-12;
+                    }
                 }
 
                 .lstpayment {
@@ -262,7 +394,8 @@
 
                     label {
                         margin-bottom: 1rem;
-                        span:last-of-type{
+
+                        span:last-of-type {
                             img {
                                 display: inline-block;
                                 margin-right: 8px;
@@ -275,6 +408,10 @@
                                 height: 25px;
                                 width: 110px;
                             }
+
+                            @include responsive(768) {
+                                font-size: $fs-12;
+                            }
                         }
                     }
                 }
@@ -285,6 +422,87 @@
                     justify-content: center;
                 }
             }
+        }
+
+        @include responsive(768) {
+            width: 70%;
+            margin: 0 auto;
+        }
+
+        @include responsive(576) {
+            width: 80%;
+        }
+
+        @include responsive(376) {
+            width: 90%;
+        }
+    }
+
+    @include responsive(768) {
+        display: block;
+        padding: 0rem 1.5rem 2rem;
+    }
+}
+
+/** Custom color for seat */
+
+.seat-vip {
+    background-color: rgb(241, 186, 3) !important;
+    border: 2px solid rgb(241, 186, 3) !important;
+}
+
+.seat-selected {
+    background-color: rgba(220, 50, 27, 0.87) !important;
+    border: 2px solid rgba(220, 50, 27, 0.87) !important;
+    cursor: no-drop;
+}
+
+.seat-selecting {
+    background-color: rgba(16, 184, 69, 0.904) !important;
+    border: 2px solid rgba(16, 184, 69, 0.904) !important;
+}
+
+.seat-userselected {
+    background-color: $white !important;
+    border: 2px solid $orange-1 !important;
+    cursor: no-drop;
+    span {
+        color: $orange-1 !important;
+    }
+}
+
+.seat-selecteRealtime {
+    background-color: rgb(100, 20, 221) !important;
+    border: 2px solid rgb(100, 20, 221) !important;
+    cursor: no-drop;
+    span {
+        color: $orange-1 !important;
+    }
+}
+
+/** Custom for notification overtime */
+.ant-modal-confirm-body-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .ant-modal-confirm-title {
+        margin-bottom: 1rem;
+        text-align: center;
+        font-size: $fs-18 !important;
+        font-family: $main-font-bold;
+    }
+
+    .ant-modal-confirm-content {
+        margin: 0 auto !important;
+        font-family: $main-font-regular;
+    }
+
+    .ant-modal-confirm-btns {
+        float: center !important;
+        margin-top: 1.5rem !important;
+        button {
+            @extend .c-secondary-btn
         }
     }
 }

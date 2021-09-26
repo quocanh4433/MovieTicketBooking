@@ -1,10 +1,11 @@
 import React, { Fragment, useState } from 'react'
 import { CloseCircleOutlined } from "@ant-design/icons"
-import { Modal, Button } from 'antd';
+import { Modal, Button, notification } from 'antd';
 import { BookingTicketInfo } from '../../_core/models/BookingTicketInfo';
 import { useDispatch, useSelector } from 'react-redux';
 import { bookingTicketAction } from '../../redux/actions/QuanLyDatVeAction';
 import _ from "lodash"
+import { history } from '../../App';
 
 export default function ModalTicket(props) {
 
@@ -12,7 +13,7 @@ export default function ModalTicket(props) {
     const dispatch = useDispatch()
     const [state, setState] = useState({
         loading: false,
-        visible: true,
+        visible: false,
     })
 
     let { thongTinPhim } = showtimeDetail
@@ -28,9 +29,7 @@ export default function ModalTicket(props) {
     /* For Modal */
     const handleOk = () => {
 
-        setTimeout(() => {
-            setState({ loading: false, visible: false });
-        }, 3000);
+        setState({ loading: false, visible: false });
 
         /* Post ticket info after booking successful */
         const bookingTicketInfo = new BookingTicketInfo
@@ -41,6 +40,28 @@ export default function ModalTicket(props) {
 
     const handleCancel = () => {
         setState({ visible: false });
+    };
+    
+    const handelReturnHome = () => {
+        history.push("/home")
+    }
+
+    /** For Message notice when user booking but not select seat */
+    const close = () => {};
+
+    const openNotification = () => {
+        const key = `open${Date.now()}`;
+        const btn = (
+            <Button type="primary" onClick={() => notification.close(key)}>XÁC NHẬN</Button>
+        );
+        notification.open({
+            maxCount: 3,
+            message: 'Bạn vui lòng chọ ghế trước khi đặt vé',
+            description: "",
+            btn,
+            key,
+            onClose: close,
+        });
     };
 
     const renderPayment = (payment) => {
@@ -64,7 +85,9 @@ export default function ModalTicket(props) {
         <Fragment>
 
             {/* Button Booking ticket  */}
-            <button className="c-main-btn icon-play" onClick={() => { showModal() }}>Đặt vé</button>
+            <button className="c-main-btn icon-play" onClick={() => { 
+                lstSeatSelecting.length !== 0 ?  showModal() : openNotification()
+            }}>Đặt vé</button>
 
             {/* Modal confirm Booking ticket  */}
             <Modal
@@ -76,7 +99,7 @@ export default function ModalTicket(props) {
                 closeIcon={<CloseCircleOutlined />}
                 title="XÁC NHẬN THÔNG TIN ĐẶT VÉ"
                 footer={[
-                    <Button key="back" onClick={handleCancel}>
+                    <Button key="back" onClick={handelReturnHome}>
                         TRANG CHỦ
                     </Button>,
                     <Button key="submit" type="primary" loading={loading} onClick={handleOk}>
@@ -117,12 +140,7 @@ export default function ModalTicket(props) {
                             <p>Suất chiếu</p>
                             <p>{thongTinPhim?.gioChieu}</p>
                         </div>
-                        
-                        <div className="info__group">
-                            <p>Combo </p>
-                            <p>Combo1</p>
-                        </div>
-                        
+
                         <div className="info__group">
                             <p>SỐ GHẾ</p>
                             <div className="listSeatConfirm">
@@ -131,12 +149,12 @@ export default function ModalTicket(props) {
                                 })}
                             </div>
                         </div>
-                        
+
                         <div className="info__group">
                             <p>hình thứ thanh toán </p>
                             <p>{renderPayment(payment)}</p>
                         </div>
-                        
+
                         <div className="info__group">
                             <p>Tổng cộng</p>
                             <p className="total">{

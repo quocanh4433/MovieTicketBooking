@@ -29,6 +29,7 @@ footer, header, hgroup, menu, nav, section {
 }
 html {
 	font-size: 62.5%;
+	scroll-behavior: smooth;
 }
 body {
 	line-height: 1;
@@ -62,7 +63,7 @@ button {
 	outline: none;
 	cursor: pointer;
 	padding: 0;
-	background-color: transparent;
+	background-color: transparent; 	
 }
 
 input, textarea {

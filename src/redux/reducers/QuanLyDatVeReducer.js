@@ -1,8 +1,9 @@
-import { DONE_BOOKING_TICKET, GET_SHOWTIME_DETIAL, SELECT_SEAT } from "../types/QuanLyDatVeType"
+import { CLEAR_SEAT_OVERTIME, DONE_BOOKING_TICKET, GET_LST_SEAT_REALTIME, GET_SHOWTIME_DETIAL, SELECT_SEAT } from "../types/QuanLyDatVeType"
 
 const stateDefault = {
     showtimeDetail: {},
-    lstSeatSelecting: []
+    lstSeatSelecting: [],
+    lstSeatSelectRealTime: []
 
 }
 
@@ -25,6 +26,16 @@ export const QuanLyDatVeReducer = (state = stateDefault, action) => {
 
         case DONE_BOOKING_TICKET: {
             state.lstSeatSelecting = []
+            return {...state}
+        }
+
+        case GET_LST_SEAT_REALTIME: {
+            state.lstSeatSelectRealTime = action.arrSeatRealtime
+            return {...state}
+        }
+
+        case CLEAR_SEAT_OVERTIME: {
+            state.lstSeatSelecting = [];
             return {...state}
         }
 

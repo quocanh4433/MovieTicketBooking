@@ -6,7 +6,7 @@
 
     padding: 10px 0;
     background-color: $dark-60;
-    z-index: 20;
+    z-index: 99999;
     transition: 0.3s;
 
     &__wrapper {

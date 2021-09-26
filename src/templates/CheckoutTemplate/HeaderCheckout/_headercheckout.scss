@@ -1,0 +1,94 @@
+.checkout__header {
+
+    min-height: 5rem;
+    margin: 0 auto 1rem;
+
+    background-color: #fff;
+    box-shadow: 0 1px 22px -6px $dark-30;
+
+    &-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        padding: 5px 3rem;
+        margin: 0 auto;
+        max-width: 1440px;
+
+        .checkoutLogo {
+            padding: 0;
+        }
+
+        figure {
+            margin: 0;
+            line-height: 1;
+            svg {
+                width: 3.5rem;
+                height: 3.5rem;
+                cursor: pointer;
+
+                @include responsive(768) {
+                    width: 2.5rem;
+                    height: 2.5rem;
+                    opacity: 0.7;
+                }
+            }
+        }
+
+        .userInfo {
+            display: flex;
+            align-items: center;
+            position: relative;
+            color: $light;
+
+            & > p {
+                font-size: $fs-16;
+                margin: 0;
+                text-transform: capitalize;
+                color: $dark;
+                font-family: $main-font-bold;
+            }
+
+            & > div {
+                position: relative;
+                width: 4.1rem;
+                height: 4.1rem;
+                margin: 0 0rem 0 1.5rem;
+
+                border-radius: 50%;
+                z-index: 1;
+
+                & > img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    -webkit-object-fit: cover;
+                    border-radius: inherit;
+                }
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 0px;
+                    left: 0px;
+                    width: 100%;
+                    height: 100%;
+
+                    background-image: linear-gradient(to right, $orange-1, $orange-3);
+                    border-radius: inherit;
+                    transform: scale(1.1);
+                    z-index: -1;
+                }
+            }
+
+            @include responsive(768) {
+                display: none;
+            }
+        }
+
+        @include responsive(768) {
+            flex-direction: row-reverse;
+            padding: 5px 1.5rem;
+        }
+        
+    }
+}

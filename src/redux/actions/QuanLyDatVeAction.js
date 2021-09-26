@@ -1,5 +1,6 @@
+import { connection } from "../.."
 import { quanLyDatVeService } from "../../services/QuanLyDatVeSevice"
-import { DONE_BOOKING_TICKET, GET_SHOWTIME_DETIAL } from "../types/QuanLyDatVeType"
+import { CLEAR_SEAT_OVERTIME, DONE_BOOKING_TICKET, GET_LST_SEAT_REALTIME, GET_SHOWTIME_DETIAL, SELECT_SEAT } from "../types/QuanLyDatVeType"
 import { displayLoadingAction, hideLoadingAction } from "./LoadingAction"
 
 export const getShowtimeDetailAction = (showtimeID) => {
@@ -18,38 +19,67 @@ export const getShowtimeDetailAction = (showtimeID) => {
     }
 }
 
-export const bookingTicketAction = (ticketInfo) => {
+export const bookingTicketAction = (bookingTicketInfo) => {
     return async (dispatch, getState) => {
         try {
-            // Hiển thị loading khi đợi API
             dispatch(displayLoadingAction)
-            const result = await quanLyDatVeService.bookingTicket(ticketInfo)
 
-            // Đặt vé thành công load lại trang
-            await dispatch(getShowtimeDetailAction(ticketInfo.maLichChieu))
-
+            const result = await quanLyDatVeService.bookingTicket(bookingTicketInfo)
+            await dispatch(getShowtimeDetailAction(bookingTicketInfo.maLichChieu))
             await dispatch({
                 type: DONE_BOOKING_TICKET
             })
-            // Ẩn loading cho dù gọi API không thành công
+
             dispatch(hideLoadingAction)
 
-            // Gọi lên tín hiệu đặt vé thành công để BE hiểu vé đã đặt thành công. 
-            // Sau đó gưi tín hiểu đến các client khác cùng biết là ghế đó đã đặt và khong thể chọn được nửa
-            // let userLogin = getState().QuanLyNguoiDungReducer.userLogin
-            // connection.invoke('datGheThanhCong', userLogin.taiKhoan, thongTinDatVe.maLichChieu)
-
-
-            // await dispatch({
-            //     type: CHUYEN_TABS
-            // })
+            /** 
+                Send notification to Back-end is done booking ticket 
+                After that, Back-end will notice all client is the seat is booked successful
+            **/
+            let userLogin = getState().QuanLyNguoiDungReducer.userLogin
+            connection.invoke('datGheThanhCong', userLogin.taiKhoan, bookingTicketInfo.maLichChieu)
 
         } catch (error) {
-            // Ẩn loading cho dù gọi API bị lỗi 
-            // dispatch(hideLoadingAction)
+            dispatch(hideLoadingAction)
             console.log({error})
-
         }
     }
+}
 
+export const selectSeatRealtimeAction = (seat, showtimeID) => {
+
+    return async (dispatch, getState) => {
+        try {
+
+            /** Post lstSelecting to QuanLyDatVeReducer */
+            await dispatch({
+                type: SELECT_SEAT,
+                seatSelect: seat,
+            })
+
+            /** Call API to Back-end */
+            let lstSearSelecting = getState().QuanLyDatVeReducer.lstSeatSelecting;
+            let account = getState().QuanLyNguoiDungReducer.userLogin.taiKhoan
+            lstSearSelecting = JSON.stringify(lstSearSelecting)
+
+            /** Call API to SignalR */
+            connection.invoke('datGhe',account,lstSearSelecting,showtimeID);
+
+        } catch (error) {
+            console.log("Error:", error.response.data)
+        }
+    }
+}
+
+export const selectSeatRestUserAction = (arrSeatRealtime) => {
+    return {
+        type: GET_LST_SEAT_REALTIME,
+        arrSeatRealtime,
+    }
+}
+
+export const clearSeatOvertimeAction = () => {
+    return {
+        type: CLEAR_SEAT_OVERTIME
+    }
 }

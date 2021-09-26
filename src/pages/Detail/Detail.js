@@ -155,7 +155,7 @@ function TabComment(props) {
                         <div className="comment-user">
                             <div className="user-avatar">
                                 <figure>
-                                    <img type="text" src={userComment.avatar} alt="UserName" onError={(e) => { e.target.onError = null; e.target.src = `/images/header/avatar-user.jpg` }} />
+                                    <img type="text" src={userComment?.avatar} alt="UserName" onError={(e) => { e.target.onError = null; e.target.src = `/images/header/avatar-user.jpg` }} />
                                 </figure>
                                 <p>
                                     <span>{userComment.name}</span>
@@ -163,7 +163,7 @@ function TabComment(props) {
                                 </p>
                             </div>
                             <div className="user-score">
-                                <span className="score">{userComment.score.toFixed(1)}</span>
+                                <span className="score">{(userComment.score * 2).toFixed(1)}</span>
                                 <Rate disabled allowHalf defaultValue={userComment.score / 2} />
                             </div>
                         </div>

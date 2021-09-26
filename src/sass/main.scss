@@ -26,11 +26,12 @@
 // -------------------------------------
 
 /* Import from  Template React */
-@import "../templates/CheckoutTemplate/checkouttemplate";
+
 
 /* Import Layout from  Template React */
 @import "../templates/HomeTemplate/Layout/Header/header";
 @import "../templates/HomeTemplate/Layout/Footer/footer";
+@import "../templates/CheckoutTemplate/HeaderCheckout/headercheckout";
 
 /* Import from Page React */
 @import "../pages/Home/home";
@@ -45,6 +46,8 @@
 @import "../components/ShowtimeBar/showtimebar";
 @import "../components/MultiplerowCarousel/multiplerow";
 @import "../components/ParallelCarousel/parallelcarousel";
+@import "../components/Loading/loading";
+
 
 
 

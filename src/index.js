@@ -10,13 +10,30 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { DOMAIN } from './utils/setting'
 
+/** Setup SignalR */
+import * as signalR from '@aspnet/signalr'
 
-// Thí code connect to serrver for realtime ticketbooking function 
-// export const connection = new signalR.HubConnectionBuilder().withUrl(`${DOMAIN}/DatVeHub`).configureLogging(signalR.LogLevel.Information).build();
+// This code connect to server for realtime ticketbooking function 
+export const connection = new signalR.HubConnectionBuilder().withUrl(`${DOMAIN}/DatVeHub`).configureLogging(signalR.LogLevel.Information).build();
 
-render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-)
+
+// conecttion.start lắng nghe tín hiệu từ server. Do là hàm bất đồng bộ nên phải đảm bảo mọi giao thức kết nối đã xác nhận thì mới render ra giao diện
+connection.start().then(() => { 
+  render(
+    <Provider store={store}>
+      <App />
+    </Provider>
+    ,
+    document.getElementById('root')
+  );
+}).catch(errors => {
+  console.log("Error: ", errors);
+})
+
+
+// render(
+//   <Provider store={store}>
+//     <App />
+//   </Provider>,
+//   document.getElementById('root')
+// )

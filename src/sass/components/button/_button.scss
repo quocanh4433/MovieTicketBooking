@@ -18,10 +18,29 @@
 
     &:hover {
         background-position: right;
+        color: $light !important;
     }
 }
 
 .icon-play span {
     font-size: $fs-22 ;
     margin-right: 0.8rem;
+}
+
+.c-secondary-btn {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 1rem 1.5rem;
+    border-radius: 6px;
+    border: none !important;
+    height: fit-content;
+
+    font-family: $main-font-bold;
+    font-size: $fs-12;
+    text-transform: uppercase;
+
+    color: $light;
+    background: $orange-1 !important;
+    box-shadow: 2px 4px 6px rgba(255, 107, 0, 0.34);
 }

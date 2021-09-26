@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { Tabs, Statistic, Col, Radio } from 'antd';
-import { CloseOutlined, UserOutlined } from "@ant-design/icons";
+import { Tabs, Statistic, Col, Radio, Button, Modal } from 'antd';
+import { CloseOutlined, UserOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from 'react-redux'
-import { getShowtimeDetailAction } from '../../redux/actions/QuanLyDatVeAction';
+import { clearSeatOvertimeAction, getShowtimeDetailAction, selectSeatRealtimeAction, selectSeatRestUserAction } from '../../redux/actions/QuanLyDatVeAction';
 import { SELECT_SEAT } from '../../redux/types/QuanLyDatVeType';
 import _ from "lodash"
 import ModalTicket from '../../components/ModalTicket/ModalTicket';
 import { getCinemaInfoAction } from '../../redux/actions/QuanLyRapAction';
+import { connection } from '../..';
+import { history } from '../../App';
+
 const { TabPane } = Tabs;
 
 export default function Checkout(props) {
-    const { showtimeDetail, lstSeatSelecting } = useSelector(state => state.QuanLyDatVeReducer)
+    const { showtimeDetail, lstSeatSelecting, lstSeatSelectRealTime } = useSelector(state => state.QuanLyDatVeReducer)
     const { cinemaSystem } = useSelector(state => state.QuanLyRapReducer);
     const [visibleModal, setVisibleModal] = useState(false)
     const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer)
@@ -23,11 +26,52 @@ export default function Checkout(props) {
         let { id } = props.match.params;
         dispatch(getShowtimeDetailAction(id))
         dispatch(getCinemaInfoAction())
+        dispatch(clearSeatOvertimeAction())
+
+        /** Setup function realtime booking  */
+
+        /** 01. Method recieve notification from Back-end, the users done booking tickets, after that, reload page  */
+        connection.on('datVeThanhCong', () => {
+            dispatch(getShowtimeDetailAction(props.match.params.id))
+        })
+
+        /** 02. Method notice for all of client */
+        connection.invoke('loadDanhSachGhe', props.match.params.id)
+
+        /** 03. Method listen notification from Back-end */
+        connection.on("loadDanhSachGheDaDat", (lstSeat) => {
+
+            /** Step 01: Remove curent user from list of user is booking */
+            lstSeat = lstSeat.filter(item => item.taiKhoan !== userLogin.taiKhoan);
+
+            /** Step 02: Rending all of seat from the rest user */
+            let arrSeatRealtime = lstSeat.reduce((result, item, index) => {
+                let arrSeat = JSON.parse(item.danhSachGhe);
+                return [...result, ...arrSeat]
+            }, [])
+
+            /** Step 03: Post arrSeatRealtime to QuanLyDatVeReducer */
+            dispatch(selectSeatRestUserAction(arrSeatRealtime))
+
+            /** Step 04: Setup method remove event booking if client reload page */
+            window.addEventListener('beforeunload', clearSeatSelecting)
+
+            /** Step 05: Reomve event with lifecycle Unmout */
+            return () => {
+                clearSeatSelecting();
+                window.removeEventListener('beforeunload', clearSeatSelecting)
+            }
+        })
     }, [])
+
+    const clearSeatSelecting = () => {
+        connection.invoke('huyDat', userLogin.taiKhoan, props.match.params.id)
+    }
 
     /* For Countdown */
     const onFinish = () => {
-        // alert('finished!');
+        countDown()
+
     }
 
     const onChangeCountDown = (val) => {
@@ -42,10 +86,38 @@ export default function Checkout(props) {
     };
 
     /* For Modal */
-    const showModal = () => {
-        console.log(visibleModal)
-        setVisibleModal(true);
-    };
+    // const showModal = () => {
+    //     setVisibleModal(true);
+    // };
+
+
+    /** For Message overtime */
+    const countDown = () => {
+        let secondsToGo = 5;
+        const modal = Modal.success({
+            onOk: () => {
+                dispatch(clearSeatOvertimeAction())
+                history.push("/home");
+            },
+            icon: "",
+            okText: "Xác Nhận",
+            width: 400,
+            title: `Đã hết thời gian giữ ghế !!!`,
+            content: `Bạn sẽ quay về trang chủ sau ${secondsToGo} giây.`,
+        });
+        const timer = setInterval(() => {
+            secondsToGo -= 1;
+            modal.update({
+                content: `Bạn sẽ quay về trang chủ sau ${secondsToGo} giây.`,
+            });
+        }, 1000);
+        setTimeout(() => {
+            clearInterval(timer);
+            modal.destroy();
+            history.push("/home");
+        }, secondsToGo * 1000);
+    }
+
 
     const renderSeats = () => {
         return danhSachGhe?.map((singleSeat, index) => {
@@ -54,7 +126,9 @@ export default function Checkout(props) {
             let classSeatSelected = "";
             let classSeatSelecting = "";
             let classSeatUserSelected = "";
-            let indexSeatSelecting = lstSeatSelecting?.findIndex(seatDD => seatDD.maGhe === singleSeat.maGhe)
+            let classSeatSelectRealtime = "";
+            let indexSeatSelecting = lstSeatSelecting?.findIndex(seat => seat.maGhe === singleSeat.maGhe)
+            let indexSeatSelectRealtime = lstSeatSelectRealTime?.findIndex(seat => seat.maGhe === singleSeat.maGhe)
             if (singleSeat.loaiGhe === "Vip") {
                 classSeatVip = "seat-vip"
             }
@@ -67,18 +141,20 @@ export default function Checkout(props) {
             if (userLogin.taiKhoan === singleSeat.taiKhoanNguoiDat) {
                 classSeatUserSelected = "seat-userselected"
             }
+            if (indexSeatSelectRealtime !== -1) {
+                classSeatSelectRealtime = "seat-selecteRealtime"
+            }
 
             return (
                 <button disabled={singleSeat.daDat} className="seat__wrapper" key={index} onClick={() => {
-                    dispatch({
-                        type: SELECT_SEAT,
-                        seatSelect: singleSeat,
-                    })
+                    dispatch(selectSeatRealtimeAction(singleSeat, props.match.params.id,))
                 }}>
-                    <div className={`seat ${classSeatVip} ${classSeatSelected} ${classSeatSelecting} ${classSeatUserSelected}`} >
-                        {
-                            singleSeat.daDat ? classSeatUserSelected != "" ? <UserOutlined /> : <CloseOutlined /> : singleSeat.stt
-                        }
+                    <div className={`seat ${classSeatVip} ${classSeatSelected} ${classSeatSelecting} ${classSeatUserSelected} ${classSeatSelectRealtime}`} >
+                        <span className="seatNumber">
+                            {
+                                singleSeat.daDat ? classSeatUserSelected != "" ? <UserOutlined /> : <CloseOutlined /> : singleSeat.stt
+                            }
+                        </span>
                     </div>
                 </button>
             )
@@ -88,8 +164,8 @@ export default function Checkout(props) {
     const renderLogoCinema = () => {
         return cinemaSystem?.map((cinema, index) => {
             return cinema.lstCumRap.map((cine, index) => {
-                if(cine.tenCumRap === thongTinPhim?.tenCumRap) {
-                    return <img src={cinema.logo} alt={cinema.maHeThongRap} key={index}/>
+                if (cine.tenCumRap === thongTinPhim?.tenCumRap) {
+                    return <img src={cinema.logo} alt={cinema.maHeThongRap} key={index} />
                 }
             })
         })
@@ -113,7 +189,7 @@ export default function Checkout(props) {
                     </div>
                     <div className="countdown">
                         <Col span={12}>
-                            <Countdown value={Date.now() + 600 * 1000} onChange={onChangeCountDown} onFinish={onFinish} />
+                            <Countdown value={Date.now() + 660 * 1000} format="mm:ss" onChange={onChangeCountDown} onFinish={onFinish} />
                         </Col>
                     </div>
                 </div>
@@ -123,10 +199,36 @@ export default function Checkout(props) {
                     <div className="screen">
                         <span>SCREEN</span>
                     </div>
-                    <div className="lstseats">   {renderSeats()}   </div>
+                    <div className="lstseats">
+                        {renderSeats()}
+                    </div>
+                </div>
+
+                {/* Note kind of seats */}
+                <div className="seatNote">
+                    <div>
+                        <h6>Ghế Đang Chọn</h6>
+                        <span className="seat-selecting"></span>
+                    </div>
+                    <div>
+                        <h6>Ghế VIP</h6>
+                        <span className="seatNumber seat-vip"></span>
+                    </div>
+                    <div>
+                        <h6>Ghế Bạn Đã Đặt</h6>
+                        <span className="seatNumber seat-userselected"></span>
+                    </div>
+                    <div>
+                        <h6>Ghế Đã Đặt</h6>
+                        <span className="seatNumber seat-selected"></span>
+                    </div>
+                    {/* <div>
+                        <h6>Ghế Người Khác Đặt</h6>
+                        <span className="seatNumber seat-selecteRealtime"></span>
+                    </div> */}
                 </div>
             </div>
-            
+
             <div className="checkout__left">
 
                 <div className="film__info">
@@ -144,7 +246,7 @@ export default function Checkout(props) {
                         </div>
                     </div>
                 </div>
-                
+
                 <div className="payment__info">
                     <h3>
                         {
@@ -154,8 +256,12 @@ export default function Checkout(props) {
                         }
                     </h3>
                     <div className="cinemaInfo">
-                        <span>CỤM RẠP / RẠP</span>
-                        <span>{thongTinPhim?.tenCumRap} / {thongTinPhim?.tenRap}</span>
+                        <span>CỤM RẠP</span>
+                        <span>{thongTinPhim?.tenCumRap}</span>
+                    </div>
+                    <div className="cinemaInfo">
+                        <span>RẠP</span>
+                        <span>{thongTinPhim?.tenRap}</span>
                     </div>
                     <div className="cinemaInfo">
                         <span>SUẤT CHIẾU</span>
@@ -177,7 +283,7 @@ export default function Checkout(props) {
                             <Radio value={3}><img src="/images/common/zalopay.jpg" alt="zalopay" /></Radio>
                             <Radio value={4}><img className="credit-card" src="/images/common/visa-card.png" alt="credit-card" /></Radio>
                         </Radio.Group>
-                        
+
                         {/* Button Modal Ticket  */}
                         <ModalTicket
                             showtimeID={props.match.params.id}
@@ -185,10 +291,9 @@ export default function Checkout(props) {
                             payment={valueRadio}
                         />
                     </div>
-
                 </div>
             </div>
-        
+
         </section>
     )
 }

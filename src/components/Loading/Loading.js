@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { Spin } from "antd"
 
 export default function Loading() {
 
@@ -9,22 +10,8 @@ export default function Loading() {
         <Fragment>
             {
                 isLoading ? (
-                    <div style={{
-                        position: "fixed",
-                        width: "100%",
-                        height: "100%",
-                        top: "0",
-                        left: "0",
-                        backgroundColor: "rgba(0,0,0,0.5)",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        color: "white",
-                        fontSize: "30px",
-                        fontWeight: "bold",
-                        zIndex: 99999,
-                    }}>
-                        LOADING ...........
+                    <div className="loading">
+                        <Spin size="large"/>
                     </div>
                 ) : (
                     ""
