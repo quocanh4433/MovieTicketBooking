@@ -58,7 +58,7 @@ export default function Footer() {
                 </div>
                 <div className="footer__sub">
                     <NavLink to="/home"><img src="/images/header/logo.svg" alt="Logo" /></NavLink>
-                    <p>CÔNG TY TNHH CJ CGV VIETNAM <br />Giấy CNĐKDN: 0303675393, đăng ký lần đầu ngày 31/7/2008, đăng ký thay đổi lần thứ 5 ngày 14/10/2015, cấp bởi Sở KHĐT thành phố Hồ Chí Minh. <br /> Địa Chỉ: Tầng 2, Rivera Park Saigon - Số 7/28 Thành Thái, P.14, Q.10,<br /> TPHCM.Hotline: 1900 6017COPYRIGHT 2017 CJ CGV. All RIGHTS RESERVED .</p>
+                    <p>CÔNG TY TNHH CYBERBOX VIETNAM <br />Giấy CNĐKDN: 03036713425, đăng ký lần đầu ngày 5/7/2010, đăng ký thay đổi lần thứ 5 ngày 20/10/2017, cấp bởi Sở KHĐT thành phố Hồ Chí Minh. <br /> Địa Chỉ: Tầng 8, Rivera Park Saigon - Số 128 Thành Thái, P.14, Q.10,<br /> TPHCM.Hotline: 1900 6017 COPYRIGHT 2017 CYBERBOX. All RIGHTS RESERVED .</p>
                 </div>
             </div>
         </footer>

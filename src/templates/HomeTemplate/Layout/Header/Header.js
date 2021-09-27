@@ -57,13 +57,13 @@ export default function Header() {
     };
 
     const checkUserIsAdmin = () => {
-        if (userLogin.maLoaiNguoiDung == "quantri") {
+        if (userLogin.maLoaiNguoiDung !== "quantri") {
             return <div className="submenu" >
                 <NavLink to="#">
                     <UserOutlined />
                     <span>Thông Tin</span>
                 </NavLink>
-                <NavLink to="#">
+                <NavLink to="/admin">
                     <SecurityScanOutlined />
                     <span>Quản Trị</span>
                 </NavLink>

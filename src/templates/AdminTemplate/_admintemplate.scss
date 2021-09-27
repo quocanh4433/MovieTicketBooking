@@ -1,0 +1,139 @@
+.admin {
+    &__sidebar {
+        box-shadow: -4px 0 11px 9px $dark-30;
+        &-logo {
+            text-align: center;
+            padding: 1.5rem 0;
+        }
+
+        ul {
+            width: 92%;
+            margin: 0 auto;
+
+            li {
+                // border-radius: 5px;
+                // background-color: $orange-3;
+
+                span {
+                    font-family: $main-font-regular;
+                    font-size: $fs-14;
+                    text-transform: uppercase;
+                }
+
+                span.anticon {
+                    font-size: $fs-16;
+                }
+            }
+
+            li.ant-menu-item.ant-menu-item-selected {
+                border-radius: 5px;
+                background-color: $orange-1 !important;
+            }
+        }
+    }
+
+    &__layout {
+        background-color: $light !important;
+
+        header {
+            background-color: $white;
+            box-shadow: 0 2px 13px -6px $dark-30;
+            margin-bottom: 1rem;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            figure {
+                display: flex;
+                align-items: center;
+                margin: 0;
+                line-height: 1;
+
+                font-size: $fs-16;
+                text-transform: uppercase;
+                color: $orange-1;
+                cursor: pointer;
+                
+
+                svg {
+                    width: 3rem;
+                    height: 3rem;
+                    @include responsive(768) {
+                        width: 2.5rem;
+                        height: 2.5rem;
+                        opacity: 0.7;
+                    }
+                }
+            }
+
+            .userInfo {
+                display: flex;
+                align-items: center;
+                position: relative;
+                color: $light;
+
+                & > p {
+                    font-size: $fs-16;
+                    margin: 0;
+                    text-transform: capitalize;
+                    color: $dark;
+                    font-family: $main-font-bold;
+                }
+
+                & > div {
+                    position: relative;
+                    width: 4.1rem;
+                    height: 4.1rem;
+                    margin: 0 0rem 0 1.5rem;
+                    display: flex;
+                    align-items: center;
+
+                    border-radius: 50%;
+                    z-index: 1;
+
+                    & > img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        -webkit-object-fit: cover;
+                        border-radius: inherit;
+                    }
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        top: 0px;
+                        left: 0px;
+                        width: 100%;
+                        height: 100%;
+
+                        background-image: linear-gradient(to right, $orange-1, $orange-3);
+                        border-radius: inherit;
+                        transform: scale(1.1);
+                        z-index: -1;
+                    }
+                }
+
+                @include responsive(768) {
+                    display: none;
+                }
+            }
+
+        
+        }
+
+        main {
+            margin-bottom: 2rem !important;
+            height: 100%;
+
+            .site-layout-background {
+                background-color: #fff;
+                box-shadow: 0 2px 13px -6px $dark-30;
+            }
+        }
+
+        footer {
+            background-color: #fff;
+        }
+    }
+}

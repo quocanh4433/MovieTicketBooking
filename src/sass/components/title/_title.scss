@@ -35,3 +35,9 @@
 .c-primary__title--center {
     justify-content: center !important;
 }
+
+.c-admin-title {
+    text-transform: uppercase;
+    color: $orange-1;
+    font-size: $fs-26;
+}

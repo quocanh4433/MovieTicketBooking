@@ -6,10 +6,12 @@ import Header from './Layout/Header/Header';
 export default function HomeTemplate(props) {
     let { Component, ...restProps } = props
     return <Route  {...restProps} render={(propsRoute) => {
-        return <Fragment>
-            <Header {...propsRoute} />
-            <Component {...propsRoute} />
-            <Footer {...propsRoute} />
-        </Fragment>
+        return (
+            <Fragment>
+                <Header {...propsRoute} />
+                <Component {...propsRoute} />
+                <Footer {...propsRoute} />
+            </Fragment>
+        )
     }} />
 }

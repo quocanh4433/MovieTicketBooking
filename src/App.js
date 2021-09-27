@@ -15,6 +15,12 @@ import Detail from "./pages/Detail/Detail";
 import Checkout from "./pages/Checkout/Checkout";
 import CheckoutTemplate from "./templates/CheckoutTemplate/CheckoutTemplate";
 import Loading from "./components/Loading/Loading";
+import AdminTemplate from "./templates/AdminTemplate/AdminTemplate";
+import Statistics from "./pages/Admin/Statistics/Statistics";
+import ListFilm from "./pages/Admin/ListFilm/ListFilm";
+import AddFilm from "./pages/Admin/AddFilm/AddFilm";
+import ListUser from "./pages/Admin/ListUser/ListUser";
+import AddUser from "./pages/Admin/AddUser/AddUser";
 
 export const history = createBrowserHistory()
 
@@ -25,11 +31,16 @@ function App() {
       <Switch>
         <HomeTemplate exact path="/" Component={Home} />
         <HomeTemplate exact path="/home" Component={Home} />
-        <HomeTemplate exact path="/theater" Component={Theater} />
-        <HomeTemplate exact path="/news" Component={News} />
-        <HomeTemplate exact path="/apps" Component={Apps} />
         <HomeTemplate exact path="/detail/:id" Component={Detail} />
+
         <CheckoutTemplate exact path="/checkout/:id" Component={Checkout} />
+
+        <AdminTemplate exact path="/admin" Component={Statistics} />
+        <AdminTemplate exact path="/admin/film/listfilm" Component={ListFilm} />
+        <AdminTemplate exact path="/admin/film/addfilm" Component={AddFilm} />
+        <AdminTemplate exact path="/admin/listuser" Component={ListUser} />
+        <AdminTemplate exact path="/admin/adduser" Component={AddUser} />
+
         <UserTemplate exact path="/login" Component={Login} />
         <UserTemplate exact path="/register" Component={Register} />
       </Switch>

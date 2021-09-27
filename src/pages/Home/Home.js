@@ -9,7 +9,9 @@ import ParallelCarousel from "../../components/ParallelCarousel/ParallelCarousel
 import { NavLink } from "react-router-dom";
 import { getCinemaInfoAction } from "../../redux/actions/QuanLyRapAction";
 import moment from 'moment';
-import { Tabs } from 'antd';
+import { Tabs, BackTop } from 'antd';
+import { VerticalAlignTopOutlined } from "@ant-design/icons"
+
 
 const { TabPane } = Tabs;
 
@@ -336,7 +338,7 @@ function News() {
 export default function (props) {
     const { arrAllFilmInfo } = useSelector(state => state.QuanLyPhimReducer)
     const { arrBanner } = useSelector(state => state.QuanLyPhimReducer)
-   
+
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -408,6 +410,14 @@ export default function (props) {
                     </div>
                 </div>
             </section>
+
+            {/* Btn bottom to top  */}
+            <div className="c-btn-backtotop">
+                <BackTop>
+                    <div className="iconBack"><VerticalAlignTopOutlined /></div>
+                </BackTop>
+            </div>
+
         </section>
     )
 }

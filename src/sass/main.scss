@@ -26,6 +26,8 @@
 // -------------------------------------
 
 /* Import from  Template React */
+@import "../templates/AdminTemplate/admintemplate";
+
 
 
 /* Import Layout from  Template React */
@@ -37,6 +39,9 @@
 @import "../pages/Home/home";
 @import "../pages/Detail/detail";
 @import "../pages/Checkout/checkout";
+@import "../pages/Admin/ListFilm/listfilm";
+
+
 
 /* Import from Component React*/
 @import "../components/Carousel/carousel";
