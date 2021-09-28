@@ -1,4 +1,4 @@
-import { GET_CINEMA_INFO, GET_THEATERS_INFO } from "../types/QuanLyRapType.js";
+import { GET_CINEMA_INFO } from "../types/QuanLyRapType.js";
 
 const stateDefault = {
     cinemaSystem: [],

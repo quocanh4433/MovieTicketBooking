@@ -4,7 +4,7 @@ import { CloseCircleOutlined } from '@ant-design/icons';
 import { history } from '../../App';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
-import { loginAction, signinAction } from '../../redux/actions/QuanLyNguoiDungAction';
+import { loginAction } from '../../redux/actions/QuanLyNguoiDungAction';
 
 export default function Login() {
     const dispatch = useDispatch()

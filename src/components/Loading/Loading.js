@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Spin } from "antd"
 
 export default function Loading() {

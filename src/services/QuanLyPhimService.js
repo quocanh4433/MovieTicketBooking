@@ -13,21 +13,21 @@ export class QuanLyPhimService extends baseService {
         return this.get(`/api/QuanLyPhim/LayDanhSachPhim?maNhom=${GROUPID}`)
     }
 
-    // getListMovie = () => {
-    //     return this.get(`/api/QuanLyPhim/LayDanhSachPhim?maNhom=${GROUPID}`)
-    // }
+    addFilm = (formData) => {
+        return this.post(`/api/QuanLyPhim/ThemPhimUploadHinh`, formData)
+    }
 
-    // themHinhUploadHinh = (formData) => {
-    //     return this.post(`/api/QuanLyPhim/ThemPhimUploadHinh`, formData)
-    // }
+    editFilm = (filmID) => {
+        return this.get(`/api/QuanLyPhim/LayThongTinPhim?MaPhim=${filmID}`)
+    }
 
-    
-    // xoaPhim = (maPhim) => {
-    //     return this.delete(`/api/QuanLyPhim/XoaPhim?MaPhim=${maPhim}`)
-    // }
-    // capNhatPhim = (formData) => {
-    //     return this.post(`/api/QuanLyPhim/CapNhatPhimUpload`, formData)
-    // }
+    updateFilm = (formData) => {
+        return this.post(`/api/QuanLyPhim/CapNhatPhimUpload`, formData)
+    }
+
+    deleteFilm = (filmID) => {
+        return this.delete(`/api/QuanLyPhim/XoaPhim?MaPhim=${filmID}`)
+    }
 }
 
 export const quanLyPhimService = new QuanLyPhimService()

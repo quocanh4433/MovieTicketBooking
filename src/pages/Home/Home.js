@@ -26,6 +26,10 @@ function ShowtimeHome(props) {
     });
     const { tabPosition } = state;
 
+    useEffect(() => {
+        window.scrollTo(0,0)
+    }, [])
+
     window.onload = () => {
         let widthScreen = window.innerWidth
         if (widthScreen <= 992) {
@@ -38,7 +42,7 @@ function ShowtimeHome(props) {
             })
         }
     }
-
+    
     window.onresize = () => {
         let widthScreen = window.innerWidth
         if (widthScreen <= 992) {
@@ -53,15 +57,15 @@ function ShowtimeHome(props) {
     }
 
     const renderCinemaSystem = () => {
-        return cinemaSystem?.map((singleSystem, index) => {
+        return cinemaSystem?.map((singleSystem, indexTab) => {
             return (
                 <TabPane
                     defaultActiveKey="1"
                     tab={<img className="cinema-brand" src={singleSystem.logo} alt={singleSystem.tenHeThongRap} />}
-                    key={index}
+                    key={indexTab}
                 >
                     <Tabs tabPosition={tabPosition}>
-                        {singleSystem.lstCumRap?.map((cinema, index) => {
+                        {singleSystem.lstCumRap?.map((cinema, indexTabPane) => {
                             return (
                                 <TabPane
                                     tab={
@@ -74,7 +78,8 @@ function ShowtimeHome(props) {
                                             </div>
                                         </div>
                                     }
-                                    key={index}
+                                    key={indexTabPane}
+                                    defaultActiveKey="1"
                                 >
                                     {/* List of detail info film */}
                                     {cinema.danhSachPhim?.map((film, index) => {
@@ -309,7 +314,7 @@ function News() {
         let content = [];
         if (readMore <= 1) {
             for (let i = 0; i <= readMore; i++) {
-                i == 0 ? content.push(newsContent) : content.push(newsContent2)
+                i === 0 ? content.push(newsContent) : content.push(newsContent2)
             }
         } else {
             setReadMore(0)

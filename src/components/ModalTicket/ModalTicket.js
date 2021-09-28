@@ -32,7 +32,7 @@ export default function ModalTicket(props) {
         setState({ loading: false, visible: false });
 
         /* Post ticket info after booking successful */
-        const bookingTicketInfo = new BookingTicketInfo
+        const bookingTicketInfo = new BookingTicketInfo()
         bookingTicketInfo.maLichChieu = showtimeID
         bookingTicketInfo.danhSachVe = lstSeatSelecting
         dispatch(bookingTicketAction(bookingTicketInfo))

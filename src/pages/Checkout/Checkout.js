@@ -1,21 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import { Tabs, Statistic, Col, Radio, Button, Modal } from 'antd';
-import { CloseOutlined, UserOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
+import React, { Fragment, useEffect, useState } from 'react'
+import { Statistic, Col, Radio, Modal } from 'antd';
+import { CloseOutlined, UserOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from 'react-redux'
 import { clearSeatOvertimeAction, getShowtimeDetailAction, selectSeatRealtimeAction, selectSeatRestUserAction } from '../../redux/actions/QuanLyDatVeAction';
-import { SELECT_SEAT } from '../../redux/types/QuanLyDatVeType';
 import _ from "lodash"
 import ModalTicket from '../../components/ModalTicket/ModalTicket';
 import { getCinemaInfoAction } from '../../redux/actions/QuanLyRapAction';
 import { connection } from '../..';
 import { history } from '../../App';
 
-const { TabPane } = Tabs;
+// const { TabPane } = Tabs;
+// const [visibleModal, setVisibleModal] = useState(false)
 
 export default function Checkout(props) {
     const { showtimeDetail, lstSeatSelecting, lstSeatSelectRealTime } = useSelector(state => state.QuanLyDatVeReducer)
     const { cinemaSystem } = useSelector(state => state.QuanLyRapReducer);
-    const [visibleModal, setVisibleModal] = useState(false)
     const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer)
     const dispatch = useDispatch();
     const { Countdown } = Statistic;
@@ -152,7 +151,7 @@ export default function Checkout(props) {
                     <div className={`seat ${classSeatVip} ${classSeatSelected} ${classSeatSelecting} ${classSeatUserSelected} ${classSeatSelectRealtime}`} >
                         <span className="seatNumber">
                             {
-                                singleSeat.daDat ? classSeatUserSelected != "" ? <UserOutlined /> : <CloseOutlined /> : singleSeat.stt
+                                singleSeat.daDat ? classSeatUserSelected !== "" ? <UserOutlined /> : <CloseOutlined /> : singleSeat.stt
                             }
                         </span>
                     </div>
@@ -163,11 +162,17 @@ export default function Checkout(props) {
 
     const renderLogoCinema = () => {
         return cinemaSystem?.map((cinema, index) => {
-            return cinema.lstCumRap.map((cine, index) => {
-                if (cine.tenCumRap === thongTinPhim?.tenCumRap) {
-                    return <img src={cinema.logo} alt={cinema.maHeThongRap} key={index} />
-                }
-            })
+            return (
+                <Fragment key={index}>
+                    {
+                        cinema.lstCumRap.map((cine, index) => {
+                            if (cine.tenCumRap === thongTinPhim?.tenCumRap) {
+                                return <img src={cinema.logo} alt={cinema.maHeThongRap} key={index} />
+                            }
+                        })
+                    }
+                </Fragment>
+            ) 
         })
     }
 
@@ -189,7 +194,7 @@ export default function Checkout(props) {
                     </div>
                     <div className="countdown">
                         <Col span={12}>
-                            <Countdown value={Date.now() + 660 * 1000} format="mm:ss" onChange={onChangeCountDown} onFinish={onFinish} />
+                            <Countdown value={Date.now() + 600 * 1000} format="mm:ss" onChange={onChangeCountDown} onFinish={onFinish} />
                         </Col>
                     </div>
                 </div>

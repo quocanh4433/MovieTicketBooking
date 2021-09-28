@@ -11,9 +11,9 @@
             
             /** Custom searchbar ant design */
             input {
-                border-radius: 6px 0 0 6px;
                 padding: 8px 11px;
                 width: 300px;
+                border-radius: 6px 0 0 6px;
 
                 &:focus {
                     border-color: $orange-1 !important;
@@ -38,9 +38,40 @@
 
     /** Custom table */
     .ant-table-wrapper {
+        .ant-table-thead {
+            background-color: $gray-4;
+            tr {
+                th {
+                    text-transform: capitalize;
+                    font-size: $fs-14;
+                    font-family: $main-font-bold;
 
-        .ant-table-cell {
-            padding: 5px 1rem !important;
+                    color: $white;
+                    background-color: transparent;
+
+                    span {
+                        color: $white
+                    }
+
+                    &::before {
+                        background-color: $light !important;
+                    }
+                }
+            }
+        }
+
+        .ant-table-row {
+            transition: all 0.2s;
+            
+            .ant-table-cell {
+                padding: 5px 1rem !important;
+                background-color: transparent;
+            }
+
+            &:hover {
+                background-color: $gray-70;
+            }
+            
         }
 
         /** Custom pagination table */
@@ -51,12 +82,25 @@
                 border: 1px solid $orange-1 !important;
     
                 a {
-                    color: $orange-1
+                    color: $orange-1 !important;
                 }
             }
     
             .ant-pagination-item {
                 border-radius: 50%;
+                transition: all 0.3s;
+
+                a {
+                    color: $gray-3;
+                }
+
+                &:hover {
+                    border-color: $orange-1;
+
+                    a {
+                        color: $orange-1;
+                    }
+                }
             }
     
             .ant-pagination-prev, .ant-pagination-next  {

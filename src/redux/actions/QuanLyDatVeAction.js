@@ -23,8 +23,7 @@ export const bookingTicketAction = (bookingTicketInfo) => {
     return async (dispatch, getState) => {
         try {
             dispatch(displayLoadingAction)
-
-            const result = await quanLyDatVeService.bookingTicket(bookingTicketInfo)
+            await quanLyDatVeService.bookingTicket(bookingTicketInfo)
             await dispatch(getShowtimeDetailAction(bookingTicketInfo.maLichChieu))
             await dispatch({
                 type: DONE_BOOKING_TICKET

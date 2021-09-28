@@ -1,7 +1,6 @@
 import { USER_LOGIN } from "../../utils/setting";
 import { ADD_COMMENT, COUNT_LIKE, LOG_IN } from "../types/QuanLyNguoiDungType"
 import _ from 'lodash'
-import ActionButton from "antd/lib/modal/ActionButton";
 
 /** Check user logged  */
 let userLogged = null;
@@ -114,17 +113,19 @@ export const QuanLyNguoiDungReducer = (state = stateDefault, action) => {
         case LOG_IN: {
             state.userLogin = action.userInfo;
             return { ...state }
-        }
+        } break;
 
         case COUNT_LIKE: {
-            let index = _.findIndex(state.lstUserComment, user => user.id == action.id)
-            let newLike = [...state.lstUserComment, state.lstUserComment[index].like += 1] 
-        }
+            let index = _.findIndex(state.lstUserComment, user => user.id === action.id)
+            state.lstUserComment[index].like += 1 
+            return {...state}
+        } break;
 
         case ADD_COMMENT: {
             state.lstUserComment = [...state.lstUserComment, action.userComment]
             return {...state}
-        }
+        } break;
+        
         default: return { ...state }
     }
 }

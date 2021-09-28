@@ -19,7 +19,7 @@ export default function ModalTrailer(props) {
     /* Close modal when press ESC */
     window.addEventListener("keydown", (e) => {
         e = e || window.event;
-        if (e.keyCode == 27) {
+        if (e.keyCode === 27) {
             setTrailer("");
             setModal(false);
         }

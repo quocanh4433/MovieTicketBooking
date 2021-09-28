@@ -178,6 +178,12 @@
                         }
                     }
 
+                    figure {
+                        & > img {
+                            width: 15%;
+                        }
+                    }
+
                     @include responsive(992){
                         margin-left: 1.5rem;
                         width: 100% !important;
@@ -217,9 +223,15 @@
                         width: 100%;
                         font-family: $main-font-bold;
                         border-radius: 5px;
-                        padding: 3px 10px;
-                        color: $orange-1;
-                        border: 2px solid $orange-1;
+                        padding: 3.5px 10px;
+                        color: $light;
+                        box-shadow:  0 0 0 100px $orange-1 inset;
+                        transition: all 0.3s;
+
+                        &:hover {
+                            box-shadow:  0 0 0 2px $orange-1 inset;
+                            color: $orange-1;
+                        }
 
                         @include responsive(768){
                             padding: 3px 6px;    

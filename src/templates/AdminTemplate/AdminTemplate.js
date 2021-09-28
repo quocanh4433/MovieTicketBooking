@@ -1,14 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Route } from 'react-router';
 import { NavLink } from 'react-router-dom';
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu } from 'antd';
 import {
     DesktopOutlined,
     PieChartOutlined,
-    FileOutlined,
     TeamOutlined,
-    UserOutlined,
-    LeftCircleOutlined
+   
 } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 import { history } from '../../App';
@@ -18,11 +16,9 @@ import { history } from '../../App';
 export default function AdminTemplate(props) {
 
     const { Header, Content, Footer, Sider } = Layout;
-    const { SubMenu } = Menu;
     const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer)
-
+   
     let { Component, ...restProps } = props
-
 
     return (
         <Route  {...restProps} render={(propsRoute) => {
@@ -36,22 +32,12 @@ export default function AdminTemplate(props) {
                             <Menu.Item key="1" icon={<PieChartOutlined />}>
                                 <NavLink to="/admin">Thống kê</NavLink>
                             </Menu.Item>
-                            <SubMenu key="sub1" icon={<DesktopOutlined />} title="Phim">
-                                <Menu.Item key="3">
-                                    <NavLink to="/admin/film/listfilm"> Danh Sách Phim</NavLink>
-                                </Menu.Item>
-                                <Menu.Item key="4">
-                                    <NavLink to="/admin/film/addfilm">Thêm Phim</NavLink>
-                                </Menu.Item>
-                            </SubMenu>
-                            <SubMenu key="sub2" icon={<TeamOutlined />} title="Người dùng">
-                                <Menu.Item key="6">
-                                    <NavLink to="/admin/listuser">Danh Sách Người Dùng</NavLink>
-                                </Menu.Item>
-                                <Menu.Item key="8">
-                                    <NavLink to="/admin/adduser">Thêm Người Dùng</NavLink>
-                                </Menu.Item>
-                            </SubMenu>
+                            <Menu.Item key="2" icon={<DesktopOutlined />}>
+                                <NavLink to="/admin/listfilm">Quản lý phim</NavLink>
+                            </Menu.Item>
+                            <Menu.Item key="3" icon={<TeamOutlined />}>
+                                <NavLink to="/admin/listuser">Quản lý Người dùng</NavLink>
+                            </Menu.Item>
                         </Menu>
                     </Sider>
 

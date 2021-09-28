@@ -11,7 +11,7 @@ import { signupAction } from '../../redux/actions/QuanLyNguoiDungAction';
 
 export default function Register(props) {
     const dispatch = useDispatch()
-    const phoneRegex = /([\+84|84|0]+(3|5|7|8|9|1[2|6|8|9]))+([0-9]{8})\b/;
+    const phoneRegex = /([+84|84|0]+(3|5|7|8|9|1[2|6|8|9]))+([0-9]{8})\b/;
     const nameRegex = /^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s\W|_]+$/
 
     const formik = useFormik({
@@ -19,10 +19,9 @@ export default function Register(props) {
             taiKhoan: "",
             matKhau: "",
             email: "",
-            maNhom: "",
             hoTen: "",
             soDt: "",
-            maNhom: GROUPID
+            maNhom: GROUPID,
         },
         validationSchema: Yup.object({
             taiKhoan: Yup.string().required("Tài khoản không được bỏ trống").min(6, "Tài khoản từ 6-32 ký tự").max(32, "Tài khoản từ 6-32 ký tự"),

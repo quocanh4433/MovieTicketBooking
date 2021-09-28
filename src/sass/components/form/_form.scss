@@ -129,3 +129,101 @@
         }
     }
 }
+
+/** Custom form for admn page */
+.classInputDefault {
+    border-radius: 5px;
+
+    &:hover {
+        border-color: $orange-3;
+    }
+
+    &:focus {
+        border-color: $orange-3;
+        box-shadow: 0 0 3px $orange-3;
+    }
+
+}
+
+
+.c-form__group {
+
+    /** Custom for antdesign */
+    label {
+        text-transform: uppercase;
+        font-family: $main-font-bold;
+        color: $gray-2;
+    }
+
+    input {
+        @extend .classInputDefault;
+    } 
+
+    input#upload-photo {
+        background-color: red !important;
+    } 
+
+    textarea {
+        @extend .classInputDefault; 
+        min-height: 10rem;
+    }
+
+    .ant-picker {
+        @extend .classInputDefault; 
+    }
+
+    .ant-picker-focused {
+        box-shadow: 0 0 3px $orange-3 !important;
+        border-color: $orange-3;
+    }
+
+    .ant-switch-checked {
+        background-color: $orange-3;
+    }
+
+    .ant-input-number {
+        @extend .classInputDefault; 
+    }
+
+    .ant-input-number-focused {
+        box-shadow: 0 0 3px $orange-3 !important;
+        border-color: $orange-3;
+    }
+
+    /** Custom for own scss */
+    .c-form-control {
+        display: flex;
+        align-items: center;
+
+        .inputfile {
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+        }
+
+        .inputfile + label {
+            margin-bottom: 1rem;
+            border-radius: 6px;
+            padding: 3px 6px;
+            font-size: $fs-14;
+            font-family: $main-font-regular;
+            color: $orange-1;
+            background-color: $white;
+            border: 1px solid $orange-1;
+            display: inline-block;
+            cursor: pointer; /* "hand" cursor */
+            text-transform: capitalize;
+        }
+        
+    }
+
+    .img-upload {
+        width: 10rem;
+        height: 12rem;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+}

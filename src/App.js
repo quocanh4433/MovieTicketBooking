@@ -6,10 +6,7 @@ import "./sass/main.scss";
 import HomeTemplate from "./templates/HomeTemplate/HomeTemplate";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
-import News from "./pages/News/News";
 import Register from "./pages/Register/Register";
-import Theater from "./pages/Theater/Theater";
-import Apps from "./pages/App/Apps";
 import UserTemplate from "./templates/UsesTemplate/UserTemplate";
 import Detail from "./pages/Detail/Detail";
 import Checkout from "./pages/Checkout/Checkout";
@@ -21,6 +18,8 @@ import ListFilm from "./pages/Admin/ListFilm/ListFilm";
 import AddFilm from "./pages/Admin/AddFilm/AddFilm";
 import ListUser from "./pages/Admin/ListUser/ListUser";
 import AddUser from "./pages/Admin/AddUser/AddUser";
+import EditFilm from "./pages/Admin/EditFilm/EditFilm";
+import ChiTiet from "./pages/ChiTiet/ChiTiet";
 
 export const history = createBrowserHistory()
 
@@ -32,15 +31,17 @@ function App() {
         <HomeTemplate exact path="/" Component={Home} />
         <HomeTemplate exact path="/home" Component={Home} />
         <HomeTemplate exact path="/detail/:id" Component={Detail} />
+        <HomeTemplate exact path="/chitiet/:id" Component={ChiTiet} />
 
         <CheckoutTemplate exact path="/checkout/:id" Component={Checkout} />
 
         <AdminTemplate exact path="/admin" Component={Statistics} />
-        <AdminTemplate exact path="/admin/film/listfilm" Component={ListFilm} />
-        <AdminTemplate exact path="/admin/film/addfilm" Component={AddFilm} />
+        <AdminTemplate exact path="/admin/listfilm" Component={ListFilm} />
+        <AdminTemplate exact path="/admin/addfilm" Component={AddFilm} />
+        <AdminTemplate exact path="/admin/editfilm/:id" Component={EditFilm} />
         <AdminTemplate exact path="/admin/listuser" Component={ListUser} />
         <AdminTemplate exact path="/admin/adduser" Component={AddUser} />
-
+        
         <UserTemplate exact path="/login" Component={Login} />
         <UserTemplate exact path="/register" Component={Register} />
       </Switch>

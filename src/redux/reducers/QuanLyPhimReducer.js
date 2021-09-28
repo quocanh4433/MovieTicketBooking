@@ -1,4 +1,4 @@
-import { GET_ALL_FILM_INFO, GET_BANNER, GET_FILM_COMINGSOON, GET_FILM_NOWSHOWING } from "../types/QuanLyPhimType"
+import { GET_ALL_FILM_INFO, GET_BANNER, GET_FILM_COMINGSOON, GET_FILM_INFO_EDIT, GET_FILM_NOWSHOWING } from "../types/QuanLyPhimType"
 import { GET_CINEMA_SHOWTIME } from "../types/QuanLyRapType.js";
 
 const stateDefault = {
@@ -13,8 +13,8 @@ const stateDefault = {
     arrFilmConfig: [],
     nowShowing: true,
     comingSoon: false,
-
-    filmDetail: {}
+    filmDetail: {},
+    filmInfoEdit: {},
 
 }
 
@@ -51,6 +51,11 @@ export const QuanLyPhimReducer = (state = stateDefault, action) => {
 
         case GET_CINEMA_SHOWTIME: {
             state.filmDetail = action.filmDetail
+            return {...state}
+        }
+
+        case GET_FILM_INFO_EDIT: {
+            state.filmInfoEdit = action.filmInfoEdit
             return {...state}
         }
         default: return { ...state }

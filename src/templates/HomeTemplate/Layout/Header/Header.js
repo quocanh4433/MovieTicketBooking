@@ -1,16 +1,17 @@
 import React, { Fragment, useState } from 'react'
-import { Avatar, Image } from 'antd';
 import { CaretDownOutlined, UserOutlined, SecurityScanOutlined, LogoutOutlined, MenuOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { TOKEN_CYBERSOFT, USER_LOGIN } from '../../../../utils/setting';
 import { history } from '../../../../App';
+import { Link } from 'react-scroll'
 
 
 export default function Header() {
     const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer)
     const [headerOnScroll, setHeaderOnScroll] = useState(false);
     const [menuOnMobile, setMenuOnMobile] = useState(false);
+    const PADDING_TOP = -75; 
 
     const logout = () => {
         localStorage.removeItem(USER_LOGIN);
@@ -135,35 +136,35 @@ export default function Header() {
         }
     }
 
-        window.addEventListener("scroll", headeronScroll)
+    window.addEventListener("scroll", headeronScroll)
 
-        return (
-            <header className={headerOnScroll ? "header header-onScroll" : "header"}>
-                <div className="header__wrapper container">
-                    <h1>
-                        <NavLink to="/home"><img src="/images/header/logo.svg" alt="Logo" /></NavLink>
-                    </h1>
-                    <nav className={menuOnMobile ? "header__wrapper--nav nav-activeOnMobile" : "header__wrapper--nav"}>
+    return (
+        <header className={headerOnScroll ? "header header-onScroll" : "header"}>
+            <div className="header__wrapper container">
+                <h1>
+                    <NavLink to="/home"><img src="/images/header/logo.svg" alt="Logo" /></NavLink>
+                </h1>
+                <nav className={menuOnMobile ? "header__wrapper--nav nav-activeOnMobile" : "header__wrapper--nav"}>
 
-                        {/* User info on mobile */}
-                        <div className="navUserInfo">{checkUserInfoMobile()}</div>
+                    {/* User info on mobile */}
+                    <div className="navUserInfo">{checkUserInfoMobile()}</div>
 
-                        {/* Main menu on PC and mobile */}
-                        <NavLink to="/home" activeClassName="nav-active" onClick={closeMenuOnMobile}>Trang Chủ</NavLink>
-                        <a href="#news" activeClassName="nav-active" onClick={closeMenuOnMobile}>Tin Tức</a>
-                        <a href="#event" activeClassName="nav-active" onClick={closeMenuOnMobile}>Sự kiện</a>
-                        <a href="#homeapp" activeClassName="nav-active" onClick={closeMenuOnMobile}>Ứng Dụng</a>
+                    {/* Main menu on PC and mobile */}
+                    <NavLink to="/home" activeClassName="nav-active" onClick={closeMenuOnMobile}>Trang Chủ</NavLink>
+                    <Link to="news" activeClass="nav-active" spy={true} offset={PADDING_TOP} onClick={closeMenuOnMobile}>Tin Tức</Link>
+                    <Link to="event" activeClass="nav-active" spy={true} offset={PADDING_TOP} onClick={closeMenuOnMobile}>Sự kiện</Link>
+                    <Link to="homeapp" activeClass="nav-active" spy={true} onClick={closeMenuOnMobile}>Ứng Dụng</Link>
 
-                        {/* Only Show on mobile  */}
-                        <CloseCircleOutlined onClick={closeMenuOnMobile} />
-                        {checkSignInBtnMobile()}
+                    {/* Only Show on mobile  */}
+                    <CloseCircleOutlined onClick={closeMenuOnMobile} />
+                    {checkSignInBtnMobile()}
 
-                    </nav>
+                </nav>
 
-                    {checkUserIsLogin()}
+                {checkUserIsLogin()}
 
-                    <MenuOutlined className="header__wrapper--toggle" onClick={openMenuOnMobile} />
-                </div>
-            </header>
-        )
-    }
+                <MenuOutlined className="header__wrapper--toggle" onClick={openMenuOnMobile} />
+            </div>
+        </header>
+    )
+}

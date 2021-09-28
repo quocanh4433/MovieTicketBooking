@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import { CustomCard } from '@tsamantanis/react-glassmorphism'
 import '@tsamantanis/react-glassmorphism/dist/index.css'
-import { Progress, Rate, Tabs, Modal  } from 'antd';
+import { Progress, Rate, Tabs, Modal } from 'antd';
 import { PlayCircleOutlined, LikeOutlined, CloseCircleOutlined } from '@ant-design/icons'
 import { useSelector, useDispatch } from 'react-redux';
 import { ADD_COMMENT, COUNT_LIKE } from '../../redux/types/QuanLyNguoiDungType';
@@ -11,8 +11,6 @@ import moment from 'moment'
 import { NavLink } from 'react-router-dom';
 import { getCinemaShowtimeAction } from '../../redux/actions/QuanLyRapAction';
 import ModalTrailer from '../../components/ModalTrailer/ModalTrailer';
-
-
 
 const { TabPane } = Tabs;
 
@@ -27,7 +25,7 @@ function ShowtimeDetail(props) {
         tabPosition: 'left',
     });
     const { tabPosition } = state;
-    
+
     useEffect(() => {
         let { filmID } = props;
         dispatch(getCinemaShowtimeAction(filmID))
@@ -140,18 +138,30 @@ function ShowtimeDetail(props) {
 }
 
 // ======================================================
-// Modal Comment Component
+// Main Component 
 // ======================================================
-function ModalComment() {
+export default function (props) {
+    const { lstUserComment } = useSelector(state => state.QuanLyNguoiDungReducer);
+    const { filmDetail } = useSelector(state => state.QuanLyPhimReducer)
+    const [modal, setModal] = useState(false);
+    const [trailer, setTrailer] = useState("");
+    const dispatch = useDispatch()
+    const { id } = props.match.params
+    useEffect(() => {
+        let { id } = props.match.params;
+        dispatch(getCinemaShowtimeAction(id))
+    }, [])
 
+    /** For Modal */
     const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer)
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [contentComment, setContentComment] = useState("");
     const [start, setStart] = useState(0)
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
 
     const showModal = (e) => {
         setIsModalVisible(true);
+        e.preventDefault()
     };
 
     const handleOk = async () => {
@@ -189,170 +199,6 @@ function ModalComment() {
         setContentComment(value)
     }
 
-    return (
-        <Fragment>
-            <div className="comment__modal-toggle" onClick={showModal}>
-                <img type="text" src="/images/header/avatar.jfif" alt="UserName" onError={(e) => { e.target.onError = null; e.target.src = `/images/header/avatar-user.jpg` }} />
-                <input placeholder="Bạn nghĩ gì về bộ phim này?" />
-                <Rate disabled allowHalf defaultValue={100} />
-            </div>
-            <Modal
-                okText="Đăng"
-                cancelText="Hủy"
-                closeIcon={<CloseCircleOutlined />}
-                visible={isModalVisible}
-                onOk={handleOk}
-                onCancel={handleCancel}
-            >
-                <div className="comment__modal">
-                    <h3>{(start * 2).toFixed(1)}</h3>
-                    <div className="comment__modal-startRate">
-                        <Rate allowHalf defaultValue={start} onChange={handleStartRate} />
-                    </div>
-                    <textarea placeholder="Bạn nghĩ gì về phim này..." name="comment" onChange={handleComment}></textarea>
-                </div>
-            </Modal>
-        </Fragment>
-    )
-}
-
-// ======================================================
-// Tabs Component
-// ======================================================
-function TabComment(props) {
-
-    const [showComment, setShowComment] = useState(4)
-    const { filmDesc } = props
-    const dispatch = useDispatch()
-    let { lstUserComment } = props
-
-    const renderLstComment = () => {
-        return _.orderBy(lstUserComment, ['id'], ['desc'])?.slice(0, showComment).map((userComment, indexComment) => {
-            return (
-                <div className="tab__comment-list" key={indexComment}>
-                    <div className="comment-group">
-                        <div className="comment-user">
-                            <div className="user-avatar">
-                                <figure>
-                                    <img type="text" src={userComment.avatar} alt="UserName" onError={(e) => { e.target.onError = null; e.target.src = `/images/header/avatar-user.jpg` }} />
-                                </figure>
-                                <p>
-                                    <span>{userComment.name}</span>
-                                    <span>{moment(userComment?.day).format("DD/MM/YYYY")}</span>
-                                </p>
-                            </div>
-                            <div className="user-score">
-                                <span className="score">{(userComment.score * 2).toFixed(1)}</span>
-                                <Rate disabled allowHalf defaultValue={userComment.score / 2} />
-                            </div>
-                        </div>
-                        <div className="comment-content">
-                            <p>{userComment.comment}</p>
-                        </div>
-                        <div className="comment-like">
-                            <LikeOutlined className="icon-like" onClick={() => {
-                                dispatch({
-                                    type: COUNT_LIKE,
-                                    id: userComment.id
-                                })
-                            }} />
-                            <span>{userComment.like} Thích</span>
-                        </div>
-                    </div>
-                </div>
-            )
-        })
-    }
-
-    const handleShowLstComment = () => {
-        if (showComment < lstUserComment.length) {
-            let newShowComment = showComment + 2
-            if (newShowComment < lstUserComment.length) {
-                setShowComment(newShowComment)
-            } else {
-                setShowComment(lstUserComment.length)
-            }
-        } else {
-            setShowComment(4)
-        }
-    }
-
-    return (
-        <Fragment>
-            <Tabs defaultActiveKey="1" centered className="detail__info-tabs">
-
-                {/* Tab info  */}
-                <TabPane tab={<h4>Thông Tin</h4>} key="1">
-                    <div className="tab__info">
-                        <div className="tab__info--left">
-                            <div className="info-group">
-                                <p>Ngày công chiếu: </p>
-                                <p>26/12/2021</p>
-                            </div>
-                            <div className="info-group">
-                                <p>Đạo diễn: </p>
-                                <p>Christopher Nolan</p>
-                            </div>
-                            <div className="info-group">
-                                <p>Diễn viên: </p>
-                                <p>Hugh Jackman, Christian Bale, Chris Evan, Leonardo DiCaprio, Margot Robbie, Anne Hathaway</p>
-                            </div>
-                            <div className="info-group">
-                                <p>Thể loại: </p>
-                                <p>Tâm lý, Kinh dị, Viễn tưởng</p>
-                            </div>
-                            <div className="info-group">
-                                <p>Định dang: </p>
-                                <p>2D/3D/4DX</p>
-                            </div>
-                            <div className="info-group">
-                                <p>Quốc gia: </p>
-                                <p>Mỹ</p>
-                            </div>
-                        </div>
-                        <div className="tab__info--right">
-                            <div className="info-group">
-                                <p>Nội dung: </p>
-                                <p>{filmDesc}</p>
-                            </div>
-                        </div>
-                    </div>
-                </TabPane>
-
-                {/* Tab Comment  */}
-                <TabPane tab={<h4>Đánh Giá</h4>} key="2">
-                    <div className="tab__comment">
-
-                        <ModalComment />
-                        {renderLstComment()}
-
-                        <div className="tab__comment-btnReadmore">
-                            <button className="c-main-btn icon-play" onClick={handleShowLstComment}>
-                                {showComment >= lstUserComment.length ? "thu gọn" : "xem thêm"}
-                            </button>
-                        </div>
-                    </div>
-                </TabPane>
-            </Tabs>
-        </Fragment>
-    )
-}
-
-// ======================================================
-// Main Component 
-// ======================================================
-export default function (props) {
-    const { lstUserComment } = useSelector(state => state.QuanLyNguoiDungReducer);
-    const { filmDetail } = useSelector(state => state.QuanLyPhimReducer)
-    const [modal, setModal] = useState(false);
-    const [trailer, setTrailer] = useState("");
-    const dispatch = useDispatch()
-    const { id } = props.match.params
-    useEffect(() => {
-        let { id } = props.match.params;
-        dispatch(getCinemaShowtimeAction(id))
-        window.scrollTo(0,0)
-    }, [])
 
     return (
         <Fragment>
@@ -412,12 +258,90 @@ export default function (props) {
                 {/* Detail tabs info and comment */}
                 <div className="detail__info l-section">
                     <div className="container2">
-                        <TabComment filmDesc={filmDetail.moTa} lstUserComment={lstUserComment} />
+                        {/* <TabComment filmDesc={filmDetail.moTa} lstUserComment={lstUserComment} /> */}
+                        <Tabs defaultActiveKey="1" centered className="detail__info-tabs">
+
+                            {/* Tab info  */}
+                            <TabPane tab={<h4>Thông Tin</h4>} key="1">
+                                <div className="tab__info">
+                                    <div className="tab__info--left">
+                                        <div className="info-group">
+                                            <p>Ngày công chiếu: </p>
+                                            <p>26/12/2021</p>
+                                        </div>
+                                        <div className="info-group">
+                                            <p>Đạo diễn: </p>
+                                            <p>Christopher Nolan</p>
+                                        </div>
+                                        <div className="info-group">
+                                            <p>Diễn viên: </p>
+                                            <p>Hugh Jackman, Christian Bale, Chris Evan, Leonardo DiCaprio, Margot Robbie, Anne Hathaway</p>
+                                        </div>
+                                        <div className="info-group">
+                                            <p>Thể loại: </p>
+                                            <p>Tâm lý, Kinh dị, Viễn tưởng</p>
+                                        </div>
+                                        <div className="info-group">
+                                            <p>Định dang: </p>
+                                            <p>2D/3D/4DX</p>
+                                        </div>
+                                        <div className="info-group">
+                                            <p>Quốc gia: </p>
+                                            <p>Mỹ</p>
+                                        </div>
+                                    </div>
+                                    <div className="tab__info--right">
+                                        <div className="info-group">
+                                            <p>Nội dung: </p>
+                                            <p>{filmDetail.moTa}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </TabPane>
+
+                            {/* Tab Comment  */}
+                            <TabPane tab={<h4>Đánh Giá</h4>} key="2">
+                                <div className="tab__comment">
+
+                                    {/* <ModalComment /> */}
+                                    <div className="comment__modal-toggle" onClick={showModal}>
+                                        <img type="text" src="/images/header/avatar.jfif" alt="UserName" onError={(e) => { e.target.onError = null; e.target.src = `/images/header/avatar-user.jpg` }} />
+                                        <input placeholder="Bạn nghĩ gì về bộ phim này?" />
+                                        <Rate disabled allowHalf defaultValue={100} />
+                                    </div>
+                                    <Modal
+                                        okText="Đăng"
+                                        cancelText="Hủy"
+                                        closeIcon={<CloseCircleOutlined />}
+                                        visible={isModalVisible}
+                                        onOk={handleOk}
+                                        onCancel={handleCancel}
+                                    >
+                                        <div className="comment__modal">
+                                            <h3>{(start * 2).toFixed(1)}</h3>
+                                            <div className="comment__modal-startRate">
+                                                <Rate allowHalf defaultValue={start} onChange={handleStartRate} />
+                                            </div>
+                                            <textarea placeholder="Bạn nghĩ gì về phim này..." name="comment" onChange={handleComment}></textarea>
+                                        </div>
+                                    </Modal>
+
+
+                                    {/* {renderLstComment()} */}
+
+                                    {/* <div className="tab__comment-btnReadmore">
+                                        <button className="c-main-btn icon-play" onClick={handleShowLstComment}>
+                                            {showComment >= lstUserComment.length ? "thu gọn" : "xem thêm"}
+                                        </button>
+                                    </div> */}
+                                </div>
+                            </TabPane>
+                        </Tabs>
                     </div>
                 </div>
             </section>
 
-            <ModalTrailer  modal={modal} trailer={trailer} setTrailer={setTrailer} setModal={setModal} /> 
+            <ModalTrailer modal={modal} trailer={trailer} setTrailer={setTrailer} setModal={setModal} />
 
         </Fragment>
 

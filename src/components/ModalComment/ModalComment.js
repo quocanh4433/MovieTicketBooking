@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Modal, Rate, Button } from 'antd';
+import { Modal, Rate } from 'antd';
 import { CloseCircleOutlined } from "@ant-design/icons"
 import { useDispatch, useSelector } from 'react-redux';
 import { ADD_COMMENT } from '../../redux/types/QuanLyNguoiDungType';
@@ -19,6 +19,7 @@ export default function ModalComment() {
     const handleOk = async () => {
         let today = new Date();
         let date = await today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        
         let userComment = {
             id: 10,
             name: `${userLogin.taiKhoan}`,
@@ -73,17 +74,6 @@ export default function ModalComment() {
                     <textarea placeholder="Bạn nghĩ gì về phim này..." name="comment" onChange={handleComment}></textarea>
                 </div>
             </Modal>
-
-            {/* <>
-                <Button type="primary" onClick={showModal}>
-                    Open Modal
-                </Button>
-                <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-                    <p>Some contents...</p>
-                    <p>Some contents...</p>
-                    <p>Some contents...</p>
-                </Modal>
-            </> */}
         </Fragment>
     )
 }

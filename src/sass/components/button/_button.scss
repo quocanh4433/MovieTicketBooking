@@ -22,6 +22,12 @@
     }
 }
 
+.c-main-btn--paddingsmall {
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: $fs-12;
+}
+
 .icon-play span {
     font-size: $fs-22 ;
     margin-right: 0.8rem;
@@ -86,4 +92,33 @@
     &:hover {
         opacity: 0.7;
     }
+}
+
+/** Custom button admin tempalte - list film */
+
+.c-btn {
+    width: 26px;
+    height: 26px;
+    color: white !important;
+    border-radius: 100%;
+    display: inline-flex !important;
+    justify-content: center;
+    align-items: center;
+    margin-right: 4px;
+    font-size: $fs-14;
+
+}
+
+.c-btn-edit {
+    background-color: $blue;
+
+}
+
+.c-btn-calendar {
+    background-color: $green;
+
+}
+
+.c-btn-delete {
+    background-color: $red;
 }

@@ -15,8 +15,8 @@ export const QuanLyDatVeReducer = (state = stateDefault, action) => {
         }
 
         case SELECT_SEAT: {
-            let index = state.lstSeatSelecting.findIndex(seat => seat.maGhe == action.seatSelect.maGhe)
-            if (index != -1) {
+            let index = state.lstSeatSelecting.findIndex(seat => seat.maGhe === action.seatSelect.maGhe)
+            if (index !== -1) {
                 state.lstSeatSelecting = state.lstSeatSelecting.filter(seat => seat.maGhe !== action.seatSelect.maGhe)
             } else {
                 state.lstSeatSelecting.push(action.seatSelect)

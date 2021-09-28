@@ -65,7 +65,7 @@ export default function MultipleRowCarousel(props) {
                         </div>
                     </div>
                     <div className="multipleRow__item-content">
-                        <img src={film.hinhAnh} alt="..." />
+                        <img src={film.hinhAnh} alt={film.tenPhim} onError={(e) => { e.target.onError = null; e.target.src = `/images/common/error-img.jpg` }} />
                         <p><span className="c-review__raiting">PG-13</span> {film.tenPhim}</p>
                         <div className="c-review__score">
                             <span>{film.danhGia.toFixed(1)}</span>
