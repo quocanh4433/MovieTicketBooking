@@ -9,18 +9,17 @@ import {
 import { useFormik } from 'formik';
 import moment from 'moment'
 import { useDispatch } from 'react-redux'
-import { GROUPID } from '../../../utils/setting';
+import http, { GROUPID } from '../../../utils/setting';
 import { addFilmAction } from '../../../redux/actions/QuanLyPhimAction';
 import { UploadOutlined } from '@ant-design/icons'
+import { message } from 'antd';
 
 export default function AddFilm() {
-    const [componentSize, setComponentSize] = useState('default');
+
     const [img, setImg] = useState("/images/common/error-img.jpg")
     const dispatch = useDispatch()
 
-    const onFormLayoutChange = ({ size }) => {
-        setComponentSize(size);
-    };
+
 
     const formik = useFormik({
         initialValues: {
@@ -47,16 +46,31 @@ export default function AddFilm() {
 
                 if (key !== 'hinhAnh') {
                     formData.append(key, values[key]);
+                } else {
                     formData.append('File', values.hinhAnh, values.hinhAnh.name)
                 }
             }
-            console.log(values)
+
+
             dispatch(addFilmAction(formData))
+            success()
         }
     })
 
-    const handleChangePicker = (date, dateString) => {
-        const dateLocal = moment(date).format("DD/MM/yyyy")
+    /** For Message */
+    const success = () => {
+        message
+            .loading({
+                content: 'Tiến hành thêm phim',
+            }, 2.5)
+            .then(() => message.success({
+                content: 'Thêm phim hoàn tất',
+            }, 2.5))
+    };
+
+
+    const handleChangePicker = (date) => {
+        const dateLocal = moment(date).format("DD/MM/YYYY");
         formik.setFieldValue('ngayKhoiChieu', dateLocal)
     }
 
@@ -79,9 +93,9 @@ export default function AddFilm() {
         reader.onload = async (e) => {
             /** Set stage để hiện thị ra giao diện */
             setImg(e.target.result)
-            /** Sau đó set dữ liệu vào formik */
-            await formik.setFieldValue('hinhAnh', file)
         }
+        /** Sau đó set dữ liệu vào formik */
+        formik.setFieldValue('hinhAnh', file)
     }
 
     return (
@@ -98,11 +112,6 @@ export default function AddFilm() {
                     span: 14,
                 }}
                 layout="horizontal"
-                initialValues={{
-                    size: componentSize,
-                }}
-                onValuesChange={onFormLayoutChange}
-                size={componentSize}
                 className="form-addfilm"
             >
                 <Form.Item className="c-form__group" label="Mã Phim">
@@ -118,7 +127,7 @@ export default function AddFilm() {
                     <Input.TextArea name="moTa" rows="4" onChange={formik.handleChange} />
                 </Form.Item>
                 <Form.Item className="c-form__group" label="Ngày khởi chiếu">
-                    <DatePicker name="ngayKhoiChieu" format={"DD/MM/YYYY"} onChange={handleChangePicker} />
+                    <DatePicker name="ngayKhoiChieu" format="DD/MM/YYYY" onChange={handleChangePicker} />
                 </Form.Item>
                 <Form.Item className="c-form__group" label="Đang chiếu" valuePropName="checked">
                     <Switch name="dangChieu" onChange={(checked) => { formik.setFieldValue('dangChieu', checked) }} />
@@ -134,11 +143,11 @@ export default function AddFilm() {
                 </Form.Item>
                 <Form.Item className="c-form__group" label="Hình ảnh">
                     <div className="c-form-control">
-                        <input type="file" name="hinhAnh" id="file" class="inputfile" accept="image/png, image/jpg, image/jpeg, image/gif" onChange={handleChangeFile} />
+                        <input type="file" name="hinhAnh" id="file" className="inputfile" accept="image/png, image/jpg, image/jpeg, image/gif" onChange={handleChangeFile} />
                         <label for="file"> <UploadOutlined /> Choose a file</label>
                     </div>
                     {/* <input type="file" name="hinhAnh" accept="image/png, image/jpg, image/jpeg, image/gif" onChange={handleChangeFile} /> */}
-                    <img src={img} alt='...' className="img-upload"/>
+                    <img src={img} alt='...' className="img-upload" />
                 </Form.Item>
                 <Form.Item className="c-form__group" label="Chức năng">
                     <button type="submit" className="c-main-btn c-main-btn--paddingsmall" >Thêm Phim</button>

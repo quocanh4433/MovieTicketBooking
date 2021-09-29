@@ -19,7 +19,7 @@ export default function ModalTicket(props) {
     let { thongTinPhim } = showtimeDetail
     let { showtimeID, lstSeatSelecting, payment } = props
     let { loading, visible } = state
-
+    let showtimeIDNumber = Number(showtimeID)
     const showModal = () => {
         setState({
             visible: true,
@@ -33,7 +33,7 @@ export default function ModalTicket(props) {
 
         /* Post ticket info after booking successful */
         const bookingTicketInfo = new BookingTicketInfo()
-        bookingTicketInfo.maLichChieu = showtimeID
+        bookingTicketInfo.maLichChieu = showtimeIDNumber
         bookingTicketInfo.danhSachVe = lstSeatSelecting
         dispatch(bookingTicketAction(bookingTicketInfo))
     };

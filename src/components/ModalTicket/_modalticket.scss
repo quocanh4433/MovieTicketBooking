@@ -159,4 +159,10 @@
             @extend .c-secondary-btn;
         }
     }
+
+    .iconWarning {
+        span {
+            color: $red !important;
+        }
+    }
 }

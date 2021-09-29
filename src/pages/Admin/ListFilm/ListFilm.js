@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from 'react'
-import { Table, Input } from 'antd';
-import { PlusCircleOutlined, CalendarOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons"
+import { Table, Input, Button, notification, message } from 'antd';
+import { PlusCircleOutlined, CalendarOutlined, EditOutlined, DeleteOutlined, CloseCircleOutlined } from "@ant-design/icons"
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteFilmAction, getAllFilmInfoAction } from '../../../redux/actions/QuanLyPhimAction';
 import { NavLink } from 'react-router-dom'
@@ -83,9 +83,10 @@ export default function ListFilm() {
                     <Fragment>
                         <NavLink key={1} to={`/admin/editfilm/${film.maPhim}`} className="c-btn c-btn-edit"><EditOutlined /></NavLink>
                         <span className="c-btn c-btn-delete" style={{ cursor: 'pointer' }} key={2}><DeleteOutlined onClick={() => {
-                            if (window.confirm('Bạn có chắc muốn xoá phim ' + film.tenPhim)) {
-                                dispatch(deleteFilmAction(film.maPhim));
-                            }
+
+                            openNotification(film.maPhim);
+                            
+
                         }} /> </span>
                         <NavLink key={3} to="" className="c-btn c-btn-calendar"><CalendarOutlined /> </NavLink>
                     </Fragment>
@@ -99,10 +100,51 @@ export default function ListFilm() {
         console.log('params', pagination, filters, sorter, extra);
     }
 
+    /** For Notification */
+    const close = () => {
+        
+     
+    };
+
+    const openNotification = (filmID) => {
+        const key = `open${Date.now()}`;
+        const btn = (
+            <Button onClick={ async () => {
+
+                notification.close();
+
+                /** Confirm delete film */
+                dispatch(deleteFilmAction(filmID));
+                success();
+            }}>XÁC NHẬN</Button>
+        );
+        notification.open({
+            maxCount: 3,
+            message: 'Bạn có chắc muốn xóa phim này',
+            description: "",
+            btn,
+            key,
+            onClose: close,
+            icon: <div className="iconWarning"><CloseCircleOutlined /></div>,
+        });
+    };
+
+    /** For Message */
+    const success = () => {
+        message
+            .loading({
+                content: 'Tiến hành xóa phim',
+            }, 2.5)
+            .then(() => message.success({
+                content: 'Xóa phim hoàn tất',
+            }, 2.5))
+    };
+
+
     return (
-        <section className="listFilm">
+        <section className="list">
             <h3 className="c-admin-title">danh sách phim</h3>
-            <div className="listFilm__inner">
+            <div className="list__inner">
                 <div className="c-btn-add">
                     <button onClick={() => {
                         history.push("/admin/addfilm")

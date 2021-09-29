@@ -65,15 +65,15 @@ function ShowtimeHome(props) {
                     key={indexTab}
                 >
                     <Tabs tabPosition={tabPosition}>
-                        {singleSystem.lstCumRap?.map((cinema, indexTabPane) => {
+                        {singleSystem.lstCumRap?.slice(0, 7).map((cinema, indexTabPane) => {
                             return (
                                 <TabPane
                                     tab={
                                         <div className="cinema-location">
                                             <img src={cinema.hinhAnh} alt="brandlogo" />
                                             <div>
-                                                <h3>{cinema.tenCumRap}</h3>
-                                                <h4>{cinema.diaChi}</h4>
+                                                <h3>{cinema.tenCumRap.length  > 20 ? cinema.tenCumRap.substr(0, 23) + ' ...' : cinema.tenCumRap}</h3>
+                                                <h4>{cinema.diaChi.length > 20 ? cinema.diaChi.substr(0, 23) + ' ...' : cinema.diaChi}</h4>
                                                 {/* <NavLink to="/" >[Chi tết]</NavLink> */}
                                             </div>
                                         </div>
@@ -82,8 +82,8 @@ function ShowtimeHome(props) {
                                     defaultActiveKey="1"
                                 >
                                     {/* List of detail info film */}
-                                    {cinema.danhSachPhim?.map((film, index) => {
-                                        return <div className="cinema-showtime" key={index}>
+                                    {cinema.danhSachPhim?.map((film, indexC) => {
+                                        return <div className="cinema-showtime" key={indexC}>
                                             <div className="cinema-showtime-info">
                                                 <img src={film.hinhAnh} alt={film.tenPhim} />
                                                 <div>
@@ -101,10 +101,10 @@ function ShowtimeHome(props) {
                                                 </div>
                                             </div>
                                             <div className="cinema-showtime-time">
-                                                {film.lstLichChieuTheoPhim?.slice(0, 10).map((time, index) => {
+                                                {film.lstLichChieuTheoPhim?.slice(0, 10).map((time, indexS) => {
                                                     return (
                                                         <div>
-                                                            <NavLink to={`/checkout/${time.maLichChieu}`} key={index}>
+                                                            <NavLink to={`/checkout/${time.maLichChieu}`} key={indexS}>
                                                                 {moment(time.ngayChieuGioChieu).format('hh:mm A')}
                                                             </NavLink>
                                                         </div>
@@ -418,7 +418,7 @@ export default function (props) {
 
             {/* Btn bottom to top  */}
             <div className="c-btn-backtotop">
-                <BackTop>
+                <BackTop duration={200}>
                     <div className="iconBack"><VerticalAlignTopOutlined /></div>
                 </BackTop>
             </div>

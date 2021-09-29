@@ -1,7 +1,21 @@
 import { quanLyNguoiDungService } from "../../services/QuanLyNguoiDungService"
-import { ACCESS_TOKEN, USER_LOGIN } from "../../utils/setting";
+import { ACCESS_TOKEN, http, USER_LOGIN } from "../../utils/setting";
 import { history } from "../../App";
-import { LOG_IN, SIGN_UP } from "../types/QuanLyNguoiDungType";
+import { GET_ALL_USER, LOG_IN, SIGN_UP } from "../types/QuanLyNguoiDungType";
+
+export const getAllUserAction = () => {
+    return async (dispatch) => {
+        try {
+            const result = await quanLyNguoiDungService.getAllUser()
+            dispatch({
+                type: GET_ALL_USER,
+                arrAllUser: result.data.content
+            })
+        } catch (error) {
+            console.log("Error: ", error.response?.data)
+        }
+    }
+}
 
 export const signupAction = (userInfo) => {
     return async (dispatch) => {
@@ -29,10 +43,34 @@ export const loginAction = (userInfo) => {
             };
             localStorage.setItem(ACCESS_TOKEN, result.data.content.accessToken);
             localStorage.setItem(USER_LOGIN, JSON.stringify(result.data.content));
-            history.push("/home")
+            history.push("/")
         } catch (error) {
             console.log("Error: ", error.response?.data)
         }
     }
 }
+
+export const addUserAction = (userInfo) => {
+    return async (dispatch) => {
+        try {
+            const result = await quanLyNguoiDungService.addUser(userInfo)
+            alert("Thêm người dùng thành công")
+        } catch (error) {
+            console.log("Error: ", error)
+        }
+
+        // let promise = http.post("/api/QuanLyNguoiDung/ThemNguoiDung",userInfo)
+            
+        // promise.then((result)=>{
+        //     alert("Thêm người dùng thành công")
+        //     console.log('result',result);
+        // }) 
+
+        // promise.catch(error => {
+        //     console.log(error)
+        // })
+    }
+}
+
+
 

@@ -1,5 +1,5 @@
 import { USER_LOGIN } from "../../utils/setting";
-import { ADD_COMMENT, COUNT_LIKE, LOG_IN } from "../types/QuanLyNguoiDungType"
+import { ADD_COMMENT, COUNT_LIKE, GET_ALL_USER, LOG_IN } from "../types/QuanLyNguoiDungType"
 import _ from 'lodash'
 
 /** Check user logged  */
@@ -105,7 +105,9 @@ const stateDefault = {
             day: "2021-9-19"
         },
 
-    ]
+    ],
+
+    arrAllUser: [],
 }
 
 export const QuanLyNguoiDungReducer = (state = stateDefault, action) => {
@@ -123,6 +125,11 @@ export const QuanLyNguoiDungReducer = (state = stateDefault, action) => {
 
         case ADD_COMMENT: {
             state.lstUserComment = [...state.lstUserComment, action.userComment]
+            return {...state}
+        } break;
+
+        case GET_ALL_USER: {
+            state.arrAllUser = action.arrAllUser
             return {...state}
         } break;
         

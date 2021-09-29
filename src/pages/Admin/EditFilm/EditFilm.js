@@ -19,7 +19,6 @@ export default function EditFilm(props) {
     const [img, setImg] = useState("")
     const dispatch = useDispatch()
 
-
     useEffect(() => {
         let { id } = props.match.params;
         dispatch(editFilmAction(id))
@@ -61,12 +60,14 @@ export default function EditFilm(props) {
                     }
                 }
             }
+
+            console.log(values)
             dispatch(updateFilmAction(formData))
         }
     })
 
-    const handleChangePicker = (date, dateString) => {
-        const dateLocal = moment(date)
+    const handleChangeDatePicker = (value) => {
+        const dateLocal = moment(value)
         formik.setFieldValue('ngayKhoiChieu', dateLocal)
     }
 
@@ -74,10 +75,14 @@ export default function EditFilm(props) {
         let file = event.target.files[0];
 
         if (file) {
-            let reader = new FileReader();
+
             await formik.setFieldValue('hinhAnh', file)
+
+            let reader = new FileReader();
             reader.readAsDataURL(file)
+
             setImg(event.target.result)
+
             reader.onload = async (e) => {
                 setImg(e.target.result)
             }
@@ -117,7 +122,7 @@ export default function EditFilm(props) {
                     <Input.TextArea name="moTa" rows="4" onChange={formik.handleChange} value={formik.values.moTa} />
                 </Form.Item>
                 <Form.Item className="c-form__group" label="Ngày khởi chiếu">
-                    <DatePicker name="ngayKhoiChieu" onChange={handleChangePicker} format={"DD/MM/YYYY"} value={moment(formik.values.ngayKhoiChieu)} />
+                    <DatePicker name="ngayKhoiChieu" format="DD/MM/YYYY" onChange={handleChangeDatePicker} value={moment(formik.values.ngayKhoiChieu)} />
                 </Form.Item>
                 <Form.Item className="c-form__group" label="Đang chiếu" valuePropName="checked">
                     <Switch name="dangChieu" onChange={(checked) => { formik.setFieldValue('dangChieu', checked) }} checked={formik.values.dangChieu} />
@@ -133,11 +138,11 @@ export default function EditFilm(props) {
                 </Form.Item>
                 <Form.Item className="c-form__group" label="Hình ảnh">
                     <div className="c-form-control">
-                        <input type="file" name="hinhAnh" id="file" class="inputfile" accept="image/png, image/jpg, image/jpeg, image/gif" onChange={handleChangeFile} />
+                        <input type="file" name="hinhAnh" id="file" className="inputfile" accept="image/png, image/jpg, image/jpeg, image/gif" onChange={handleChangeFile} />
                         <label for="file"> <UploadOutlined /> Choose a file</label>
                     </div>
                     {/* <input type="file" id="upload-photo" name="hinhAnh" accept="image/png, image/jpg, image/jpeg, image/gif" onChange={handleChangeFile} /> */}
-                    <img src={img === "" ? filmInfoEdit.hinhAnh : img} alt={filmInfoEdit.tenPhim} className="img-upload" />
+                    <img src={img === "" ? filmInfoEdit.hinhAnh : img} alt={filmInfoEdit.tenPhim} className="img-upload"  onError={(e) => { e.target.onError = null; e.target.src = `/images/common/error-img.jpg` }} />
                 </Form.Item>
                 <Form.Item className="c-form__group" label="Chức năng">
                     <button type="submit" className="c-main-btn c-main-btn--paddingsmall" >Cập nhật</button>

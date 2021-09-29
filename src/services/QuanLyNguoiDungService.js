@@ -1,3 +1,4 @@
+import { GROUPID } from "../utils/setting";
 import { baseService } from "./baseService";
 
 export class QuanLyNguoiDungService extends baseService {
@@ -13,9 +14,13 @@ export class QuanLyNguoiDungService extends baseService {
         return this.post("/api/QuanLyNguoiDung/DangKy", userInfo)
     }
 
-    // layThongtinNguoiDung = () => {
-    //     return this.post("/api/QuanLyNguoiDung/ThongTinTaiKhoan")
-    // }
+    getAllUser = () => {
+        return this.get(`/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=${GROUPID}`)
+    }
+
+    addUser = (userInfo) => {
+        return this.post("/api/QuanLyNguoiDung/ThemNguoiDung", userInfo)
+    }  
 
 }
 

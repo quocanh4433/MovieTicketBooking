@@ -1,8 +1,10 @@
 import { quanLyPhimService } from "../../services/QuanLyPhimService"
+import http, { GROUPID } from "../../utils/setting"
 import { GET_ALL_FILM_INFO, GET_BANNER, GET_FILM_INFO_EDIT } from "../types/QuanLyPhimType"
 
 export const getBannerAction =  () => {
     return async (dispatch) => {
+
         try {
             const result = await quanLyPhimService.getBanner()
             dispatch({
@@ -14,6 +16,7 @@ export const getBannerAction =  () => {
         }
     }
 } 
+
 
 export const getAllFilmInfoAction =  () => {
     return async (dispatch) => {
@@ -32,7 +35,8 @@ export const getAllFilmInfoAction =  () => {
 export const addFilmAction = (formData) => {
     return async (dispatch) => {
         try {
-            await quanLyPhimService.addFilm(formData)
+            const result = await quanLyPhimService.addFilm(formData)
+           
         } catch (error) {
             console.log(error.response?.data)
         }
@@ -56,10 +60,10 @@ export const editFilmAction = (filmID) => {
 export const updateFilmAction = (formData) => {
     return async (dispatch) => {
         try {
-            await quanLyPhimService.updateFilm(formData)
+            const result = await quanLyPhimService.updateFilm(formData)
             alert("Cập nhật phim thành công")
         } catch (error) {
-            console.log("Error: ",error)
+            console.log(error)
         }
     }
 }
@@ -68,7 +72,6 @@ export const deleteFilmAction = (filmID) => {
     return async (dispatch) => {
         try {
             await quanLyPhimService.deleteFilm(filmID)
-            alert("Xóa phim thành công")
             dispatch(getAllFilmInfoAction())
         } catch (error) {
             console.log(error)

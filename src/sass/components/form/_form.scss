@@ -132,21 +132,23 @@
 
 /** Custom form for admn page */
 .classInputDefault {
-    border-radius: 5px;
+    border-radius: 5px !important;
+    background-color: transparent !important;
 
     &:hover {
-        border-color: $orange-3;
+        border-color: $orange-3 !important;
     }
 
     &:focus {
-        border-color: $orange-3;
-        box-shadow: 0 0 3px $orange-3;
+        border-color: $orange-3 !important;
+        box-shadow: 0 0 3px $orange-3 !important;
     }
 
 }
 
 
 .c-form__group {
+    margin-bottom: 1rem;
 
     /** Custom for antdesign */
     label {
@@ -163,9 +165,45 @@
         background-color: red !important;
     } 
 
+    input:invalid {
+        border-color: $red;
+    }
+
     textarea {
         @extend .classInputDefault; 
         min-height: 10rem;
+    }
+
+
+
+    .ant-select-selector {
+        border-radius: 5px !important;
+        &:hover {
+            border-color: $orange-3 !important;
+            box-shadow: 0 0 3px $orange-3 !important;
+        } 
+        &:focus {
+            border-color: $orange-3 !important;
+            box-shadow: 0 0 3px $orange-3 !important;
+        }
+    }
+
+    .ant-input-affix-wrapper {
+        @extend .classInputDefault; 
+
+        &:hover {
+            border-color: $orange-3 !important;
+        }
+    }
+
+    .ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover {
+        border-color: $orange-3 !important;
+
+    }
+
+    .ant-input-affix-wrapper:focus, .ant-input-affix-wrapper-focused {
+        box-shadow: 0 0 3px $orange-3 !important;
+        border-color: $orange-3 !important;
     }
 
     .ant-picker {
@@ -225,5 +263,10 @@
         height: 12rem;
         object-fit: cover;
         border-radius: 8px;
+    }
+
+    .error {
+        color: $red;
+        margin: 0;
     }
 }

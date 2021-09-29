@@ -27,6 +27,7 @@
         }
 
         .ant-tabs-nav-wrap {
+            
             @include responsive(992) {
                 justify-content: center;
             }
@@ -90,7 +91,9 @@
         /* Custom location of cinema*/
         .cinema-location {
             display: flex;
-            justify-content: space-between;
+            // justify-content: space-between;
+
+            width: 250px;
             img {
                 width: 5rem;
                 height: 5rem;
@@ -102,7 +105,7 @@
                 text-align: left;
                 margin-left: 1rem;
                 h3 {
-                    width: 170px;
+                    // width: 170px;
                     overflow: hidden;
                     margin-bottom: 0;
                     

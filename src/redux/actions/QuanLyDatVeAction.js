@@ -40,7 +40,8 @@ export const bookingTicketAction = (bookingTicketInfo) => {
 
         } catch (error) {
             dispatch(hideLoadingAction)
-            console.log({error})
+            console.log("Error:", error)
+
         }
     }
 }

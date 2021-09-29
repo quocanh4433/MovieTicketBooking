@@ -11,7 +11,7 @@ export default function Header() {
     const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer)
     const [headerOnScroll, setHeaderOnScroll] = useState(false);
     const [menuOnMobile, setMenuOnMobile] = useState(false);
-    const PADDING_TOP = -75; 
+    const PADDING_TOP = -75;
 
     const logout = () => {
         localStorage.removeItem(USER_LOGIN);
@@ -58,7 +58,7 @@ export default function Header() {
     };
 
     const checkUserIsAdmin = () => {
-        if (userLogin.maLoaiNguoiDung !== "quantri") {
+        if (userLogin.maLoaiNguoiDung == "QuanTri") {
             return <div className="submenu" >
                 <NavLink to="#">
                     <UserOutlined />
@@ -141,7 +141,9 @@ export default function Header() {
     return (
         <header className={headerOnScroll ? "header header-onScroll" : "header"}>
             <div className="header__wrapper container">
-                <h1>
+                <h1 onClick={() => {
+                    window.scrollTo(0, 0)
+                }}>
                     <NavLink to="/home"><img src="/images/header/logo.svg" alt="Logo" /></NavLink>
                 </h1>
                 <nav className={menuOnMobile ? "header__wrapper--nav nav-activeOnMobile" : "header__wrapper--nav"}>

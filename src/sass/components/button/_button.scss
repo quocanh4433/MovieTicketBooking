@@ -8,6 +8,7 @@
     font-family: $main-font-bold;
     font-size: $fs-14;
     text-transform: uppercase;
+    line-height: 1.4;
 
     color: $light;
     background-image: linear-gradient(to right, $orange-1 0% , $orange-3 60%, $orange-1 100%);
@@ -23,7 +24,7 @@
 }
 
 .c-main-btn--paddingsmall {
-    padding: 6px 10px;
+    padding: 1rem;
     border-radius: 6px;
     font-size: $fs-12;
 }
