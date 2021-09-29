@@ -54,21 +54,11 @@ export const addUserAction = (userInfo) => {
     return async (dispatch) => {
         try {
             const result = await quanLyNguoiDungService.addUser(userInfo)
-            alert("Thêm người dùng thành công")
+            console.log(result);
+            alert("Thêm nguoif dùng thành công")
         } catch (error) {
             console.log("Error: ", error)
         }
-
-        // let promise = http.post("/api/QuanLyNguoiDung/ThemNguoiDung",userInfo)
-            
-        // promise.then((result)=>{
-        //     alert("Thêm người dùng thành công")
-        //     console.log('result',result);
-        // }) 
-
-        // promise.catch(error => {
-        //     console.log(error)
-        // })
     }
 }
 

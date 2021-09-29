@@ -37,11 +37,12 @@ export default function ListUser() {
                 }
                 return -1;
             },
+            width: "15%"
         },
         {
             title: 'Tài Khoản',
             dataIndex: 'taiKhoan',
-            defaultSortOrder: 'descend',
+            defaultSortOrder: 'ascend',
             sorter: (a, b) => {
                 let accountA = a.taiKhoan.toLowerCase().trim();
                 let accountB = b.taiKhoan.toLowerCase().trim();
@@ -50,6 +51,7 @@ export default function ListUser() {
                 }
                 return -1;
             },
+            width: "20%"
         },
         {
             title: 'Mật Khẩu',
@@ -63,6 +65,8 @@ export default function ListUser() {
                 }
                 return -1;
             },
+            width: "17%"
+
         },
         {
             title: 'Email',
@@ -76,6 +80,8 @@ export default function ListUser() {
                 }
                 return -1;
             },
+            width: "20%"
+
         },
         {
             title: 'Số ĐT',
@@ -89,6 +95,8 @@ export default function ListUser() {
                 }
                 return -1;
             },
+            width: "10%"
+
         },
         {
             title: 'Loại',
@@ -104,6 +112,7 @@ export default function ListUser() {
                 },
             ],
             onFilter: (value, record) => record.maLoaiNguoiDung.indexOf(value) === 0,
+            width: "8%"
 
         },
         {
@@ -122,7 +131,7 @@ export default function ListUser() {
                     </Fragment>
                 )
             },
-            // width: "20%",
+            width: "10%",
         },
     ];
 
