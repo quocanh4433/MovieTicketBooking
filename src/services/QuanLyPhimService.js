@@ -9,7 +9,10 @@ export class QuanLyPhimService extends baseService {
         return this.get("/api/QuanLyPhim/LayDanhSachBanner")
     }
 
-    getAllFilmInfo = () => {
+    getAllFilmInfo = (filmName) => {
+        if (filmName !== "") {
+            return this.get(`/api/QuanLyPhim/LayDanhSachPhim?maNhom=${GROUPID}&tenPhim=${filmName}`)
+        } 
         return this.get(`/api/QuanLyPhim/LayDanhSachPhim?maNhom=${GROUPID}`)
     }
 

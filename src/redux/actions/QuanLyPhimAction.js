@@ -18,10 +18,11 @@ export const getBannerAction =  () => {
 } 
 
 
-export const getAllFilmInfoAction =  () => {
+export const getAllFilmInfoAction =  (filmName = "") => {
     return async (dispatch) => {
         try {
-            const result = await quanLyPhimService.getAllFilmInfo()
+            const result = await quanLyPhimService.getAllFilmInfo(filmName)
+            console.log("result: ", result)
             dispatch({
                 type: GET_ALL_FILM_INFO,
                 arrAllFilmInfo: result.data.content,
@@ -78,4 +79,5 @@ export const deleteFilmAction = (filmID) => {
         }
     }
 }
+
 

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useEffect, useRef } from 'react'
 import { Table, Input } from 'antd';
 import { PlusCircleOutlined, CalendarOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons"
 import { useDispatch, useSelector } from 'react-redux'
@@ -12,14 +12,14 @@ import { getAllUserAction } from '../../../redux/actions/QuanLyNguoiDungAction';
 export default function ListUser() {
     const { arrAllUser } = useSelector(state => state.QuanLyNguoiDungReducer)
     const dispatch = useDispatch()
+    
     useEffect(() => {
         dispatch(getAllUserAction())
     }, [])
 
     /** For search bar */
     const { Search } = Input;
-    const onSearch = value => console.log(value);
-
+ 
 
     /** For table */
     const data = arrAllUser
@@ -121,7 +121,7 @@ export default function ListUser() {
             render: (text, film) => {
                 return (
                     <Fragment>
-                        <NavLink key={1} to={`/admin/editfilm/${film.maPhim}`} className="c-btn c-btn-edit"><EditOutlined /></NavLink>
+                        <NavLink key={1} to={`/admin/edituser/${film.maPhim}`} className="c-btn c-btn-edit"><EditOutlined /></NavLink>
                         <span className="c-btn c-btn-delete" style={{ cursor: 'pointer' }} key={2}><DeleteOutlined onClick={() => {
                             if (window.confirm('Bạn có chắc muốn xoá phim ' + film.tenPhim)) {
                                 dispatch(deleteFilmAction(film.maPhim));
@@ -135,7 +135,6 @@ export default function ListUser() {
         },
     ];
 
-
     return (
         <section className="list">
             <h3 className="c-admin-title">danh sách người dùng</h3>
@@ -146,7 +145,13 @@ export default function ListUser() {
                     }}><PlusCircleOutlined />Thêm người dùng</button>
                 </div>
                 <div className="admin-searchbar">
-                    <Search placeholder="Thông tin cần tìm ..." onSearch={onSearch} enterButton />
+                    <Search placeholder="Thông tin cần tìm ..." onSearch={ (value) => {
+                        console.log(value)
+                    
+                    }
+                       
+                    
+                    } enterButton />
                 </div>
             </div>
             <Table columns={columns} dataSource={data} />

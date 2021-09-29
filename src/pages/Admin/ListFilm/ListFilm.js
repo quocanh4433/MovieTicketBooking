@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useEffect, useRef } from 'react'
 import { Table, Input, Button, notification, message } from 'antd';
 import { PlusCircleOutlined, CalendarOutlined, EditOutlined, DeleteOutlined, CloseCircleOutlined } from "@ant-design/icons"
 import { useDispatch, useSelector } from 'react-redux'
@@ -151,7 +151,9 @@ export default function ListFilm() {
                     }}><PlusCircleOutlined />Thêm phim</button>
                 </div>
                 <div className="admin-searchbar">
-                    <Search placeholder="Thông tin cần tìm ..." onSearch={onSearch} enterButton />
+                    <Search placeholder="Thông tin cần tìm ..." onSearch={(value) => {
+                        dispatch(getAllFilmInfoAction(value))
+                    } } enterButton />
                 </div>
             </div>
             <Table columns={columns} dataSource={data} onChange={onChange} rowKey={"maPhim"} />
