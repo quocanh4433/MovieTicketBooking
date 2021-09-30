@@ -61,9 +61,10 @@ export const selectSeatRealtimeAction = (seat, showtimeID) => {
             let lstSearSelecting = getState().QuanLyDatVeReducer.lstSeatSelecting;
             let account = getState().QuanLyNguoiDungReducer.userLogin.taiKhoan
             lstSearSelecting = JSON.stringify(lstSearSelecting)
+            let intShowtimeID  = parseInt(showtimeID)
 
             /** Call API to SignalR */
-            connection.invoke('datGhe',account,lstSearSelecting,showtimeID);
+            connection.invoke('datGhe',account,lstSearSelecting, intShowtimeID);
 
         } catch (error) {
             console.log("Error:", error.response.data)

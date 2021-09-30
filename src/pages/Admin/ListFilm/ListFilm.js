@@ -1,24 +1,24 @@
-import React, { Fragment, useEffect, useRef } from 'react'
+import React, { Fragment, useEffect } from 'react';
 import { Table, Input, Button, notification, message } from 'antd';
-import { PlusCircleOutlined, CalendarOutlined, EditOutlined, DeleteOutlined, CloseCircleOutlined } from "@ant-design/icons"
-import { useDispatch, useSelector } from 'react-redux'
+import { PlusCircleOutlined, CalendarOutlined, EditOutlined, DeleteOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteFilmAction, getAllFilmInfoAction } from '../../../redux/actions/QuanLyPhimAction';
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
 import moment from 'moment';
 import { history } from '../../../App';
 
 
 export default function ListFilm() {
-    const { arrAllFilmInfo } = useSelector(state => state.QuanLyPhimReducer)
-    const dispatch = useDispatch()
+    const { arrAllFilmInfo } = useSelector(state => state.QuanLyPhimReducer);
+    const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getAllFilmInfoAction())
-    }, [])
+    }, []);
 
     /** For search bar */
     const { Search } = Input;
-    const onSearch = value => console.log(value);
-
+    const onSearch = (value) => dispatch(getAllFilmInfoAction(value))
+  
     /** For table */
     const data = arrAllFilmInfo
 
@@ -82,11 +82,10 @@ export default function ListFilm() {
                 return (
                     <Fragment>
                         <NavLink key={1} to={`/admin/editfilm/${film.maPhim}`} className="c-btn c-btn-edit"><EditOutlined /></NavLink>
-                        <span className="c-btn c-btn-delete" style={{ cursor: 'pointer' }} key={2}><DeleteOutlined onClick={() => {
+                        <span className="c-btn c-btn-delete" style={{ cursor: 'pointer' }} key={2}><DeleteOutlined  onClick={() => {
 
                             openNotification(film.maPhim);
                             
-
                         }} /> </span>
                         <NavLink key={3} to="" className="c-btn c-btn-calendar"><CalendarOutlined /> </NavLink>
                     </Fragment>
@@ -100,10 +99,9 @@ export default function ListFilm() {
         console.log('params', pagination, filters, sorter, extra);
     }
 
-    /** For Notification */
+    /** For Notification Delete film */
     const close = () => {
         
-     
     };
 
     const openNotification = (filmID) => {
@@ -111,16 +109,17 @@ export default function ListFilm() {
         const btn = (
             <Button onClick={ async () => {
 
-                notification.close();
+                await notification.close();
 
                 /** Confirm delete film */
-                dispatch(deleteFilmAction(filmID));
+                await dispatch(deleteFilmAction(filmID));
                 success();
+
             }}>XÁC NHẬN</Button>
         );
         notification.open({
             maxCount: 3,
-            message: 'Bạn có chắc muốn xóa phim này',
+            message: 'Bạn có chắc muốn xóa người dùng này',
             description: "",
             btn,
             key,
@@ -134,10 +133,10 @@ export default function ListFilm() {
         message
             .loading({
                 content: 'Tiến hành xóa phim',
-            }, 2.5)
+            }, 1.5)
             .then(() => message.success({
                 content: 'Xóa phim hoàn tất',
-            }, 2.5))
+            }, 1.5))
     };
 
 
@@ -151,9 +150,7 @@ export default function ListFilm() {
                     }}><PlusCircleOutlined />Thêm phim</button>
                 </div>
                 <div className="admin-searchbar">
-                    <Search placeholder="Thông tin cần tìm ..." onSearch={(value) => {
-                        dispatch(getAllFilmInfoAction(value))
-                    } } enterButton />
+                    <Search placeholder="Thông tin cần tìm ..." onSearch={onSearch} />
                 </div>
             </div>
             <Table columns={columns} dataSource={data} onChange={onChange} rowKey={"maPhim"} />

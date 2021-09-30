@@ -1,0 +1,98 @@
+.statistics {
+    .chartInfo {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+
+        margin: 1.5rem 0 2.5rem;
+
+        &__item {
+            width: calc(100% / 3 - 30px);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            background-color: $white;
+            box-shadow: 0 1px 11px -2px $dark-30;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            &-content {
+                h5 {
+                    color: $dark;
+                    text-transform: uppercase;
+                    font-size: $fs-12 !important;
+                    margin: 0;
+                }
+                span {
+                    font-size: $fs-22;
+                    text-transform: uppercase;
+                    font-family: $main-font-bold;
+
+                    .unit {
+                        font-size: $fs-12;
+                        font-family: $main-font-regular;
+                    }
+                }
+
+                .total {
+                    color: $purple;
+                }
+
+                .highest {
+                    color: $green;
+                }
+
+                .lowest {
+                    color: $red;
+                }
+            }
+
+            &-icon {
+                span {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    font-size: $fs-24;
+                    border-radius: 8px;
+                    color: $light;
+                    width: 5rem;
+                    height: 5rem;
+                }
+
+                .icon-total {
+                    background-color: $purple;
+                    box-shadow: 0 2px 5px -2px $purple;
+                }
+
+                .icon-highest {
+                    background-color: $green;
+                    box-shadow: 0 2px 5px -2px $green;
+                }
+
+                .icon-lowest {
+                    background-color: $red;
+                    box-shadow: 0 2px 5px -2px $red;
+                }
+            }
+        }
+    }
+
+    h4 {
+        margin-bottom: 0;
+        color: $orange-2;
+
+        font-size: $fs-16;
+        text-transform: uppercase;
+    }
+
+    /* Custom tabs title in ant Design */
+    .ant-tabs-nav::before {
+        border-bottom: none !important;
+    }
+
+    .ant-tabs-ink-bar {
+        background-color: $orange-2;
+    }
+}

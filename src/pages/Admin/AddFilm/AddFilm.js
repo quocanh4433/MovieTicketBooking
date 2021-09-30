@@ -71,6 +71,7 @@ export default function AddFilm() {
 
     const handleChangePicker = (date) => {
         const dateLocal = moment(date).format("DD/MM/YYYY");
+        console.log(dateLocal)
         formik.setFieldValue('ngayKhoiChieu', dateLocal)
     }
 

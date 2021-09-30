@@ -22,6 +22,18 @@ export class QuanLyNguoiDungService extends baseService {
         return this.post("/api/QuanLyNguoiDung/ThemNguoiDung", userInfo)
     }  
 
+    editUser = (account) => {
+        return this.post(`/api/QuanLyNguoiDung/LayThongTinNguoiDung?taiKhoan=${account}`)
+    }  
+
+    updateUser = (account) => {
+        return this.post(`/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`, account)
+    }
+
+    deleteUser = (account) => {
+        return this.delete(`/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${account}`)
+    }
+
 }
 
 export const quanLyNguoiDungService = new QuanLyNguoiDungService () 

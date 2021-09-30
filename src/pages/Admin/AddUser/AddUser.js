@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react'
 import {
     Form,
     Input,
-
+    message,
     InputNumber,
 
 } from 'antd';
@@ -14,15 +14,15 @@ import { Select } from 'antd'
 import { addUserAction } from '../../../redux/actions/QuanLyNguoiDungAction';
 const { Option } = Select;
 
+
 export default function AddUser() {
     const phoneRegex = /([+84|84|0]+(3|5|7|8|9|1[2|6|8|9]))+([0-9]{8})\b/;
     const nameRegex = /^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s\W|_]+$/;
     const dispatch = useDispatch();
-    const [selectValue, setSelectValue] = useState("KhachHang")
 
     const formik = useFormik({
         initialValues: {
-            maLoaiNguoiDung: selectValue,
+            maLoaiNguoiDung: "",
             hoTen: "",
             taiKhoan: "",
             soDt: "",
@@ -36,12 +36,26 @@ export default function AddUser() {
             hoTen: Yup.string().required("Họ Tên không được bỏ trống").matches(nameRegex, "Họ Tên không hợp lệ"),
             email: Yup.string().required("Email không được bỏ trống").email("Email không đúng định dạng"),
             soDt: Yup.string().required("Số điện thoại không được bỏ trống").matches(phoneRegex, "Số điện thoại không hợp lệ").min(10, "Số điện thoại tối thiểu 10 số").max(10, "Số điện thoại tối thiếu 10 số"),
-            
+
         }),
         onSubmit: (values) => {
             dispatch(addUserAction(values))
+            success()
+
         }
     })
+
+    /** For Message */
+    const success = () => {
+        message
+            .loading({
+                content: 'Tiến hành thêm người dùng',
+            }, 1.5)
+            .then(() => message.success({
+                content: 'Thêm người dùng hoàn tất',
+            }, 1.5))
+    };
+
 
     const handleSelectChange = (values) => {
         formik.setFieldValue("maLoaiNguoiDung", values);
@@ -106,7 +120,6 @@ export default function AddUser() {
                     >
                         <Option value="KhachHang">Khách Hàng</Option>
                         <Option value="QuanTri">Quản Trị</Option>
-                        <Option value="Other">Other</Option>
                     </Select>
                     {formik.touched.maLoaiNguoiDung && formik.errors.maLoaiNguoiDung ? (
                         <p className="error">{formik.errors.maLoaiNguoiDung}</p>

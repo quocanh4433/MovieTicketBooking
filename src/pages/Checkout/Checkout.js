@@ -18,6 +18,8 @@ export default function Checkout(props) {
     const [valueRadio, setValueRadio] = useState(1);
     let { thongTinPhim, danhSachGhe } = showtimeDetail
 
+    console.log(danhSachGhe)
+
     
     useEffect(() => {
         let { id } = props.match.params;
@@ -144,7 +146,7 @@ export default function Checkout(props) {
 
             return (
                 <button disabled={singleSeat.daDat} className="seat__wrapper" key={index} onClick={() => {
-                    dispatch(selectSeatRealtimeAction(singleSeat, Number(props.match.params.id)))
+                    dispatch(selectSeatRealtimeAction(singleSeat, props.match.params.id))
                 }}>
                     <div className={`seat ${classSeatVip} ${classSeatSelected} ${classSeatSelecting} ${classSeatUserSelected} ${classSeatSelectRealtime}`} >
                         <span className="seatNumber">

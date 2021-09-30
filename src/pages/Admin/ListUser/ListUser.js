@@ -1,25 +1,22 @@
-import React, { Fragment, useEffect, useRef } from 'react'
-import { Table, Input } from 'antd';
-import { PlusCircleOutlined, CalendarOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons"
+import React, { Fragment, useEffect } from 'react'
+import { Table, Input, Button, notification, message } from 'antd';
+import { PlusCircleOutlined, EditOutlined, DeleteOutlined, CloseCircleOutlined } from "@ant-design/icons"
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteFilmAction, getAllFilmInfoAction } from '../../../redux/actions/QuanLyPhimAction';
+import { deleteFilmAction } from '../../../redux/actions/QuanLyPhimAction';
 import { NavLink } from 'react-router-dom'
-import moment from 'moment';
 import { history } from '../../../App';
-import { getAllUserAction } from '../../../redux/actions/QuanLyNguoiDungAction';
+import { deleteUserAction, getAllUserAction } from '../../../redux/actions/QuanLyNguoiDungAction';
 
 
 export default function ListUser() {
     const { arrAllUser } = useSelector(state => state.QuanLyNguoiDungReducer)
     const dispatch = useDispatch()
-    
+    const { Search } = Input;
+
     useEffect(() => {
         dispatch(getAllUserAction())
     }, [])
 
-    /** For search bar */
-    const { Search } = Input;
- 
 
     /** For table */
     const data = arrAllUser
@@ -118,22 +115,62 @@ export default function ListUser() {
         {
             title: 'Hành Động',
             dataIndex: 'hinhAnh',
-            render: (text, film) => {
+            render: (text, user) => {
                 return (
                     <Fragment>
-                        <NavLink key={1} to={`/admin/edituser/${film.maPhim}`} className="c-btn c-btn-edit"><EditOutlined /></NavLink>
+                        <NavLink key={1} to={`/admin/edituser/${user.taiKhoan}`} className="c-btn c-btn-edit"><EditOutlined /></NavLink>
                         <span className="c-btn c-btn-delete" style={{ cursor: 'pointer' }} key={2}><DeleteOutlined onClick={() => {
-                            if (window.confirm('Bạn có chắc muốn xoá phim ' + film.tenPhim)) {
-                                dispatch(deleteFilmAction(film.maPhim));
-                            }
+
+                            openNotification(user.taiKhoan);
+
                         }} /> </span>
-                        <NavLink key={3} to="" className="c-btn c-btn-calendar"><CalendarOutlined /> </NavLink>
                     </Fragment>
                 )
             },
             width: "10%",
+            align: "center"
         },
     ];
+
+
+    /** For Notification Delete user */
+    const close = () => { };
+
+    const openNotification = (account) => {
+        const key = `open${Date.now()}`;
+        const btn = (
+            <Button onClick={async () => {
+
+                await notification.close();
+
+                /** Confirm delete film */
+                await dispatch(deleteUserAction(account));
+                success();
+
+            }}>XÁC NHẬN</Button>
+        );
+        notification.open({
+            maxCount: 3,
+            message: 'Bạn có chắc muốn xóa phim này',
+            description: "",
+            btn,
+            key,
+            onClose: close,
+            icon: <div className="iconWarning"><CloseCircleOutlined /></div>,
+        });
+    };
+
+    /** For Message */
+    const success = () => {
+        message
+            .loading({
+                content: 'Tiến hành xóa người dùng',
+            }, 1.5)
+            .then(() => message.success({
+                content: 'Xóa người dùng hoàn tất',
+            }, 1.5))
+    };
+
 
     return (
         <section className="list">
@@ -145,12 +182,9 @@ export default function ListUser() {
                     }}><PlusCircleOutlined />Thêm người dùng</button>
                 </div>
                 <div className="admin-searchbar">
-                    <Search placeholder="Thông tin cần tìm ..." onSearch={ (value) => {
+                    <Search placeholder="Thông tin cần tìm ..." onSearch={(value) => {
                         console.log(value)
-                    
                     }
-                       
-                    
                     } enterButton />
                 </div>
             </div>

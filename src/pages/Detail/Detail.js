@@ -148,7 +148,16 @@ function ModalComment() {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [contentComment, setContentComment] = useState("");
     const [start, setStart] = useState(0)
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        window.onscroll = null;
+       
+    }, [])
+
+    const clearScroll = () => {
+        alert("không scroll")
+    }
 
     const showModal = (e) => {
         setIsModalVisible(true);
@@ -351,7 +360,7 @@ export default function (props) {
     useEffect(() => {
         let { id } = props.match.params;
         dispatch(getCinemaShowtimeAction(id))
-        window.scrollTo(0,0)
+        // window.scrollTo(0,0)
     }, [])
 
     return (

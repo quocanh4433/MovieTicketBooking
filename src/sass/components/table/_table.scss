@@ -76,6 +76,10 @@
 
         /** Custom pagination table */
         .ant-pagination.ant-table-pagination {
+
+            .ant-select-selector {
+                border-radius: 6px;
+            }
     
             .ant-pagination-item-active {
                 border-radius: 50%;

@@ -58,7 +58,7 @@ export default function Header() {
     };
 
     const checkUserIsAdmin = () => {
-        if (userLogin.maLoaiNguoiDung == "QuanTri") {
+        if (userLogin.maLoaiNguoiDung === "QuanTri") {
             return <div className="submenu" >
                 <NavLink to="#">
                     <UserOutlined />

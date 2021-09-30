@@ -30,7 +30,7 @@ export default function EditFilm(props) {
 
     const formik = useFormik({
         /** 
-            Thuộc tính enableReinitialize mặc định là false. 
+            enableReinitialize default =  false. 
             Chỉ sử dụng trong những trang edit vi nếu dùng sai xin ra vòng lặp vô tận 
         */
         enableReinitialize: true,
@@ -56,7 +56,6 @@ export default function EditFilm(props) {
                     /** Kiểm tra hình ảnh có thay đổi mới append ảnh mới nếu không vẫn giữ lấy ảnh */
                     if (values.hinhAnh !== null) {
                         formData.append('File', values.hinhAnh, values.hinhAnh.name)
-                        console.warn("Hình ảnh khác null")
                     }
                 }
             }
@@ -91,7 +90,7 @@ export default function EditFilm(props) {
 
     return (
         <Fragment>
-            <h3 className="c-admin-title">Edit Phim</h3>
+            <h3 className="c-admin-title">Cập Nhật Phim</h3>
             <Form
                 onSubmitCapture={
                     formik.handleSubmit
@@ -122,7 +121,7 @@ export default function EditFilm(props) {
                     <Input.TextArea name="moTa" rows="4" onChange={formik.handleChange} value={formik.values.moTa} />
                 </Form.Item>
                 <Form.Item className="c-form__group" label="Ngày khởi chiếu">
-                    <DatePicker name="ngayKhoiChieu" format="DD/MM/YYYY" onChange={handleChangeDatePicker} value={moment(formik.values.ngayKhoiChieu)} />
+                    <DatePicker name="ngayKhoiChieu" onChange={handleChangeDatePicker} value={moment(formik.values.ngayKhoiChieu)} />
                 </Form.Item>
                 <Form.Item className="c-form__group" label="Đang chiếu" valuePropName="checked">
                     <Switch name="dangChieu" onChange={(checked) => { formik.setFieldValue('dangChieu', checked) }} checked={formik.values.dangChieu} />

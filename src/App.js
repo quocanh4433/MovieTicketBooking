@@ -20,6 +20,7 @@ import ListUser from "./pages/Admin/ListUser/ListUser";
 import AddUser from "./pages/Admin/AddUser/AddUser";
 import EditFilm from "./pages/Admin/EditFilm/EditFilm";
 import ChiTiet from "./pages/ChiTiet/ChiTiet";
+import EditUser from "./pages/Admin/EditUser/EditUser";
 
 export const history = createBrowserHistory()
 
@@ -40,7 +41,8 @@ function App() {
         <AdminTemplate exact path="/admin/editfilm/:id" Component={EditFilm} />
         <AdminTemplate exact path="/admin/listuser" Component={ListUser} />
         <AdminTemplate exact path="/admin/adduser" Component={AddUser} />
-        
+        <AdminTemplate exact path="/admin/edituser/:account" Component={EditUser} />
+
         <UserTemplate exact path="/login" Component={Login} />
         <UserTemplate exact path="/register" Component={Register} />
       </Switch>
