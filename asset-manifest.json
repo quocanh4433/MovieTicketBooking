@@ -1,0 +1,37 @@
+{
+  "files": {
+    "static/js/0.4f4c3b04.chunk.js": "/MovieTicketBooking/static/js/0.4f4c3b04.chunk.js",
+    "static/js/0.4f4c3b04.chunk.js.map": "/MovieTicketBooking/static/js/0.4f4c3b04.chunk.js.map",
+    "main.css": "/MovieTicketBooking/static/css/main.3f3465d7.chunk.css",
+    "main.js": "/MovieTicketBooking/static/js/main.5a94079f.chunk.js",
+    "main.js.map": "/MovieTicketBooking/static/js/main.5a94079f.chunk.js.map",
+    "runtime-main.js": "/MovieTicketBooking/static/js/runtime-main.fb877932.js",
+    "runtime-main.js.map": "/MovieTicketBooking/static/js/runtime-main.fb877932.js.map",
+    "static/css/3.8dbe21c2.chunk.css": "/MovieTicketBooking/static/css/3.8dbe21c2.chunk.css",
+    "static/js/3.6f4b78ea.chunk.js": "/MovieTicketBooking/static/js/3.6f4b78ea.chunk.js",
+    "static/js/3.6f4b78ea.chunk.js.map": "/MovieTicketBooking/static/js/3.6f4b78ea.chunk.js.map",
+    "static/js/4.4dbc65ac.chunk.js": "/MovieTicketBooking/static/js/4.4dbc65ac.chunk.js",
+    "static/js/4.4dbc65ac.chunk.js.map": "/MovieTicketBooking/static/js/4.4dbc65ac.chunk.js.map",
+    "static/js/5.d374d3f8.chunk.js": "/MovieTicketBooking/static/js/5.d374d3f8.chunk.js",
+    "static/js/5.d374d3f8.chunk.js.map": "/MovieTicketBooking/static/js/5.d374d3f8.chunk.js.map",
+    "static/js/6.772f37f1.chunk.js": "/MovieTicketBooking/static/js/6.772f37f1.chunk.js",
+    "static/js/6.772f37f1.chunk.js.map": "/MovieTicketBooking/static/js/6.772f37f1.chunk.js.map",
+    "static/js/7.04cd7027.chunk.js": "/MovieTicketBooking/static/js/7.04cd7027.chunk.js",
+    "static/js/7.04cd7027.chunk.js.map": "/MovieTicketBooking/static/js/7.04cd7027.chunk.js.map",
+    "static/js/8.4161ecbc.chunk.js": "/MovieTicketBooking/static/js/8.4161ecbc.chunk.js",
+    "static/js/8.4161ecbc.chunk.js.map": "/MovieTicketBooking/static/js/8.4161ecbc.chunk.js.map",
+    "index.html": "/MovieTicketBooking/index.html",
+    "static/css/3.8dbe21c2.chunk.css.map": "/MovieTicketBooking/static/css/3.8dbe21c2.chunk.css.map",
+    "static/css/main.3f3465d7.chunk.css.map": "/MovieTicketBooking/static/css/main.3f3465d7.chunk.css.map",
+    "static/js/3.6f4b78ea.chunk.js.LICENSE.txt": "/MovieTicketBooking/static/js/3.6f4b78ea.chunk.js.LICENSE.txt",
+    "static/media/main.scss": "/MovieTicketBooking/static/media/Rosario-SemiBold.9e9af3e8.ttf",
+    "static/media/slick-theme.css": "/MovieTicketBooking/static/media/slick.c94f7671.ttf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.fb877932.js",
+    "static/css/3.8dbe21c2.chunk.css",
+    "static/js/3.6f4b78ea.chunk.js",
+    "static/css/main.3f3465d7.chunk.css",
+    "static/js/main.5a94079f.chunk.js"
+  ]
+}
