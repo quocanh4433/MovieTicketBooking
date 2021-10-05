@@ -1,0 +1,28 @@
+.createshowtime {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4rem;
+
+    &__img {
+        width: 20%;
+        text-align: center;
+
+        h4 {
+            margin-top: 1.5rem;
+            font-size: $fs-16;
+            text-transform: uppercase;
+            font-family: $main-font-bold;
+        }
+
+        img {
+            width: 180px;
+            height: 220px;
+            box-shadow: 0 15px 21px 1px $dark-30;
+            border-radius: 1rem;
+        }
+    }
+    &__form {
+        width: 77%;
+    }
+}

@@ -1,15 +1,12 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { AppleOutlined, AndroidOutlined, FacebookOutlined, TwitterOutlined } from "@ant-design/icons"
 import { NavLink } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { getAllFilmInfoAction } from '../../../../redux/actions/QuanLyPhimAction';
 
 export default function Footer() {
-    const { cinemaSystem } = useSelector(state => state.QuanLyRapReducer);
-    const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(getAllFilmInfoAction())
-    }, [])
+    let cinemaSystem = []
+    if(localStorage.getItem('CinemaSystem')) {
+        cinemaSystem = JSON.parse(localStorage.getItem('CinemaSystem'))
+    }
 
     const renderPartner = () => {
         return cinemaSystem?.map((item, index) => {
@@ -39,6 +36,7 @@ export default function Footer() {
                         <div>
                             {renderPartner()}
                             {renderPartner()}
+                            
                         </div>
                     </div>
                     <div className="footer__item">

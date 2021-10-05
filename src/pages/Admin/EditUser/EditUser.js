@@ -1,17 +1,16 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import {
     Form,
     Input,
-    message,
     InputNumber,
-
 } from 'antd';
 import { useFormik } from 'formik';
-import * as Yup from "yup"
 import { useDispatch, useSelector } from 'react-redux'
 import { GROUPID } from '../../../utils/setting';
 import { Select } from 'antd'
-import { addUserAction, editUserAction, updateUserAction } from '../../../redux/actions/QuanLyNguoiDungAction';
+import { editUserAction, updateUserAction } from '../../../redux/actions/QuanLyNguoiDungAction';
+import * as Yup from "yup"
+
 const { Option } = Select;
 
 
@@ -46,23 +45,9 @@ export default function EditUser(props) {
 
         }),
         onSubmit: (values) => {
-            console.log(values)
             dispatch(updateUserAction(values))
-            success()
         }
     })
-
-    /** For Message */
-    const success = () => {
-        message
-            .loading({
-                content: 'Tiến hành cập nhật người dùng',
-            }, 1.5)
-            .then(() => message.success({
-                content: 'Cập nhật người dùng hoàn tất',
-            }, 1.5))
-    };
-
 
     const handleSelectChange = (values) => {
         formik.setFieldValue("maLoaiNguoiDung", values);

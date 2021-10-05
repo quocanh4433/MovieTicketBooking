@@ -2,7 +2,7 @@ import { GROUPID } from "../utils/setting.js";
 import { baseService } from "./baseService";
 
 export class QuanLyRapService extends baseService {
-    constructor () {
+    constructor() {
         super()
     }
     getCinemaInfo = () => {
@@ -12,6 +12,15 @@ export class QuanLyRapService extends baseService {
     getCinemaShowtime = (filmID) => {
         return this.get(`/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${filmID}`)
     }
+
+    /** Use for create showtime */
+    getTheaterSystem = () => {
+        return this.get(`/api/QuanLyRap/LayThongTinHeThongRap`)
+    }
+
+    getTheaterCluster = (theaterSystemID) => {
+        return this.get(`/api/QuanLyRap/LayThongTinCumRapTheoHeThong?maHeThongRap=${theaterSystemID}`)
+    }
 }
 
-export const quanLyRapService = new QuanLyRapService () 
+export const quanLyRapService = new QuanLyRapService()

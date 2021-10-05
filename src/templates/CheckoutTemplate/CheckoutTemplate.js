@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react'
 import { Route } from 'react-router'
 import { useSelector } from 'react-redux';
-import HeaderCheckout from './HeaderCheckout/HeaderCheckout';
 import { Redirect } from 'react-router-dom'
 import { USER_LOGIN } from '../../utils/setting';
+import HeaderCheckout from './HeaderCheckout/HeaderCheckout';
 
 
 export default function CheckoutTemplate(props) {

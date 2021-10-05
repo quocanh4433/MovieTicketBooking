@@ -19,7 +19,6 @@ export default function Login() {
         },
     })
 
-
     return (
         <section className="form" >
             <CloseCircleOutlined className="form__btnClose" onClick={() => {

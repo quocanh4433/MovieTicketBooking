@@ -13,76 +13,76 @@ const stateDefault = {
     lstUserComment: [
         {
             id: 1,
-            name: "Nam",
+            name: "Như",
             like: 5,
             score: 4.5,
-            comment: "Bộ phim có chất lượng hành động tốt, cảnh quay đep.",
+            comment: "Bộ phim có chất lượng hành động tốt, cảnh quay đẹp.",
             avatar: "https://i.pravatar.cc?u=nam",
             day: "2021-8-3"
         },
 
         {
             id: 2,
-            name: "Hoàng",
+            name: "Nam",
             like: 7,
             score: 3,
-            comment: "Bộ phim có chất lượng hành động tốt, cảnh quay đep.",
+            comment: "Bộ phim có chất lượng hành động tốt, cảnh quay đẹp.",
             avatar: "https://i.pravatar.cc?u=hoang",
             day: "2021-8-6"
         },
 
         {
             id: 3,
-            name: "An",
+            name: "Phong",
             like: 12,
             score: 2,
-            comment: "Bộ phim có chất lượng hành động tốt, cảnh quay đep.",
+            comment: "Bộ phim có chất lượng hành động tốt, cảnh quay đẹp.",
             avatar: "https://i.pravatar.cc?u=an",
             day: "2021-8-9"
         },
 
         {
             id: 4,
-            name: "Định",
+            name: "hoàng",
             like: 45,
             score: 3,
-            comment: "Bộ phim có chất lượng hành động tốt, cảnh quay đep.",
+            comment: "Bộ phim có chất lượng hành động tốt, cảnh quay đẹp.",
             avatar: "https://i.pravatar.cc?u=dinh",
             day: "2021-20-8"
         },
         {
             id: 5,
-            name: "Thoại",
+            name: "Linh",
             like: 23,
             score: 4,
-            comment: "Bộ phim có chất lượng hành động tốt, cảnh quay đep.",
+            comment: "Bộ phim có chất lượng hành động tốt, cảnh quay đẹp.",
             avatar: "https://i.pravatar.cc?u=thoai",
             day: "2021-8-23"
         },
         {
             id: 6,
-            name: "Nhã",
+            name: "Vinh",
             like: 27,
             score: 2.5,
-            comment: "Bộ phim có chất lượng hành động tốt, cảnh quay đep.",
+            comment: "Bộ phim có chất lượng hành động tốt, cảnh quay đẹp.",
             avatar: "https://i.pravatar.cc?u=nha",
             day: "2021-26-8"
         },
         {
             id: 6,
-            name: "Bích",
+            name: "Sang",
             like: 23,
             score: 4,
-            comment: "Bộ phim có chất lượng hành động tốt, cảnh quay đep.",
+            comment: "Bộ phim có chất lượng hành động tốt, cảnh quay đẹp.",
             avatar: "https://i.pravatar.cc?u=bich",
             day: "2021-9-1"
         },
         {
             id: 7,
-            name: "Trung",
+            name: "Hùng",
             like: 12,
             score: 2,
-            comment: "Bộ phim có chất lượng hành động tốt, cảnh quay đep.",
+            comment: "Bộ phim có chất lượng hành động tốt, cảnh quay đẹp.",
             avatar: "https://i.pravatar.cc?u=trung",
             day: "2021-9-2"
         },
@@ -91,7 +91,7 @@ const stateDefault = {
             name: "Phước",
             like: 3,
             score: 4.5,
-            comment: "Bộ phim có chất lượng hành động tốt, cảnh quay đep.",
+            comment: "Bộ phim có chất lượng hành động tốt, cảnh quay đẹp.",
             avatar: "https://i.pravatar.cc?u=phuoc",
             day: "2021-9-18"
         },
@@ -100,7 +100,7 @@ const stateDefault = {
             name: "Đức",
             like: 3,
             score: 3,
-            comment: "Bộ phim có chất lượng hành động tốt, cảnh quay đep.",
+            comment: "Bộ phim có chất lượng hành động tốt, cảnh quay đẹp.",
             avatar: "https://i.pravatar.cc?u=duc",
             day: "2021-9-19"
         },

@@ -26,6 +26,14 @@
         justify-content: space-evenly;
         margin-bottom: 3rem;
     }
+
+    @include responsive(576) {
+        font-size: $fs-18 !important;
+    }
+
+    @include responsive(376) {
+        font-size: $fs-16 !important;
+    }
 }
 .title-active {
     background: linear-gradient(to right, $orange-1 50% , $orange-3);

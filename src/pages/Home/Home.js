@@ -1,17 +1,16 @@
 import React, { Fragment, useEffect, useState } from "react";
-import Carousel from "../../components/Carousel/Carousel";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllFilmInfoAction, getBannerAction } from "../../redux/actions/QuanLyPhimAction";
-import Slider from "react-slick";
-import ShowtimeBar from "../../components/ShowtimeBar/ShowtimeBar";
-import MultipleRowCarousel from "../../components/MultiplerowCarousel/MultipleRowCarousel";
-import ParallelCarousel from "../../components/ParallelCarousel/ParallelCarousel";
 import { NavLink } from "react-router-dom";
 import { getCinemaInfoAction } from "../../redux/actions/QuanLyRapAction";
-import moment from 'moment';
 import { Tabs, BackTop } from 'antd';
 import { VerticalAlignTopOutlined } from "@ant-design/icons"
-
+import Carousel from "../../components/Carousel/Carousel";
+import moment from 'moment';
+import Slider from "react-slick";
+import MultipleRowCarousel from "../../components/MultiplerowCarousel/MultipleRowCarousel";
+import ParallelCarousel from "../../components/ParallelCarousel/ParallelCarousel";
+import BookingTicketBar from "../../components/BookingTicketBar/BookingTicketBar";
 
 const { TabPane } = Tabs;
 
@@ -27,7 +26,7 @@ function ShowtimeHome(props) {
     const { tabPosition } = state;
 
     useEffect(() => {
-        window.scrollTo(0,0)
+        window.scrollTo(0, 0)
     }, [])
 
     window.onload = () => {
@@ -42,7 +41,7 @@ function ShowtimeHome(props) {
             })
         }
     }
-    
+
     window.onresize = () => {
         let widthScreen = window.innerWidth
         if (widthScreen <= 992) {
@@ -57,69 +56,75 @@ function ShowtimeHome(props) {
     }
 
     const renderCinemaSystem = () => {
-        return cinemaSystem?.map((singleSystem, indexTab) => {
-            return (
-                <TabPane
-                    defaultActiveKey="1"
-                    tab={<img className="cinema-brand" src={singleSystem.logo} alt={singleSystem.tenHeThongRap} />}
-                    key={indexTab}
-                >
-                    <Tabs tabPosition={tabPosition}>
-                        {singleSystem.lstCumRap?.slice(0, 7).map((cinema, indexTabPane) => {
-                            return (
-                                <TabPane
-                                    tab={
-                                        <div className="cinema-location">
-                                            <img src={cinema.hinhAnh} alt="brandlogo" />
-                                            <div>
-                                                <h3>{cinema.tenCumRap.length  > 20 ? cinema.tenCumRap.substr(0, 23) + ' ...' : cinema.tenCumRap}</h3>
-                                                <h4>{cinema.diaChi.length > 20 ? cinema.diaChi.substr(0, 23) + ' ...' : cinema.diaChi}</h4>
-                                                {/* <NavLink to="/" >[Chi tết]</NavLink> */}
-                                            </div>
-                                        </div>
-                                    }
-                                    key={indexTabPane}
-                                    defaultActiveKey="1"
-                                >
-                                    {/* List of detail info film */}
-                                    {cinema.danhSachPhim?.map((film, indexC) => {
-                                        return <div className="cinema-showtime" key={indexC}>
-                                            <div className="cinema-showtime-info">
-                                                <img src={film.hinhAnh} alt={film.tenPhim} />
-                                                <div>
-                                                    <h3>{film.tenPhim}</h3>
-                                                    <div className="c-review">
-                                                        <span className="c-review__raiting">PG-13</span>
-                                                        <p className="c-review__score">
-                                                            <span>8.0</span>
-                                                            <span>IMDb</span>
-                                                        </p>
-                                                    </div>
-                                                    <figure>
-                                                        <img src="/images/common/4DX.jpg" alt="4DX" />
-                                                    </figure>
-                                                </div>
-                                            </div>
-                                            <div className="cinema-showtime-time">
-                                                {film.lstLichChieuTheoPhim?.slice(0, 10).map((time, indexS) => {
-                                                    return (
+        return (
+            <Tabs defaultActiveKey="1" tabPosition={tabPosition} className="c-multipletabs__wrapper" >
+                {
+                    cinemaSystem?.map((singleSystem, indexTab) => {
+                        return (
+                            <TabPane
+                                defaultActiveKey="1"
+                                tab={<img className="cinema-brand" src={singleSystem.logo} alt={singleSystem.tenHeThongRap} />}
+                                key={indexTab}
+                            >
+                                <Tabs tabPosition={tabPosition}>
+                                    {singleSystem.lstCumRap?.slice(0, 7).map((cinema, indexTabPane) => {
+                                        return (
+                                            <TabPane
+                                                tab={
+                                                    <div className="cinema-location">
+                                                        <img src={cinema.hinhAnh} alt="brandlogo" />
                                                         <div>
-                                                            <NavLink to={`/checkout/${time.maLichChieu}`} key={indexS}>
-                                                                {moment(time.ngayChieuGioChieu).format('hh:mm A')}
-                                                            </NavLink>
+                                                            <h3>{cinema.tenCumRap.length > 20 ? cinema.tenCumRap.substr(0, 23) + ' ...' : cinema.tenCumRap}</h3>
+                                                            <h4>{cinema.diaChi.length > 20 ? cinema.diaChi.substr(0, 23) + ' ...' : cinema.diaChi}</h4>
+                                                            {/* <NavLink to="/" >[Chi tết]</NavLink> */}
                                                         </div>
-                                                    )
+                                                    </div>
+                                                }
+                                                key={indexTabPane}
+                                                defaultActiveKey="1"
+                                            >
+                                                {/* List of detail info film */}
+                                                {cinema.danhSachPhim?.slice(0,15).map((film, indexC) => {
+                                                    return <div className="cinema-showtime" key={indexC}>
+                                                        <div className="cinema-showtime-info">
+                                                            <img src={film.hinhAnh} alt={film.tenPhim} />
+                                                            <div>
+                                                                <h3>{film.tenPhim}</h3>
+                                                                <div className="c-review">
+                                                                    <span className="c-review__raiting">PG-13</span>
+                                                                    <p className="c-review__score">
+                                                                        <span>8.0</span>
+                                                                        <span>IMDb</span>
+                                                                    </p>
+                                                                </div>
+                                                                <figure>
+                                                                    <img src="/images/common/4DX.jpg" alt="4DX" />
+                                                                </figure>
+                                                            </div>
+                                                        </div>
+                                                        <div className="cinema-showtime-time">
+                                                            {film.lstLichChieuTheoPhim?.slice(0, 10).map((time, indexS) => {
+                                                                return (
+                                                                    <div>
+                                                                        <NavLink to={`/checkout/${time.maLichChieu}`} key={indexS}>
+                                                                            {moment(time.ngayChieuGioChieu).format('hh:mm A')}
+                                                                        </NavLink>
+                                                                    </div>
+                                                                )
+                                                            })}
+                                                        </div>
+                                                    </div>
                                                 })}
-                                            </div>
-                                        </div>
+                                            </TabPane>
+                                        )
                                     })}
-                                </TabPane>
-                            )
-                        })}
-                    </Tabs>
-                </TabPane>
-            )
-        })
+                                </Tabs>
+                            </TabPane>
+                        )
+                    })
+                }
+            </Tabs>
+        )
     }
 
     return (
@@ -127,11 +132,7 @@ function ShowtimeHome(props) {
             <div className="c-primary__title c-primary__title--center">
                 <h3 className="title-active" >chọn suất chiếu</h3>
             </div>
-            <Tabs defaultActiveKey="1" tabPosition={tabPosition} className="c-multipletabs__wrapper" >
-
-                {renderCinemaSystem()}
-
-            </Tabs>
+            {renderCinemaSystem()}
         </div>
     )
 }
@@ -355,14 +356,14 @@ export default function (props) {
     return (
         <section className="home">
 
-            {/* Main carousel */}
+            {/* Main carousel Banner */}
             <section>
                 <Carousel arrBanner={arrBanner} />
             </section>
 
             {/* Select showtime bar */}
             <section>
-                <ShowtimeBar />
+                <BookingTicketBar />
             </section>
 
             {/* Multiplerow-carousel */}

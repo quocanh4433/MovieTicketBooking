@@ -1,0 +1,186 @@
+.miniAvartar__wrapper--info {
+    display: flex;
+    align-items: center;
+    position: relative;
+    color: $light;
+
+    p {
+        font-size: $fs-16;
+        margin: 0;
+        text-transform: capitalize;
+    }
+
+    .avatar {
+        display: flex;
+        position: relative;
+        width: 4.1rem;
+        height: 4.1rem;
+        margin: 0 0rem 0 1.5rem;
+
+        border-radius: 50%;
+        z-index: 1;
+
+        & > img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            -webkit-object-fit: cover;
+            border-radius: inherit;
+        }
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+
+            background-image: linear-gradient(to right, $orange-1, $orange-3);
+            border-radius: inherit;
+            transform: scale(1.1);
+            z-index: -1;
+        }
+    }
+
+    /* arrowDown of antDesign  */
+    span {
+        font-size: $fs-18;
+        cursor: pointer;
+        padding: 1rem;
+        outline: none;
+    }
+
+    .submenu {
+        display: flex;
+        flex-direction: column;
+
+        position: absolute;
+        top: 4.8rem;
+        right: 0;
+
+        opacity: 0;
+        pointer-events: none;
+        visibility: hidden;
+
+        width: 180px;
+        padding: 1rem;
+        border-radius: 1rem;
+
+        box-shadow: 2px 4px 6px $dark-30;
+        background-color: $orange-4;
+        transition: 0.1s;
+        z-index: 10;
+
+        a {
+            display: flex;
+            align-items: center;
+            padding: 4px 0 !important;
+            margin-bottom: 5px;
+            transition: all 0.3s;
+
+            span {
+                color: $gray-2;
+                font-size: $fs-14;
+                font-family: $main-font-bold;
+                line-height: 1;
+            }
+
+            /* icon of antDesign  */
+            .anticon {
+                color: $orange-2;
+                font-size: $fs-18;
+            }
+
+            &:hover {
+                background-color: $orange-5;
+                color: $light;
+                border-radius: 7px;
+
+                span {
+                    color: $light;
+                }
+
+                .anticon {
+                    color: $light;
+                }
+            }
+        }
+
+        button {
+            display: flex;
+            align-items: center;
+
+            padding: 4px 0;
+            transition: all 0.3s;
+            line-height: 1;
+
+            /* icon of antDesign  */
+            .anticon {
+                color: $orange-2;
+                font-size: $fs-18;
+            }
+
+            span {
+                color: $gray-2;
+                font-size: $fs-14;
+                font-family: $main-font-bold;
+            }
+
+            &:hover {
+                background-color: $orange-5;
+                color: $light;
+                border-radius: 7px;
+
+                span {
+                    color: $light;
+                }
+
+                .anticon {
+                    color: $light;
+                }
+            }
+        }
+    }
+
+    .submenu-active {
+        opacity: 1;
+        pointer-events: all;
+        visibility: visible;
+    }
+
+    @include responsive(992) {
+        display: none;
+    }
+}
+
+.miniAvartar__wrapper--signin {
+    
+    .signup {
+        padding-right: $d-1;
+        margin-right: $d-1;
+
+        font-family: $main-font-bold;
+        font-size: $fs-12;
+        text-transform: uppercase;
+
+        border-right: 1px solid $light;
+        color: $light;
+        transition: 0.3s;
+
+        &:hover {
+            color: $orange-2;
+        }
+
+        @include responsive(992) {
+            display: none;
+        }
+    }
+
+    .signin {
+        font-size: $fs-12;
+    }
+
+    @include responsive(992) {
+        display: none;
+    }
+}

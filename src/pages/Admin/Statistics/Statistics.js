@@ -1,18 +1,15 @@
-
-
-import React, { useState, useEffect, Fragment } from 'react';
+import React from 'react';
 import { Column, Line } from '@ant-design/charts';
 import { useSelector } from 'react-redux';
 import { Tabs } from 'antd';
 import { FlagOutlined, RiseOutlined, FallOutlined, UsergroupDeleteOutlined, UserSwitchOutlined } from '@ant-design/icons'
+
 const { TabPane } = Tabs;
 
 
 export default function Statistics() {
     const { showtimeDetail } = useSelector(state => state.QuanLyDatVeReducer)
     let { danhSachGhe } = showtimeDetail
-    console.log(showtimeDetail)
-
 
     /** For Column Chart */
     const ColumnChart: React.FC = () => {
@@ -258,23 +255,14 @@ export default function Statistics() {
             },
             legend: { position: 'top' },
             smooth: true,
-            animation: {
-                // appear: {
-                //     animation: 'path-in',
-                //     duration: 40000,
-                // },
-            },
         };
         return <Line {...configLineChart} />;
     };
 
     /** For Tabs */
-    function callback(key) {
-        console.log(key);
-    }
+    const callback = () => {}
 
     return (
-
         <Tabs defaultActiveKey="1" onChange={callback} className="statistics">
             <TabPane tab={<h4>01. THỐNG KÊ DOANH THU</h4>} key="1">
                 <div className="chartInfo">

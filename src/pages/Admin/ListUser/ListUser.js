@@ -1,8 +1,7 @@
 import React, { Fragment, useEffect } from 'react'
-import { Table, Input, Button, notification, message } from 'antd';
+import { Table, Input, Button, notification } from 'antd';
 import { PlusCircleOutlined, EditOutlined, DeleteOutlined, CloseCircleOutlined } from "@ant-design/icons"
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteFilmAction } from '../../../redux/actions/QuanLyPhimAction';
 import { NavLink } from 'react-router-dom'
 import { history } from '../../../App';
 import { deleteUserAction, getAllUserAction } from '../../../redux/actions/QuanLyNguoiDungAction';
@@ -63,7 +62,6 @@ export default function ListUser() {
                 return -1;
             },
             width: "17%"
-
         },
         {
             title: 'Email',
@@ -78,7 +76,6 @@ export default function ListUser() {
                 return -1;
             },
             width: "20%"
-
         },
         {
             title: 'Số ĐT',
@@ -93,7 +90,6 @@ export default function ListUser() {
                 return -1;
             },
             width: "10%"
-
         },
         {
             title: 'Loại',
@@ -110,7 +106,6 @@ export default function ListUser() {
             ],
             onFilter: (value, record) => record.maLoaiNguoiDung.indexOf(value) === 0,
             width: "8%"
-
         },
         {
             title: 'Hành Động',
@@ -120,9 +115,7 @@ export default function ListUser() {
                     <Fragment>
                         <NavLink key={1} to={`/admin/edituser/${user.taiKhoan}`} className="c-btn c-btn-edit"><EditOutlined /></NavLink>
                         <span className="c-btn c-btn-delete" style={{ cursor: 'pointer' }} key={2}><DeleteOutlined onClick={() => {
-
                             openNotification(user.taiKhoan);
-
                         }} /> </span>
                     </Fragment>
                 )
@@ -132,26 +125,20 @@ export default function ListUser() {
         },
     ];
 
-
     /** For Notification Delete user */
     const close = () => { };
 
     const openNotification = (account) => {
         const key = `open${Date.now()}`;
         const btn = (
-            <Button onClick={async () => {
-
-                await notification.close();
-
-                /** Confirm delete film */
-                await dispatch(deleteUserAction(account));
-                success();
-
+            <Button onClick={() => {
+                notification.close();
+                dispatch(deleteUserAction(account));
             }}>XÁC NHẬN</Button>
         );
         notification.open({
             maxCount: 3,
-            message: 'Bạn có chắc muốn xóa phim này',
+            message: 'Bạn có chắc muốn xóa người dùng này',
             description: "",
             btn,
             key,
@@ -159,19 +146,7 @@ export default function ListUser() {
             icon: <div className="iconWarning"><CloseCircleOutlined /></div>,
         });
     };
-
-    /** For Message */
-    const success = () => {
-        message
-            .loading({
-                content: 'Tiến hành xóa người dùng',
-            }, 1.5)
-            .then(() => message.success({
-                content: 'Xóa người dùng hoàn tất',
-            }, 1.5))
-    };
-
-
+    
     return (
         <section className="list">
             <h3 className="c-admin-title">danh sách người dùng</h3>
@@ -182,10 +157,7 @@ export default function ListUser() {
                     }}><PlusCircleOutlined />Thêm người dùng</button>
                 </div>
                 <div className="admin-searchbar">
-                    <Search placeholder="Thông tin cần tìm ..." onSearch={(value) => {
-                        console.log(value)
-                    }
-                    } enterButton />
+                    <Search placeholder="Thông tin cần tìm ..." onSearch={(value) => { dispatch(getAllUserAction(value)) }} enterButton />
                 </div>
             </div>
             <Table columns={columns} dataSource={data} />

@@ -1,26 +1,184 @@
 import React, { Fragment, useEffect, useState } from 'react'
-import { Statistic, Col, Radio, Modal } from 'antd';
-import { CloseOutlined, UserOutlined } from "@ant-design/icons";
+import { Statistic, Col, Radio, Modal, Button, notification } from 'antd';
+import { CloseOutlined, UserOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from 'react-redux'
 import { clearSeatOvertimeAction, getShowtimeDetailAction, selectSeatRealtimeAction, selectSeatRestUserAction } from '../../redux/actions/QuanLyDatVeAction';
-import _ from "lodash"
-import ModalTicket from '../../components/ModalTicket/ModalTicket';
 import { getCinemaInfoAction } from '../../redux/actions/QuanLyRapAction';
 import { connection } from '../..';
 import { history } from '../../App';
+import { BookingTicketInfo } from '../../_core/models/BookingTicketInfo';
+import { bookingTicketAction } from '../../redux/actions/QuanLyDatVeAction';
+import _ from "lodash"
+
+//=====================================
+// MODAL TICKET
+//=====================================
+function ModalTicket(props) {
+
+    const { showtimeDetail } = useSelector(state => state.QuanLyDatVeReducer)
+    const dispatch = useDispatch()
+    const [state, setState] = useState({
+        loading: false,
+        visible: false,
+    })
+    let { thongTinPhim } = showtimeDetail
+    let { showtimeID, lstSeatSelecting, payment } = props
+    let { loading, visible } = state
+    let showtimeIDNumber = Number(showtimeID)
+
+    const showModal = () => {
+        setState({ visible: true, });
+    };
+
+    /* For Modal */
+    const handleOk = () => {
+        setState({ loading: false, visible: false });
+        /* Post ticket info after booking successful */
+        const bookingTicketInfo = new BookingTicketInfo()
+        bookingTicketInfo.maLichChieu = showtimeIDNumber
+        bookingTicketInfo.danhSachVe = lstSeatSelecting
+        dispatch(bookingTicketAction(bookingTicketInfo))
+    };
+
+
+    /** For Message notice when user booking but not select seat */
+    const close = () => { };
+
+    const openNotification = () => {
+        const key = `open${Date.now()}`;
+        const btn = (
+            <Button type="primary" onClick={() => notification.close(key)}>XÁC NHẬN</Button>
+        );
+        notification.open({
+            maxCount: 3,
+            message: 'Bạn vui lòng chọ ghế trước khi đặt vé',
+            description: "",
+            btn,
+            key,
+            onClose: close,
+        });
+    };
+
+    const renderPayment = (payment) => {
+        if (payment === 1) {
+            return (
+                <Fragment>
+                    Thẻ ATM Nội Địa
+                    <img src="/images/common/atmcard.png" alt="atmcard" />
+                </Fragment>
+            )
+        } else if (payment === 2) {
+            return <img src="/images/common/momo.jpg" alt="momo" />
+        } else if (payment === 3) {
+            return <img src="/images/common/zalopay.jpg" alt="zalopay" />
+        } else {
+            return <img className="credit-card" src="/images/common/visa-card.png" alt="credit-card" />
+        }
+    }
+
+    return (
+        <Fragment>
+            {/* Button Booking ticket  */}
+            <button className="c-main-btn c-btn-bookingticket" onClick={() => {
+                lstSeatSelecting.length !== 0 ? showModal() : openNotification()
+            }}>Đặt vé</button>
+
+            {/* Modal confirm Booking ticket  */}
+            <Modal
+                centered
+                visible={visible}
+                onOk={handleOk}
+                onCancel={() => { setState({ visible: false }); }}
+                className="modal__ticket"
+                closeIcon={<CloseCircleOutlined />}
+                title="XÁC NHẬN THÔNG TIN ĐẶT VÉ"
+                footer={[
+                    <Button key="back" onClick={() => { history.push("/home") }}>
+                        TRANG CHỦ
+                    </Button>,
+                    <Button key="submit" type="primary" loading={loading} onClick={handleOk}>
+                        XÁC NHẬN
+                    </Button>,
+                ]}
+            >
+                <div className="modal__ticket-confirm">
+
+                    <div className="ticket__img">
+                        <figure>
+                            <img src={thongTinPhim?.hinhAnh} alt="..." />
+                        </figure>
+                        <div>
+                            <h3>{thongTinPhim?.tenPhim}</h3>
+                            <div className="c-review">
+                                <span className="c-review__raiting">PG-13</span>
+                                <p className="c-review__score">
+                                    <span>8.0</span>
+                                    <span>IMDb</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="ticket__info">
+                        <div className="info__group">
+                            <p>Tên cụm rạp</p>
+                            <p>{thongTinPhim?.tenCumRap}</p>
+                        </div>
+
+                        <div className="info__group">
+                            <p>Số rạp</p>
+                            <p>{thongTinPhim?.tenRap}</p>
+                        </div>
+
+                        <div className="info__group">
+                            <p>Suất chiếu</p>
+                            <p>{thongTinPhim?.gioChieu}</p>
+                        </div>
+
+                        <div className="info__group">
+                            <p>SỐ GHẾ</p>
+                            <div className="listSeatConfirm">
+                                {_.sortBy(lstSeatSelecting, ['maGhe'])?.map((seat, index) => {
+                                    return <span key={index}>{seat.stt}</span>
+                                })}
+                            </div>
+                        </div>
+
+                        <div className="info__group">
+                            <p>hình thứ thanh toán </p>
+                            <p>{renderPayment(payment)}</p>
+                        </div>
+
+                        <div className="info__group">
+                            <p>Tổng cộng</p>
+                            <p className="total">{
+                                lstSeatSelecting?.reduce((total, seat, index) => {
+                                    return total += seat.giaVe
+                                }, 0).toLocaleString()
+                            }</p>
+                        </div>
+                    
+                    </div>
+                </div>
+            </Modal>
+        </Fragment>
+    )
+}
+
+
+//=====================================
+// MAIN COMPONENT
+//=====================================
 
 export default function Checkout(props) {
     const { showtimeDetail, lstSeatSelecting, lstSeatSelectRealTime } = useSelector(state => state.QuanLyDatVeReducer)
     const { cinemaSystem } = useSelector(state => state.QuanLyRapReducer);
     const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer)
-    const dispatch = useDispatch();
     const { Countdown } = Statistic;
     const [valueRadio, setValueRadio] = useState(1);
+    const dispatch = useDispatch();
     let { thongTinPhim, danhSachGhe } = showtimeDetail
 
-    console.log(danhSachGhe)
-
-    
     useEffect(() => {
         let { id } = props.match.params;
         dispatch(getShowtimeDetailAction(id))
@@ -75,7 +233,7 @@ export default function Checkout(props) {
 
     const onChangeCountDown = (val) => {
         if (4.95 * 1000 < val && val < 5 * 1000) {
-            console.log('changed!');
+
         }
     }
 
@@ -126,6 +284,7 @@ export default function Checkout(props) {
             let classSeatSelecting = "";
             let classSeatUserSelected = "";
             let classSeatSelectRealtime = "";
+
             let indexSeatSelecting = lstSeatSelecting?.findIndex(seat => seat.maGhe === singleSeat.maGhe)
             let indexSeatSelectRealtime = lstSeatSelectRealTime?.findIndex(seat => seat.maGhe === singleSeat.maGhe)
             if (singleSeat.loaiGhe === "Vip") {
@@ -172,7 +331,7 @@ export default function Checkout(props) {
                         })
                     }
                 </Fragment>
-            ) 
+            )
         })
     }
 
@@ -297,8 +456,8 @@ export default function Checkout(props) {
                         />
                     </div>
                 </div>
+            
             </div>
-
         </section>
     )
 }

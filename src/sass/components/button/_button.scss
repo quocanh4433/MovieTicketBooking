@@ -1,9 +1,9 @@
 .c-main-btn {
-    display: inline-flex;
+    display: inline-flex !important;
     align-items: center;
 
     padding: 1rem 1.5rem;
-    border-radius: 1rem;
+    border-radius: 8px;
 
     font-family: $main-font-bold;
     font-size: $fs-14;
@@ -11,7 +11,7 @@
     line-height: 1.4;
 
     color: $light;
-    background-image: linear-gradient(to right, $orange-1 0% , $orange-3 60%, $orange-1 100%);
+    background-image: linear-gradient(to right, $orange-1 0%, $orange-3 60%, $orange-1 100%);
     box-shadow: 2px 4px 6px rgba(255, 107, 0, 0.34);
     background-size: 200% auto;
 
@@ -21,6 +21,18 @@
         background-position: right;
         color: $light !important;
     }
+
+    @include responsive(576) {
+        font-size: $fs-12;
+        padding: 5px 8px;
+        border-radius: 6px;
+    }
+}
+
+.c-main-btn--bgdark {
+    background-image: linear-gradient(to right, $gray-3 0%, $gray-4 60%, $gray-3 100%) !important;
+    box-shadow: 2px 4px 6px $gray-70 !important;
+    cursor: no-drop;
 }
 
 .c-main-btn--paddingsmall {
@@ -30,8 +42,12 @@
 }
 
 .icon-play span {
-    font-size: $fs-22 ;
+    font-size: $fs-22;
     margin-right: 0.8rem;
+
+    @include responsive(768) {
+        font-size: $fs-18;
+    }
 }
 
 .c-secondary-btn {
@@ -70,7 +86,7 @@
 }
 
 .c-btn-add {
-    transition:  all 0.3s;
+    transition: all 0.3s;
 
     button {
         display: flex;
@@ -95,6 +111,20 @@
     }
 }
 
+/** Custom button booking ticket */
+.c-btn-bookingticket {
+    @include responsive(768) {
+        position: fixed ;
+        bottom: 0;
+        right: 0;
+        display: block;
+        padding: 2rem 0 !important;
+
+        font-size: $fs-20;
+        letter-spacing: 5px;
+    }
+}
+
 /** Custom button admin tempalte - list film */
 
 .c-btn {
@@ -107,17 +137,14 @@
     align-items: center;
     margin-right: 4px;
     font-size: $fs-14;
-
 }
 
 .c-btn-edit {
     background-color: $blue;
-
 }
 
 .c-btn-calendar {
     background-color: $green;
-
 }
 
 .c-btn-delete {

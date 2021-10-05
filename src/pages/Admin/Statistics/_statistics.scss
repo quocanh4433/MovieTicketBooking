@@ -3,7 +3,6 @@
         display: flex;
         align-items: center;
         justify-content: space-evenly;
-
         margin: 1.5rem 0 2.5rem;
 
         &__item {
@@ -19,11 +18,12 @@
 
             &-content {
                 h5 {
-                    color: $dark;
+                    margin: 0;
                     text-transform: uppercase;
                     font-size: $fs-12 !important;
-                    margin: 0;
+                    color: $dark;
                 }
+
                 span {
                     font-size: $fs-22;
                     text-transform: uppercase;

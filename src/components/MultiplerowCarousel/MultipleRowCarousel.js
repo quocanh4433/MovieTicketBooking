@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Slider from "react-slick";
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { GET_FILM_COMINGSOON, GET_FILM_NOWSHOWING } from "../../redux/types/QuanLyPhimType";
+import Slider from "react-slick";
 import ModalTrailer from "../ModalTrailer/ModalTrailer";
 
 export default function MultipleRowCarousel(props) {

@@ -1,16 +1,15 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import { CustomCard } from '@tsamantanis/react-glassmorphism'
-import '@tsamantanis/react-glassmorphism/dist/index.css'
-import { Progress, Rate, Tabs, Modal  } from 'antd';
+import { Progress, Rate, Tabs, Modal } from 'antd';
 import { PlayCircleOutlined, LikeOutlined, CloseCircleOutlined } from '@ant-design/icons'
 import { useSelector, useDispatch } from 'react-redux';
 import { ADD_COMMENT, COUNT_LIKE } from '../../redux/types/QuanLyNguoiDungType';
-// import ModalComment from '../../components/ModalComment/ModalComment';
-import _ from "lodash"
-import moment from 'moment'
 import { NavLink } from 'react-router-dom';
 import { getCinemaShowtimeAction } from '../../redux/actions/QuanLyRapAction';
 import ModalTrailer from '../../components/ModalTrailer/ModalTrailer';
+import _ from "lodash"
+import moment from 'moment'
+import '@tsamantanis/react-glassmorphism/dist/index.css'
 
 
 
@@ -27,7 +26,7 @@ function ShowtimeDetail(props) {
         tabPosition: 'left',
     });
     const { tabPosition } = state;
-    
+
     useEffect(() => {
         let { filmID } = props;
         dispatch(getCinemaShowtimeAction(filmID))
@@ -150,23 +149,15 @@ function ModalComment() {
     const [start, setStart] = useState(0)
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        window.onscroll = null;
-       
-    }, [])
-
-    const clearScroll = () => {
-        alert("không scroll")
-    }
-
     const showModal = (e) => {
         setIsModalVisible(true);
+        document.documentElement.style.overflow = 'hidden';
     };
 
     const handleOk = async () => {
         let today = new Date();
         let date = await today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-        
+
         let userComment = {
             id: 10,
             name: `${userLogin.taiKhoan}`,
@@ -186,7 +177,8 @@ function ModalComment() {
 
     const handleCancel = () => {
         setIsModalVisible(false);
-        setStart(0)
+        setStart(0);
+        document.documentElement.style.overflow = 'auto';
     };
 
     const handleStartRate = (value) => {
@@ -205,22 +197,20 @@ function ModalComment() {
                 <input placeholder="Bạn nghĩ gì về bộ phim này?" />
                 <Rate disabled allowHalf defaultValue={100} />
             </div>
-            <Modal
-                okText="Đăng"
-                cancelText="Hủy"
-                closeIcon={<CloseCircleOutlined />}
-                visible={isModalVisible}
-                onOk={handleOk}
-                onCancel={handleCancel}
-            >
+            <div className={isModalVisible ? "comment__modal-wrapper" : "comment__modal-wrapper-none" }>
                 <div className="comment__modal">
                     <h3>{(start * 2).toFixed(1)}</h3>
                     <div className="comment__modal-startRate">
                         <Rate allowHalf defaultValue={start} onChange={handleStartRate} />
                     </div>
                     <textarea placeholder="Bạn nghĩ gì về phim này..." name="comment" onChange={handleComment}></textarea>
+                    <div className="comment__modal-btn">
+                        <button type="button" className="btn-cancel" onClick={handleCancel}>Hủy</button>
+                        <button type='button' className="c-main-btn" onClick={handleOk}>Đăng</button>
+                    </div>
+                    <CloseCircleOutlined className="btn-close" onClick={handleCancel}/>
                 </div>
-            </Modal>
+            </div>
         </Fragment>
     )
 }
@@ -360,7 +350,7 @@ export default function (props) {
     useEffect(() => {
         let { id } = props.match.params;
         dispatch(getCinemaShowtimeAction(id))
-        // window.scrollTo(0,0)
+        window.scrollTo(0,0)
     }, [])
 
     return (
@@ -425,9 +415,7 @@ export default function (props) {
                     </div>
                 </div>
             </section>
-
-            <ModalTrailer  modal={modal} trailer={trailer} setTrailer={setTrailer} setModal={setModal} /> 
-
+            <ModalTrailer modal={modal} trailer={trailer} setTrailer={setTrailer} setModal={setModal} />
         </Fragment>
 
     )

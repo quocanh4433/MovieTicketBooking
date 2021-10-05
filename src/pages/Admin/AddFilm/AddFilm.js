@@ -7,19 +7,16 @@ import {
     Switch,
 } from 'antd';
 import { useFormik } from 'formik';
-import moment from 'moment'
 import { useDispatch } from 'react-redux'
-import http, { GROUPID } from '../../../utils/setting';
+import { GROUPID } from '../../../utils/setting';
 import { addFilmAction } from '../../../redux/actions/QuanLyPhimAction';
 import { UploadOutlined } from '@ant-design/icons'
-import { message } from 'antd';
+import moment from 'moment'
+
 
 export default function AddFilm() {
-
-    const [img, setImg] = useState("/images/common/error-img.jpg")
-    const dispatch = useDispatch()
-
-
+    const [img, setImg] = useState("/images/common/error-img.jpg");
+    const dispatch = useDispatch();
 
     const formik = useFormik({
         initialValues: {
@@ -41,33 +38,16 @@ export default function AddFilm() {
                 Đây là đối tượng browser đưa dữ liệu về backend => bảo mật hơn
             */
             let formData = new FormData()
-
             for (let key in values) {
-
                 if (key !== 'hinhAnh') {
                     formData.append(key, values[key]);
                 } else {
                     formData.append('File', values.hinhAnh, values.hinhAnh.name)
                 }
             }
-
-
             dispatch(addFilmAction(formData))
-            success()
         }
     })
-
-    /** For Message */
-    const success = () => {
-        message
-            .loading({
-                content: 'Tiến hành thêm phim',
-            }, 2.5)
-            .then(() => message.success({
-                content: 'Thêm phim hoàn tất',
-            }, 2.5))
-    };
-
 
     const handleChangePicker = (date) => {
         const dateLocal = moment(date).format("DD/MM/YYYY");
@@ -154,7 +134,6 @@ export default function AddFilm() {
                     <button type="submit" className="c-main-btn c-main-btn--paddingsmall" >Thêm Phim</button>
                 </Form.Item>
             </Form>
-
         </Fragment>
     )
 }

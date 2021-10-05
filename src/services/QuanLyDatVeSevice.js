@@ -1,10 +1,10 @@
 import { baseService } from "./baseService";
 
 export class QuanLyDatVeService extends baseService {
-    constructor () {
+    constructor() {
         super()
     }
-    
+
     getShowtimeDetail = (showtimeID) => {
         return this.get(`/api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${showtimeID}`)
     }
@@ -13,6 +13,9 @@ export class QuanLyDatVeService extends baseService {
         return this.post("/api/QuanLyDatVe/DatVe", ticketInfo)
     }
 
+    createShowtime = (showtimeInfo) => {
+        return this.post('/api/QuanLyDatVe/TaoLichChieu', showtimeInfo)
+    }
 }
 
-export const quanLyDatVeService = new QuanLyDatVeService () 
+export const quanLyDatVeService = new QuanLyDatVeService()

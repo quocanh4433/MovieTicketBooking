@@ -29,7 +29,7 @@
 
 /* Import from  Template React */
 @import "../templates/AdminTemplate/admintemplate";
-
+@import "../templates/ProfileTemplate/profiletemplate";
 
 
 /* Import Layout from  Template React */
@@ -41,18 +41,20 @@
 @import "../pages/Home/home";
 @import "../pages/Detail/detail";
 @import "../pages/Checkout/checkout";
-@import "../pages/Admin/AddFilm/addfilm";
 @import "../pages/Admin/Statistics/statistics";
+@import "../pages/Admin/CreateShowtime/createshowtime";
+@import "../pages/Profile/BookingHistory/bookinghistory";
+
 
 /* Import from Component React*/
 @import "../components/Carousel/carousel";
 @import "../components/ModalTrailer/modaltrailer";
-@import "../components/ModalComment/modalcomment";
-@import "../components/ModalTicket/modalticket";
-@import "../components/ShowtimeBar/showtimebar";
+@import "../components/BookingTicketBar/bookingticketbar";
 @import "../components/MultiplerowCarousel/multiplerow";
 @import "../components/ParallelCarousel/parallelcarousel";
 @import "../components/Loading/loading";
+@import "../components/MiniAvartar/miniavatar";
+
 
 
 

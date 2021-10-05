@@ -7,15 +7,14 @@ import {
     Switch,
 } from 'antd';
 import { useFormik } from 'formik';
-import moment from 'moment'
 import { useDispatch, useSelector } from 'react-redux'
 import { GROUPID } from '../../../utils/setting';
 import { editFilmAction, updateFilmAction } from '../../../redux/actions/QuanLyPhimAction';
 import { UploadOutlined } from '@ant-design/icons'
+import moment from 'moment'
 
 export default function EditFilm(props) {
     const { filmInfoEdit } = useSelector(state => state.QuanLyPhimReducer)
-    const [componentSize, setComponentSize] = useState('default');
     const [img, setImg] = useState("")
     const dispatch = useDispatch()
 
@@ -24,9 +23,6 @@ export default function EditFilm(props) {
         dispatch(editFilmAction(id))
     }, [])
 
-    const onFormLayoutChange = ({ size }) => {
-        setComponentSize(size);
-    };
 
     const formik = useFormik({
         /** 
@@ -59,9 +55,7 @@ export default function EditFilm(props) {
                     }
                 }
             }
-
-            console.log(values)
-            dispatch(updateFilmAction(formData))
+            dispatch(updateFilmAction(formData));
         }
     })
 
@@ -74,7 +68,6 @@ export default function EditFilm(props) {
         let file = event.target.files[0];
 
         if (file) {
-
             await formik.setFieldValue('hinhAnh', file)
 
             let reader = new FileReader();
@@ -101,12 +94,6 @@ export default function EditFilm(props) {
                 wrapperCol={{
                     span: 14,
                 }}
-                layout="horizontal"
-                initialValues={{
-                    size: componentSize,
-                }}
-                onValuesChange={onFormLayoutChange}
-                size={componentSize}
             >
                 <Form.Item className="c-form__group" label="Mã Phim">
                     <Input disabled name="maPhim" onChange={formik.handleChange} value={formik.values.maPhim} />
@@ -141,7 +128,7 @@ export default function EditFilm(props) {
                         <label for="file"> <UploadOutlined /> Choose a file</label>
                     </div>
                     {/* <input type="file" id="upload-photo" name="hinhAnh" accept="image/png, image/jpg, image/jpeg, image/gif" onChange={handleChangeFile} /> */}
-                    <img src={img === "" ? filmInfoEdit.hinhAnh : img} alt={filmInfoEdit.tenPhim} className="img-upload"  onError={(e) => { e.target.onError = null; e.target.src = `/images/common/error-img.jpg` }} />
+                    <img src={img === "" ? filmInfoEdit.hinhAnh : img} alt={filmInfoEdit.tenPhim} className="img-upload" onError={(e) => { e.target.onError = null; e.target.src = `/images/common/error-img.jpg` }} />
                 </Form.Item>
                 <Form.Item className="c-form__group" label="Chức năng">
                     <button type="submit" className="c-main-btn c-main-btn--paddingsmall" >Cập nhật</button>

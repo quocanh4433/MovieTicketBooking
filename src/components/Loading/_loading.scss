@@ -1,13 +1,15 @@
 .loading {
     position: fixed;
-    height: 100%;
-    width: 100%;
     top: 0;
     left: 0;
-    background-color: $light;
+    height: 100%;
+    width: 100%;
+    
     display: flex;
     justify-content: center;
     align-items: center;
+    
+    background-color: $light;
     z-index: 200;
 
     /** Custom spin loading */
@@ -18,6 +20,10 @@
             height: 2.3rem;
             background-color: $orange-1;
         }
+    }
+
+    @include responsive(768) {
+        
     }
 
 }

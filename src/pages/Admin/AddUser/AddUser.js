@@ -1,17 +1,15 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment } from 'react'
 import {
     Form,
     Input,
-    message,
     InputNumber,
-
 } from 'antd';
 import { useFormik } from 'formik';
-import * as Yup from "yup"
 import { useDispatch } from 'react-redux'
 import { GROUPID } from '../../../utils/setting';
 import { Select } from 'antd'
 import { addUserAction } from '../../../redux/actions/QuanLyNguoiDungAction';
+import * as Yup from "yup"
 const { Option } = Select;
 
 
@@ -40,22 +38,8 @@ export default function AddUser() {
         }),
         onSubmit: (values) => {
             dispatch(addUserAction(values))
-            success()
-
         }
     })
-
-    /** For Message */
-    const success = () => {
-        message
-            .loading({
-                content: 'Tiến hành thêm người dùng',
-            }, 1.5)
-            .then(() => message.success({
-                content: 'Thêm người dùng hoàn tất',
-            }, 1.5))
-    };
-
 
     const handleSelectChange = (values) => {
         formik.setFieldValue("maLoaiNguoiDung", values);
@@ -129,7 +113,6 @@ export default function AddUser() {
                     <button type="submit" className="c-main-btn c-main-btn--paddingsmall" >Thêm Người Dùng</button>
                 </Form.Item>
             </Form>
-
         </Fragment>
     )
 }

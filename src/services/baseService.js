@@ -1,6 +1,5 @@
 import Axios from "axios"
 import { ACCESS_TOKEN, DOMAIN, TOKEN_CYBERSOFT } from "../utils/setting.js"
-// 'Authorization': 'Bearer ' + localStorage.getItem(ACCESS_TOKEN)
 
 export class baseService {
 
@@ -11,7 +10,7 @@ export class baseService {
             data: model,
             headers: { 
                 "TokenCyberSoft": TOKEN_CYBERSOFT, 
-                "Authorization": localStorage.getItem(ACCESS_TOKEN)
+                'Authorization': 'Bearer ' + localStorage.getItem(ACCESS_TOKEN),
             },
         })
     }

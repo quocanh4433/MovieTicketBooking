@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
-import Slider from "react-slick";
 import { PlayCircleOutlined } from '@ant-design/icons'
+import Slider from "react-slick";
 import ModalTrailer from '../ModalTrailer/ModalTrailer';
 
 export default function Carousel(props) {

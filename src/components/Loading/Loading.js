@@ -13,9 +13,7 @@ export default function Loading() {
                     <div className="loading">
                         <Spin size="large"/>
                     </div>
-                ) : (
-                    ""
-                )
+                ) : ""
             }
         </Fragment>
 

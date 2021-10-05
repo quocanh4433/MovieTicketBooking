@@ -1,8 +1,20 @@
-import { quanLyPhimService } from "../../services/QuanLyPhimService"
-import http, { GROUPID } from "../../utils/setting"
-import { GET_ALL_FILM_INFO, GET_BANNER, GET_FILM_INFO_EDIT } from "../types/QuanLyPhimType"
+import { quanLyPhimService } from "../../services/QuanLyPhimService";
+import { GET_ALL_FILM_INFO, GET_BANNER, GET_FILM_INFO_EDIT } from "../types/QuanLyPhimType";
+import { message } from 'antd';
 
-export const getBannerAction =  () => {
+/** For Message */
+const success = (content, contentDone) => {
+    message
+        .loading({
+            content: content,
+        }, 2.5)
+        .then(() => message.success({
+            content: contentDone,
+        }, 2.5))
+}
+
+
+export const getBannerAction = () => {
     return async (dispatch) => {
 
         try {
@@ -11,23 +23,20 @@ export const getBannerAction =  () => {
                 type: GET_BANNER,
                 arrBanner: result.data.content,
             })
-        } catch(error) {
+        } catch (error) {
             console.log("Error: ", error.response?.data)
         }
     }
-} 
-
-
-export const getAllFilmInfoAction =  (filmName = "") => {
+}
+export const getAllFilmInfoAction = (filmName = "") => {
     return async (dispatch) => {
         try {
             const result = await quanLyPhimService.getAllFilmInfo(filmName)
-            console.log("result: ", result)
             dispatch({
                 type: GET_ALL_FILM_INFO,
                 arrAllFilmInfo: result.data.content,
             })
-        } catch(error) {
+        } catch (error) {
             console.log("Error: ", error.response?.data)
         }
     }
@@ -37,7 +46,7 @@ export const addFilmAction = (formData) => {
     return async (dispatch) => {
         try {
             const result = await quanLyPhimService.addFilm(formData)
-           
+            success('Tiến hành thêm phim', 'Thêm phim hoàn tất')
         } catch (error) {
             console.log(error.response?.data)
         }
@@ -62,9 +71,9 @@ export const updateFilmAction = (formData) => {
     return async (dispatch) => {
         try {
             const result = await quanLyPhimService.updateFilm(formData)
-            alert("Cập nhật phim thành công")
+            success('Tiến hành cập nhật phim', 'Cập nhật phim hoàn tất')
         } catch (error) {
-            console.log(error)
+            console.log('Error: ', error)
         }
     }
 }
@@ -74,6 +83,7 @@ export const deleteFilmAction = (filmID) => {
         try {
             await quanLyPhimService.deleteFilm(filmID)
             dispatch(getAllFilmInfoAction())
+            success('Tiến hành xóa phim', 'Xóa phim hoàn tất')
         } catch (error) {
             console.log(error)
         }

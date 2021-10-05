@@ -4,8 +4,8 @@ import { PlusCircleOutlined, CalendarOutlined, EditOutlined, DeleteOutlined, Clo
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteFilmAction, getAllFilmInfoAction } from '../../../redux/actions/QuanLyPhimAction';
 import { NavLink } from 'react-router-dom';
-import moment from 'moment';
 import { history } from '../../../App';
+import moment from 'moment';
 
 
 export default function ListFilm() {
@@ -18,7 +18,7 @@ export default function ListFilm() {
     /** For search bar */
     const { Search } = Input;
     const onSearch = (value) => dispatch(getAllFilmInfoAction(value))
-  
+
     /** For table */
     const data = arrAllFilmInfo
 
@@ -82,12 +82,14 @@ export default function ListFilm() {
                 return (
                     <Fragment>
                         <NavLink key={1} to={`/admin/editfilm/${film.maPhim}`} className="c-btn c-btn-edit"><EditOutlined /></NavLink>
-                        <span className="c-btn c-btn-delete" style={{ cursor: 'pointer' }} key={2}><DeleteOutlined  onClick={() => {
-
-                            openNotification(film.maPhim);
-                            
-                        }} /> </span>
-                        <NavLink key={3} to="" className="c-btn c-btn-calendar"><CalendarOutlined /> </NavLink>
+                        <span className="c-btn c-btn-delete" style={{ cursor: 'pointer' }} key={2}>
+                            <DeleteOutlined onClick={() => {
+                                openNotification(film.maPhim);
+                            }} /> 
+                        </span>
+                        <NavLink key={3} to={`/admin/createshowtime/${film.maPhim}`} className="c-btn c-btn-calendar" onClick={() => {
+                            localStorage.setItem('filmParams', JSON.stringify(film))
+                        }}><CalendarOutlined /></NavLink>
                     </Fragment>
                 )
             },
@@ -96,25 +98,18 @@ export default function ListFilm() {
     ];
 
     const onChange = (pagination, filters, sorter, extra) => {
-        console.log('params', pagination, filters, sorter, extra);
+        // console.log('params', pagination, filters, sorter, extra);
     }
 
     /** For Notification Delete film */
-    const close = () => {
-        
-    };
+    const close = () => {};
 
     const openNotification = (filmID) => {
         const key = `open${Date.now()}`;
         const btn = (
-            <Button onClick={ async () => {
-
-                await notification.close();
-
-                /** Confirm delete film */
-                await dispatch(deleteFilmAction(filmID));
-                success();
-
+            <Button onClick={() => {
+                notification.close();
+                dispatch(deleteFilmAction(filmID));
             }}>XÁC NHẬN</Button>
         );
         notification.open({
@@ -138,7 +133,6 @@ export default function ListFilm() {
                 content: 'Xóa phim hoàn tất',
             }, 1.5))
     };
-
 
     return (
         <section className="list">

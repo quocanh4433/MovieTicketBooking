@@ -3,10 +3,10 @@ import { NavLink } from 'react-router-dom';
 import { CloseCircleOutlined } from '@ant-design/icons';
 import { history } from '../../App';
 import { useFormik } from 'formik'
-import * as Yup from "yup"
 import { GROUPID } from '../../utils/setting';
 import { useDispatch } from "react-redux"
 import { signupAction } from '../../redux/actions/QuanLyNguoiDungAction';
+import * as Yup from "yup"
 
 
 export default function Register(props) {

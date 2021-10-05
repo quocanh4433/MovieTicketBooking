@@ -43,7 +43,6 @@
             background-color: $white;
             box-shadow: 0 2px 13px -6px $dark-30;
             margin-bottom: 1rem;
-            height: 56px;
 
             figure {
                 display: flex;
@@ -69,62 +68,23 @@
                 }
             }
 
-            .userInfo {
-                display: flex;
-                align-items: center;
-                position: relative;
-                color: $light;
+            .miniAvartar__wrapper--info {
 
                 & > p {
-                    margin: 0;
-                    font-size: $fs-16;
-                    text-transform: capitalize;
-                    color: $dark;
+                    color: $dark !important;
                     font-family: $main-font-bold;
                 }
 
-                & > div {
-                    position: relative;
-                    width: 4.1rem;
-                    height: 4.1rem;
-                    margin: 0 0rem 0 1.5rem;
-                    
-                    display: flex;
-                    align-items: center;
-
-                    border-radius: 50%;
-                    z-index: 1;
-
-                    & > img {
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        -webkit-object-fit: cover;
-                        border-radius: inherit;
-                    }
-                    &::before {
-                        content: "";
-                        position: absolute;
-                        top: 0px;
-                        left: 0px;
-                        width: 100%;
-                        height: 100%;
-
-                        background-image: linear-gradient(to right, $orange-1, $orange-3);
-                        border-radius: inherit;
-                        transform: scale(1.1);
-                        z-index: -1;
-                    }
+                span {
+                    color: $dark ;
                 }
 
-                @include responsive(768) {
-                    display: none;
+                .submenu {
+                    top: 5.8rem
                 }
             }
-
-        
         }
-
+        
         main {
             margin-bottom: 1rem !important;
             height: 100%;
@@ -139,9 +99,9 @@
         footer {
             padding: 10px 0;
             text-align: center;
-            background-color: #fff;
-            color: $orange-1;
             text-transform: capitalize;
+            color: $orange-1;
+            background-color: #fff;
         }
     }
 }

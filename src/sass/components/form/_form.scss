@@ -1,3 +1,6 @@
+
+/** Custom form login and register */
+/** ------------------------------------- */
 .form {
     display: flex;
     align-items: center;
@@ -32,13 +35,13 @@
     &__content {
         position: fixed;
         top: 50%;
-        left: 50%; 
+        left: 50%;
 
         display: flex;
         justify-content: space-around;
         align-items: center;
 
-        transform:  translate(-50%, -50%);
+        transform: translate(-50%, -50%);
         width: 100%;
 
         @include responsive(768) {
@@ -68,7 +71,7 @@
                 font-size: $fs-40;
 
                 margin-bottom: 2rem;
-                background: linear-gradient(to right, $orange-1 , $orange-3 50% );
+                background: linear-gradient(to right, $orange-1, $orange-3 50%);
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
             }
@@ -80,7 +83,7 @@
                     margin-bottom: 2px;
                     color: $gray-3;
                     font-family: $main-font-bold;
-                    
+
                     span {
                         color: $orange-1;
                     }
@@ -119,9 +122,9 @@
                         margin-bottom: 2.5rem;
                     }
                 }
-                p{
+                p {
                     color: $gray-3;
-                    a{
+                    a {
                         color: $orange-1;
                     }
                 }
@@ -130,7 +133,8 @@
     }
 }
 
-/** Custom form for admn page */
+/** Custom form for admin page */
+/** ------------------------------------- */
 .classInputDefault {
     border-radius: 5px !important;
     background-color: transparent !important;
@@ -143,9 +147,11 @@
         border-color: $orange-3 !important;
         box-shadow: 0 0 3px $orange-3 !important;
     }
-
 }
 
+.form-addfilm {
+    padding: 2rem 0 !important;
+}
 
 .c-form__group {
     margin-bottom: 1rem;
@@ -159,37 +165,49 @@
 
     input {
         @extend .classInputDefault;
-    } 
+    }
 
     input#upload-photo {
         background-color: red !important;
-    } 
+    }
 
     input:invalid {
         border-color: $red;
     }
 
     textarea {
-        @extend .classInputDefault; 
+        @extend .classInputDefault;
         min-height: 10rem;
     }
 
-
-
+    /** For select */
     .ant-select-selector {
         border-radius: 5px !important;
         &:hover {
             border-color: $orange-3 !important;
             box-shadow: 0 0 3px $orange-3 !important;
-        } 
+        }
         &:focus {
             border-color: $orange-3 !important;
             box-shadow: 0 0 3px $orange-3 !important;
         }
     }
 
+    .ant-select-open {
+        border: none;
+    }
+
+    /** For normal input */
+    .ant-picker-input {
+        input {
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
+    }
+
     .ant-input-affix-wrapper {
-        @extend .classInputDefault; 
+        @extend .classInputDefault;
 
         &:hover {
             border-color: $orange-3 !important;
@@ -198,16 +216,17 @@
 
     .ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover {
         border-color: $orange-3 !important;
-
     }
 
-    .ant-input-affix-wrapper:focus, .ant-input-affix-wrapper-focused {
+    .ant-input-affix-wrapper:focus,
+    .ant-input-affix-wrapper-focused {
         box-shadow: 0 0 3px $orange-3 !important;
         border-color: $orange-3 !important;
     }
 
+    /** For Data picker*/
     .ant-picker {
-        @extend .classInputDefault; 
+        @extend .classInputDefault;
     }
 
     .ant-picker-focused {
@@ -215,12 +234,14 @@
         border-color: $orange-3;
     }
 
+    /** For switch */
     .ant-switch-checked {
         background-color: $orange-3;
     }
 
+    /** For input number */
     .ant-input-number {
-        @extend .classInputDefault; 
+        @extend .classInputDefault;
     }
 
     .ant-input-number-focused {
@@ -255,7 +276,6 @@
             cursor: pointer; /* "hand" cursor */
             text-transform: capitalize;
         }
-        
     }
 
     .img-upload {
@@ -268,5 +288,175 @@
     .error {
         color: $red;
         margin: 0;
+    }
+}
+
+/** Custom form general profile page */
+/** ------------------------------------- */
+.c-profile-form {
+    margin-top: 2rem;
+    .c-profile-form__wrapper {
+        display: flex;
+        justify-content: space-between;
+
+        .c-profile-form__group {
+            width: 48.5%;
+            padding-bottom: 2rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px dotted $orange-3;
+
+            .c-profile-form__inner {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                label {
+                    width: 30%;
+                    text-transform: capitalize;
+                    font-size: $fs-12;
+                    font-family: $main-font-bold;
+
+                    @include responsive(576) {
+                        display: block;
+                        width: 100%;
+                        margin-bottom: 1rem;
+                    }
+                }
+
+                input {
+                    width: 68%;
+                    padding: 1rem;
+                    border-radius: 8px;
+                    border: 1px solid rgba(239, 239, 239, 0.3);
+
+                    @include responsive(576) {
+                        width: 100%;
+                    }
+                }
+
+                input:disabled {
+                    color: $gray-4;
+                }
+
+                .input-active {
+                    border: 1px solid $orange-3 !important ;
+                    transition: all 0.3s;
+                    &:hover {
+                        box-shadow: 0 0 5px $orange-3 !important;
+                    }
+                    &:focus {
+                        border-color: $orange-3 !important;
+                        box-shadow: 0 0 5px $orange-3 !important;
+                    }
+                }
+
+                @include responsive(576) {
+                    display: block;
+                }
+            }
+
+            @include responsive(576) {
+                width: 100%;
+                padding-bottom: 1rem;
+                margin-bottom: 1rem;
+            }
+        }
+
+        @include responsive(576) {
+            display: block;
+        }
+    }
+
+    .c-profile-form__btnsubmit {
+        text-align: right;
+        margin-top: 2rem;
+
+        @include responsive(768) {
+            text-align: center;
+        }
+
+        @include responsive(576) {
+            margin-top: 3rem;
+            text-align: center;
+        }
+    }
+
+    .c-profile-form__error {
+        margin-top: 5px;
+        color: $red;
+        font-size: $fs-12;
+    }
+}
+
+/** Custom form chane password page */
+/** ------------------------------------- */
+
+.c-changepass-form {
+    margin-top: 2rem;
+
+    form {
+        width: 60%;
+        margin: 0 auto;
+        .c-changepass-form__group {
+            margin-bottom: 2rem;
+            label {
+                font-size: $fs-14;
+                font-family: $main-font-bold;
+                display: block;
+                margin-bottom: 5px;
+            }
+
+            .c-changepass-form-input {
+                padding: 6px 1.5rem;
+            }
+
+            .c-changepass-form-error {
+                color: $red;
+                margin-top: 5px;
+            }
+        }
+
+        .c-changepass-form__btnsubmit {
+            text-align: center;
+            margin: 3rem 0 4rem;
+        }
+
+        @include responsive(576) {
+            width: 80%;
+        }
+
+        @include responsive(376) {
+            width: 100%;
+        }
+    }
+
+    &__notice {
+        display: flex;
+        justify-content: space-around;
+        margin: 0 auto;
+
+        p {
+            width: 40%;
+            strong {
+                font-size: $fs-14;
+                color: $orange-1;
+                font-family: $main-font-bold;
+                text-transform: uppercase;
+                margin-right: 5px;
+            }
+
+            span {
+                font-size: $fs-12;
+            }
+
+            @include responsive(576) {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+        }
+
+        @include responsive(576) {
+            display: block;
+        }
     }
 }

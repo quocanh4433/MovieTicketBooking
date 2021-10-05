@@ -6,19 +6,23 @@ import {
     DesktopOutlined,
     PieChartOutlined,
     TeamOutlined,
-   
 } from '@ant-design/icons';
-import { useSelector } from 'react-redux';
 import { history } from '../../App';
-
-
+import MiniAvartar from '../../components/MiniAvartar/MiniAvartar';
+import { USER_LOGIN } from '../../utils/setting';
 
 export default function AdminTemplate(props) {
-
     const { Header, Content, Footer, Sider } = Layout;
-    const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer)
-   
     let { Component, ...restProps } = props
+
+    /** Check user logged  */
+    let userLogin = null;
+    if (localStorage.getItem(USER_LOGIN)) {
+        userLogin = JSON.parse(localStorage.getItem(USER_LOGIN))
+        if (userLogin.maLoaiNguoiDung !== 'QuanTri') {
+            history.push('/home')
+        }
+    }
 
     return (
         <Route  {...restProps} render={(propsRoute) => {
@@ -30,7 +34,7 @@ export default function AdminTemplate(props) {
                         </figure>
                         <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
                             <Menu.Item key="1" icon={<PieChartOutlined />}>
-                                <NavLink to="/admin">Thống kê</NavLink>
+                                <NavLink to="/admin/statistic">Thống kê</NavLink>
                             </Menu.Item>
                             <Menu.Item key="2" icon={<DesktopOutlined />}>
                                 <NavLink to="/admin/listfilm">Quản lý phim</NavLink>
@@ -40,7 +44,6 @@ export default function AdminTemplate(props) {
                             </Menu.Item>
                         </Menu>
                     </Sider>
-
                     <Layout className="admin__layout">
                         <Header className=".admin-header">
                             <figure onClick={() => {
@@ -51,13 +54,7 @@ export default function AdminTemplate(props) {
                                     <path d="M41.6667 6.25H22.9167C20.6188 6.25 18.75 8.11875 18.75 10.4167V18.75H22.9167V10.4167H41.6667V39.5833H22.9167V31.25H18.75V39.5833C18.75 41.8812 20.6188 43.75 22.9167 43.75H41.6667C43.9646 43.75 45.8333 41.8812 45.8333 39.5833V10.4167C45.8333 8.11875 43.9646 6.25 41.6667 6.25Z" fill="#FF8A00" />
                                 </svg>
                             </figure>
-                            <div className="userInfo">
-                                <p>{userLogin.taiKhoan}</p>
-                                <div>
-                                    <img src="/images/header/avatar.fif" alt="UserName" onError={(e) => { e.target.onError = null; e.target.src = `/images/header/avatar-user.jpg` }} />
-                                </div>
-                            </div>
-
+                            <MiniAvartar />
                         </Header>
                         <Content style={{ margin: '0 16px' }}>
                             <section className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
@@ -69,6 +66,5 @@ export default function AdminTemplate(props) {
                 </Layout>
             )
         }} />
-
     )
 }

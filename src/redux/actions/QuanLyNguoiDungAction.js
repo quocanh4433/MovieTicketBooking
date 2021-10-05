@@ -2,17 +2,29 @@ import { quanLyNguoiDungService } from "../../services/QuanLyNguoiDungService"
 import { ACCESS_TOKEN, http, USER_LOGIN } from "../../utils/setting";
 import { history } from "../../App";
 import { GET_ALL_USER, GET_USER_EDIT, LOG_IN, SIGN_UP } from "../types/QuanLyNguoiDungType";
+import { message } from 'antd';
 
-export const getAllUserAction = () => {
+/** For Message */
+const success = (content, contentDone) => {
+    message
+        .loading({
+            content: content,
+        }, 2.5)
+        .then(() => message.success({
+            content: contentDone,
+        }, 2.5))
+}
+
+export const getAllUserAction = (keyword = '') => {
     return async (dispatch) => {
         try {
-            const result = await quanLyNguoiDungService.getAllUser()
+            const result = await quanLyNguoiDungService.getAllUser(keyword)
             dispatch({
                 type: GET_ALL_USER,
                 arrAllUser: result.data.content
             })
         } catch (error) {
-            console.log("Error: ", error.response?.data)
+            console.log("Error: ", error)
         }
     }
 }
@@ -54,6 +66,7 @@ export const addUserAction = (userInfo) => {
     return async (dispatch) => {
         try {
             const result = await quanLyNguoiDungService.addUser(userInfo)
+            success('Tiến hành thêm người dùng', 'Thêm người dùng hoàn tất')
         } catch (error) {
             console.log("Error: ", error)
         }
@@ -74,25 +87,39 @@ export const editUserAction = (account) => {
     }
 }
 
-
 export const updateUserAction = (account) => {
     return async (dispatch) => {
         try {
             const result = await quanLyNguoiDungService.updateUser(account)
+            localStorage.setItem(USER_LOGIN, JSON.stringify(result.data.content))
+            success('Tiến hành cập nhật thông tin', 'Cập nhật thông tin hoàn tất')
         } catch (error) {
-            console.log("Error: ", error.response?.data)
+            console.log("Error: ", error)
         }
     }
 }
 
+export const updateUserNotAdminAction = (account) => {
+    return async (dispatch) => {
+        try {
+            const result = await quanLyNguoiDungService.updateUserNotAdmin(account)
+            localStorage.setItem(USER_LOGIN, JSON.stringify({...result.data.content, matKhau: null}))
+            success('Tiến hành cập nhật thông tin', 'Cập nhật thông tin hoàn tất')
+        } catch (error) {
+            console.log("Error: ", error)
+        }
+    }
+}
 
 export const deleteUserAction = (account) => {
     return async (dispatch) => {
         try {
             const result = await quanLyNguoiDungService.deleteUser(account)
+            success('Tiến hành xóa người dùng', 'Xóa người dùng hoàn tất')
             dispatch(getAllUserAction())
         } catch (error) {
             console.log("Error: ", error.response?.data)
+            success('Tiến hành xóa người dùng', error.response?.data.content)
         }
     }
 }

@@ -8,6 +8,7 @@ export const getCinemaInfoAction = () => {
                 type: GET_CINEMA_INFO,
                 cinemaSystem: result.data.content
             })
+            localStorage.setItem('CinemaSystem', JSON.stringify(result.data.content))
         } catch(error) {
             console.log("Error: ", error.response?.data)
         }

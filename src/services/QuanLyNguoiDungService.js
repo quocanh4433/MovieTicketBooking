@@ -14,7 +14,10 @@ export class QuanLyNguoiDungService extends baseService {
         return this.post("/api/QuanLyNguoiDung/DangKy", userInfo)
     }
 
-    getAllUser = () => {
+    getAllUser = (keyword) => {
+        if(keyword !== '') {
+            return this.get(`/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=${GROUPID}&tuKhoa=${keyword}`)
+        }
         return this.get(`/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=${GROUPID}`)
     }
 
@@ -30,10 +33,19 @@ export class QuanLyNguoiDungService extends baseService {
         return this.post(`/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`, account)
     }
 
+    updateUserNotAdmin = (account) => {
+        return this.put(`/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`, account)
+    }
+
+
     deleteUser = (account) => {
         return this.delete(`/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${account}`)
     }
 
+    getUserDetail = (account) => {
+        return this.post(`/api/QuanLyNguoiDung/ThongTinTaiKhoan`, account)
+
+    }
 }
 
 export const quanLyNguoiDungService = new QuanLyNguoiDungService () 
