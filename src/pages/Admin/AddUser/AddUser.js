@@ -100,7 +100,7 @@ export default function AddUser() {
                         placeholder="Chọn loại người dùng ..."
                         onChange={handleSelectChange}
                         allowClear
-                        defaultValue="KhachHang"
+                        // defaultValue="KhachHang"
                     >
                         <Option value="KhachHang">Khách Hàng</Option>
                         <Option value="QuanTri">Quản Trị</Option>

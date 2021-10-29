@@ -32,12 +32,14 @@ export const getAllUserAction = (keyword = '') => {
 export const signupAction = (userInfo) => {
     return async (dispatch) => {
         try {
-            await quanLyNguoiDungService.signup(userInfo)
+            const result = await quanLyNguoiDungService.signup(userInfo)
             dispatch({
                 type: SIGN_UP,
-                userInfo,
+                userInfo: result.data.content
             })
+            history.push("/")
         } catch (error) {
+            message.error(error.response?.data.content);
             console.log("Error: ", error.response?.data)
         }
     }
@@ -57,6 +59,7 @@ export const loginAction = (userInfo) => {
             localStorage.setItem(USER_LOGIN, JSON.stringify(result.data.content));
             history.push("/")
         } catch (error) {
+            message.error(error.response?.data.content);
             console.log("Error: ", error.response?.data)
         }
     }
@@ -112,13 +115,14 @@ export const updateUserNotAdminAction = (account) => {
 }
 
 export const deleteUserAction = (account) => {
+    console.log(account)
     return async (dispatch) => {
         try {
             const result = await quanLyNguoiDungService.deleteUser(account)
             success('Tiến hành xóa người dùng', 'Xóa người dùng hoàn tất')
             dispatch(getAllUserAction())
         } catch (error) {
-            console.log("Error: ", error.response?.data)
+            console.log("Error: ", error)
             success('Tiến hành xóa người dùng', error.response?.data.content)
         }
     }

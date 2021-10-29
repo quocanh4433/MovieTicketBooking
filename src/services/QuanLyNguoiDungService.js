@@ -44,7 +44,6 @@ export class QuanLyNguoiDungService extends baseService {
 
     getUserDetail = (account) => {
         return this.post(`/api/QuanLyNguoiDung/ThongTinTaiKhoan`, account)
-
     }
 }
 

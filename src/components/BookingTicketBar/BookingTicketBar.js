@@ -171,7 +171,7 @@ export default function BookingTicketBar(props) {
                     onChange={changeSelecttime}
                 >
                 </Select>
-                <Tooltip placement="top" title="Vui lòng chọn phim" arrowPointAtCenter>
+                <Tooltip placement="top" title={state.showtimeID === 0 ? "Vui lòng chọn phim" : ""} arrowPointAtCenter>
                     <button
                         disabled={state.showtimeID === 0 ? true : false}
                         className={state.showtimeID === 0 ? "c-main-btn c-main-btn--bgdark " : "c-main-btn"}

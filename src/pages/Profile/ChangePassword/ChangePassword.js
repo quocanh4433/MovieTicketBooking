@@ -32,8 +32,6 @@ export default function ChangePassword(props) {
         }
     }, [])
 
-    console.log(userLogin.matKhau)
-
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
@@ -93,7 +91,6 @@ export default function ChangePassword(props) {
             setMessageConfirm('Mật khẩu không khớp')
         }
     }
-
 
     return (
         <section className="c-changepass-form" >

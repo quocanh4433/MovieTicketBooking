@@ -41,7 +41,7 @@ export default function MiniAvartar() {
     };
 
     const checkUserIsAdmin = () => {
-        if (userLogin.maLoaiNguoiDung === "QuanTri") {
+        if (userLogin.maLoaiNguoiDung === "QuanTri" || userLogin.maLoaiNguoiDung === 'KhachHang') {
             return (
                 <div className={visible ? "submenu submenu-active" : "submenu"} >
                     <NavLink to={`/profile/generalprofile/${userLogin.taiKhoan}`}>
@@ -58,20 +58,21 @@ export default function MiniAvartar() {
                     </button>
                 </div>
             )
+        } else {
+            return (
+                <div className={visible ? "submenu submenu-active" : "submenu"} >
+                    <NavLink to={`/profile/generalprofile/${userLogin.taiKhoan}`}>
+                        <UserOutlined />
+                        <span>Thông Tin</span>
+                    </NavLink>
+                    <button onClick={logout}>
+                        <LogoutOutlined />
+                        <span>Đăng Xuất</span>
+                    </button>
+                </div>
+            )
         }
 
-        return (
-            <div className={visible ? "submenu submenu-active" : "submenu"} >
-                <NavLink to={`/profile/generalprofile/${userLogin.taiKhoan}`}>
-                    <UserOutlined />
-                    <span>Thông Tin</span>
-                </NavLink>
-                <button onClick={logout}>
-                    <LogoutOutlined />
-                    <span>Đăng Xuất</span>
-                </button>
-            </div>
-        )
     };
 
     const checkUserIsLogin = () => {
@@ -82,10 +83,7 @@ export default function MiniAvartar() {
                     <div className="avatar">
                         <img src="/images/header/avatar.fif" alt="UserName" onError={(e) => { e.target.onError = null; e.target.src = `/images/header/avatar-user.jpg` }} />
                     </div>
-                    <CaretDownOutlined onClick={() => {
-                        // 
-                        openSubmenu()
-                    }} />
+                    <CaretDownOutlined onClick={() => { openSubmenu() }} />
                     {checkUserIsAdmin()}
                 </div>
             )

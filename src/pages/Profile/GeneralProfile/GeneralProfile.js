@@ -4,18 +4,20 @@ import { useDispatch } from "react-redux"
 import { updateUserNotAdminAction } from '../../../redux/actions/QuanLyNguoiDungAction';
 import { GROUPID } from '../../../utils/setting';
 import { quanLyNguoiDungService } from '../../../services/QuanLyNguoiDungService';
-import * as Yup from "yup"
+import { message } from 'antd';
+import * as Yup from "yup";
 
 export default function GeneralProfile(props) {
     
-    const phoneRegex = /([+84|84|0]+(3|5|7|8|9|1[2|6|8|9]))+([0-9]{8})\b/;
-    const nameRegex = /^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s\W|_]+$/
-    const dispatch = useDispatch();
     const [userLogin, setUserLogin] = useState({});
     const [changeValue, setChangeValue] = useState(false)
+    const dispatch = useDispatch();
+    const phoneRegex = /([+84|84|0]+(3|5|7|8|9|1[2|6|8|9]))+([0-9]{8})\b/;
+    const nameRegex = /^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s\W|_]+$/
 
     useEffect(async () => {
         try {
+            message.success({content: "Vui lòng đợi dữ liệu được tải về",}, 2)
             let account = props.match.params.account
             const result = await quanLyNguoiDungService.getUserDetail(account)
             setUserLogin(result.data.content)

@@ -137,6 +137,7 @@ export default function ListUser() {
             }}>XÁC NHẬN</Button>
         );
         notification.open({
+            duration: 4,
             maxCount: 3,
             message: 'Bạn có chắc muốn xóa người dùng này',
             description: "",
@@ -153,7 +154,7 @@ export default function ListUser() {
             <div className="list__inner">
                 <div className="c-btn-add">
                     <button onClick={() => {
-                        history.push("/admin/addUser")
+                        history.push("/admin/adduser")
                     }}><PlusCircleOutlined />Thêm người dùng</button>
                 </div>
                 <div className="admin-searchbar">

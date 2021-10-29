@@ -19,9 +19,11 @@ export default function AdminTemplate(props) {
     let userLogin = null;
     if (localStorage.getItem(USER_LOGIN)) {
         userLogin = JSON.parse(localStorage.getItem(USER_LOGIN))
-        if (userLogin.maLoaiNguoiDung !== 'QuanTri') {
-            history.push('/home')
-        }
+        // if (userLogin.maLoaiNguoiDung !== 'QuanTri') {
+        //     history.push('/home')
+        // }
+    } else if(userLogin === null) {
+        history.push('/home')
     }
 
     return (
