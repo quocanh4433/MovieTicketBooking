@@ -34,7 +34,6 @@ export default function AddUser() {
             hoTen: Yup.string().required("Họ Tên không được bỏ trống").matches(nameRegex, "Họ Tên không hợp lệ"),
             email: Yup.string().required("Email không được bỏ trống").email("Email không đúng định dạng"),
             soDt: Yup.string().required("Số điện thoại không được bỏ trống").matches(phoneRegex, "Số điện thoại không hợp lệ").min(10, "Số điện thoại tối thiểu 10 số").max(10, "Số điện thoại tối thiếu 10 số"),
-
         }),
         onSubmit: (values) => {
             dispatch(addUserAction(values))

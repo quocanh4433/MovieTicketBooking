@@ -154,28 +154,28 @@ function SliderMobileScreen() {
     return (
         <Slider {...settings} className="homeApp-slider">
             <div>
-                <img src="https://tix.vn/app/assets/img/icons/slide/slide2.jpg" alt="slider-in-screen-mobile" />
+                <img src="./images/slide-appmobile/slide1.jpg" alt="slider-in-screen-mobile" />
             </div>
             <div>
-                <img src="https://tix.vn/app/assets/img/icons/slide/slide3.jpg" alt="slider-in-screen-mobile" />
+                <img src="./images/slide-appmobile/slide2.jpg" alt="slider-in-screen-mobile" />
             </div>
             <div>
-                <img src="https://tix.vn/app/assets/img/icons/slide/slide4.jpg" alt="slider-in-screen-mobile" />
+                <img src="./images/slide-appmobile/slide3.jpg" alt="slider-in-screen-mobile" />
             </div>
             <div>
-                <img src="https://tix.vn/app/assets/img/icons/slide/slide5.jpg" alt="slider-in-screen-mobile" />
+                <img src="./images/slide-appmobile/slide4.jpg" alt="slider-in-screen-mobile" />
             </div>
             <div>
-                <img src="https://tix.vn/app/assets/img/icons/slide/slide6.jpg" alt="slider-in-screen-mobile" />
+                <img src="./images/slide-appmobile/slide5.jpg" alt="slider-in-screen-mobile" />
             </div>
             <div>
-                <img src="https://tix.vn/app/assets/img/icons/slide/slide8.jpg" alt="slider-in-screen-mobile" />
+                <img src="./images/slide-appmobile/slide6.jpg" alt="slider-in-screen-mobile" />
             </div>
             <div>
-                <img src="https://tix.vn/app/assets/img/icons/slide/slide9.jpg" alt="slider-in-screen-mobile" />
+                <img src="./images/slide-appmobile/slide7.jpg" alt="slider-in-screen-mobile" />
             </div>
             <div>
-                <img src="https://tix.vn/app/assets/img/icons/slide/slide10.jpg" alt="slider-in-screen-mobile" />
+                <img src="./images/slide-appmobile/slide8.jpg" alt="slider-in-screen-mobile" />
             </div>
         </Slider>
     )
@@ -411,7 +411,7 @@ export default function (props) {
                         <p className="notice-download">CYBERBOX có hai phiên bản <a href="#">iOS</a> và <a href="#">Android</a></p>
                     </div>
                     <div className="homeApp__wrapper-right">
-                        <img src="https://tix.vn/app/assets/img/icons/mobile.png" alt="slider-in-screen-mobile" />
+                        <img src="./images/slide-appmobile/mobile.png" alt="slider-in-screen-mobile" />
                         <SliderMobileScreen />
                     </div>
                 </div>

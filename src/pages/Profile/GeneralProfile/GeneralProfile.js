@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux"
 import { updateUserNotAdminAction } from '../../../redux/actions/QuanLyNguoiDungAction';
 import { GROUPID } from '../../../utils/setting';
 import { quanLyNguoiDungService } from '../../../services/QuanLyNguoiDungService';
-import { message } from 'antd';
 import * as Yup from "yup";
 
 export default function GeneralProfile(props) {
@@ -17,7 +16,6 @@ export default function GeneralProfile(props) {
 
     useEffect(async () => {
         try {
-            message.success({content: "Vui lòng đợi dữ liệu được tải về",}, 2)
             let account = props.match.params.account
             const result = await quanLyNguoiDungService.getUserDetail(account)
             setUserLogin(result.data.content)
